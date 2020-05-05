@@ -5,6 +5,7 @@
 //
 
 import SwiftCLI
+import Foundation
 
 let VerboseFlag = Flag("-v", "--verbose", description: "Log tech details for nerds")
 
@@ -36,19 +37,26 @@ extension VerboseLogger {
     public func log(_ item: Any, indentationLevel: Int = 0, force: Bool = false) {
         guard verbose || force else { return }
         let indentation = String(repeating: "   ", count: indentationLevel)
-        stdout <<< "\(indentation)→ \(item)"
+        stdout <<< "[\(currentTimestamp())] \(indentation)→ \(item)"
     }
     
     public func log(_ item: Any, indentationLevel: Int = 0, color: ShellColor, force: Bool = false) {
         guard verbose || force else { return }
         let indentation = String(repeating: "   ", count: indentationLevel)
-        try? Task.run("printf", "\(indentation)\(color.rawValue)\(item)\(ShellColor.neutral.rawValue)")
+        try? Task.run("printf", "[\(currentTimestamp())] \(indentation)\(color.rawValue)\(item)\(ShellColor.neutral.rawValue)")
     }
     
-    public func log(prefix: Any, item: Any, indentationLevel: Int = 0, color: ShellColor, force: Bool = false) {
+    public func log(prefix: Any, item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral, force: Bool = false) {
         guard verbose || force else { return }
         let indentation = String(repeating: "   ", count: indentationLevel)
-        try? Task.run("printf", "\(indentation)\(color.bold())\(prefix) \(color.rawValue)\(item)\(ShellColor.neutral.rawValue)")
+        try? Task.run("printf","[\(currentTimestamp())] \(indentation)\(color.bold())\(prefix) \(color.rawValue)\(item)\(ShellColor.neutral.rawValue)")
+    }
+    
+    private func currentTimestamp() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter.string(from: date)
     }
 }
 

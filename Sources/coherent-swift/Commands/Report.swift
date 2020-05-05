@@ -17,14 +17,20 @@ final class Report: Command, VerboseLogger {
     let name: String = "report"
     let shortDescription: String = "Generate a report on Swift code cohesion"
     
+    var overallCohesion: Double = 0.0
+    var accumulativeCohesion: Double = 0.0
+    var fileAmount: Int = 0
+    
     // --------------
     // MARK: Configuration Properties
     
     @Param var specs: String
     
+    @Param var defaultThreshold: Double
+    
     public func execute() throws {
         log("--------------------------------------------", force: true)
-        log("Running: coherent-swift report", force: true)
+        log(prefix: "coherent-swift", item: "report\n", force: true)
         
         let specsPath = Path(specs)
         log("Specs: \(specs)")
@@ -48,7 +54,33 @@ final class Report: Command, VerboseLogger {
         let fileManager = FileManager.default
         let enumerator = fileManager.enumerator(atPath: path.absolute().description)
         while let filename = enumerator?.nextObject() as? String {
-            log(prefix: "Analysing:", item: "\(filename)\n", indentationLevel: 1, color: .purple, force: true)
+            if filename.hasSuffix(".swift") {
+                processFile(filename: filename, in: path)
+            }
         }
+        processOverallCohesion()
+    }
+        
+    private func processFile(filename: String, in path: Path) {
+        log(prefix: "Analysing:", item: "\(filename)\n", indentationLevel: 1, color: .purple, force: true)
+        let cohesion = Double.random(in: 0.0 ..< 100.0)
+        var color = printColor(for: cohesion, threshold: defaultThreshold)
+        log(prefix: "Cohesion:", item: "\(String(format: "%.2f", cohesion))%%\n", indentationLevel: 2, color: color, force: true)
+        
+        accumulativeCohesion += cohesion
+        fileAmount += 1
+    }
+    
+    private func processOverallCohesion() {
+        overallCohesion = accumulativeCohesion / Double(fileAmount)
+        var color = printColor(for: overallCohesion, threshold: defaultThreshold)
+        log(prefix: "Analyzed \(fileAmount) files with \(String(format: "%.2f", overallCohesion))%% overall cohesion", item: "\n", indentationLevel: 1, color: color, force: true)
+    }
+    
+    private func printColor(for cohesion: Double, threshold: Double) -> ShellColor {
+        if cohesion < threshold {
+            return .red
+        }
+        return .purple
     }
 }
