@@ -9,9 +9,7 @@ import PathKit
 import SwiftCLI
 
 
-
-final class Report: Command, VerboseLogger, IOOperations {
-    var stdout: WritableStream?
+final class Report: Command, IOOperations {
     
     // --------------
     // MARK: Command information
@@ -58,7 +56,7 @@ final class Report: Command, VerboseLogger, IOOperations {
 
 extension Report: YamlParser {
     private func decode(configuration: Path) throws -> Configuration? {
-        log("Configuration path: ", item: "\(configuration.absolute())", logLevel: .info)
+        logger.logInfo("Configuration path: ", item: configuration.absolute().description)
         guard configuration.absolute().exists else {
             logger.logError(item: "Parameter not specified: -s | --spec = path to your coherent-swift.yml")
             
