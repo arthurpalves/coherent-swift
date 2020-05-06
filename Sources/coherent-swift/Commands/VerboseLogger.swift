@@ -5,6 +5,7 @@
 //
 
 import SwiftCLI
+import Foundation
 
 let VerboseFlag = Flag("-v", "--verbose", description: "Log tech details for nerds")
 
@@ -23,32 +24,44 @@ public enum ShellColor: String {
     }
 }
 
+public enum LogLevel: String {
+    case info = "INFO  "
+    case warning = "WARN  "
+    case verbose = "DEBUG "
+    case error = "ERROR "
+    case none = "     "
+}
+
 public protocol VerboseLogger {
     var verbose: Bool { get }
-    var stdout: SwiftCLI.WritableStream { get }
-    func log(_ item: Any, indentationLevel: Int, force: Bool)
-    func log(_ item: Any, indentationLevel: Int, color: ShellColor, force: Bool)
+    var stdout: SwiftCLI.WritableStream? { get }
+    func log(_ prefix: Any, item: Any, indentationLevel: Int, color: ShellColor, logLevel: LogLevel)
 }
 
 extension VerboseLogger {
-    var verbose: Bool { VerboseFlag.value }
-
-    public func log(_ item: Any, indentationLevel: Int = 0, force: Bool = false) {
-        guard verbose || force else { return }
+    public var verbose: Bool { VerboseFlag.value }
+    
+    public func log(_ prefix: Any = "", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral, logLevel: LogLevel = .none) {
+        if logLevel == .verbose {
+            guard verbose else { return }
+        }
         let indentation = String(repeating: "   ", count: indentationLevel)
-        stdout <<< "\(indentation)→ \(item)"
+        var command = ""
+        let arguments =  [
+            "\(logLevel.rawValue)[\(currentTimestamp())]: ▸ ",
+            "\(indentation)",
+            "\(color.bold())\(prefix)",
+            "\(color.rawValue)\(item)\(ShellColor.neutral.rawValue)"
+        ]
+        arguments.forEach { command.append($0) }
+        try? Task.run("printf", command+"\n")
     }
     
-    public func log(_ item: Any, indentationLevel: Int = 0, color: ShellColor, force: Bool = false) {
-        guard verbose || force else { return }
-        let indentation = String(repeating: "   ", count: indentationLevel)
-        try? Task.run("printf", "\(indentation)\(color.rawValue)\(item)\(ShellColor.neutral.rawValue)")
-    }
-    
-    public func log(prefix: Any, item: Any, indentationLevel: Int = 0, color: ShellColor, force: Bool = false) {
-        guard verbose || force else { return }
-        let indentation = String(repeating: "   ", count: indentationLevel)
-        try? Task.run("printf", "\(indentation)\(color.bold())\(prefix) \(color.rawValue)\(item)\(ShellColor.neutral.rawValue)")
+    private func currentTimestamp() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter.string(from: date)
     }
 }
 

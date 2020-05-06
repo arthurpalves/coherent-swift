@@ -10,45 +10,68 @@ import SwiftCLI
 
 
 
-final class Report: Command, VerboseLogger {
+final class Report: Command, VerboseLogger, IOOperations {
+    var stdout: WritableStream?
+    
     // --------------
     // MARK: Command information
     
     let name: String = "report"
     let shortDescription: String = "Generate a report on Swift code cohesion"
     
+    var overallCohesion: Double = 0.0
+    var accumulativeCohesion: Double = 0.0
+    var fileAmount: Int = 0
+    
     // --------------
     // MARK: Configuration Properties
+    @Key("-s", "--spec", description: "Use a yaml configuration file")
+    var specs: String
     
-    @Param var specs: String
+    
+    var configurationPath: String = "coherent-swift.yml"
+    var defaultThreshold: Double = 100.0
+    var report: ReportOutput = ReportOutput()
+    
+    var reports_path: String = "/tmp/coherent-swift/" {
+        willSet {}
+    }
     
     public func execute() throws {
-        log("--------------------------------------------", force: true)
-        log("Running: coherent-swift report", force: true)
-        
-        let specsPath = Path(specs)
-        log("Specs: \(specs)")
-        log("--------------------------------------------", force: true)
+        logger.logSection("$ ", item: "coherent-swift report", color: .ios)
+    
+        if let spec = specs {
+            configurationPath = spec
+        }
+        let specsPath = Path(configurationPath)
         
         do {
-            try readSpecs(path: specsPath)
+            guard let configuration = try decode(configuration: specsPath) else { return }
+            try readSpecs(configuration: configuration, configurationPath: Path(configurationPath).parent(), threshold: defaultThreshold)
         } catch {
-            log("Error: ", color: .red, force: true)
+            logger.logError(item: error.localizedDescription)
             throw CLI.Error(message: error.localizedDescription)
         }
     }
-    
-    private func readSpecs(path: Path) throws {
-        guard path.absolute().exists else {
-            log("--------------------------------------------", force: true)
-            log("Error: Parameter not specified: -s | --spec = path to your coherent-swift.yml \n", color: .red)
+}
+
+
+extension Report: YamlParser {
+    private func decode(configuration: Path) throws -> Configuration? {
+        log("Configuration path: ", item: "\(configuration.absolute())", logLevel: .info)
+        guard configuration.absolute().exists else {
+            logger.logError(item: "Parameter not specified: -s | --spec = path to your coherent-swift.yml")
+            
             throw CLI.Error(message: "Couldn't find specs path")
         }
         
-        let fileManager = FileManager.default
-        let enumerator = fileManager.enumerator(atPath: path.absolute().description)
-        while let filename = enumerator?.nextObject() as? String {
-            log(prefix: "Analysing:", item: "\(filename)\n", indentationLevel: 1, color: .purple, force: true)
+        do {
+            let configuration = try extractConfiguration(from: configuration.absolute().description)
+            defaultThreshold = configuration.threshold() ?? 100.0
+            return configuration
+        } catch {
+            logger.logError(item: error.localizedDescription)
         }
+        return nil
     }
 }
