@@ -27,17 +27,30 @@ public struct IndividualReport: Codable {
 
 public struct ReportClass: Codable {
     let name: String
-    let cohesion: String
-    let methods: [ReportMethod]
+    var cohesion: String
+    var properties: [ReportProperty]
+    var methods: [ReportMethod]
+    
+    init(name: String, cohesion: String = "", properties: [ReportProperty] = [], methods: [ReportMethod] = []) {
+        self.name = name
+        self.cohesion = cohesion
+        self.properties = properties
+        self.methods = methods
+    }
 }
 
 public struct ReportMethod: Codable {
     let name: String
-    let cohesion: String
-    let properties: [ReportProperties]
+    var cohesion: String
+    var properties: [ReportProperty]
+    
+    init(name: String, cohesion: String = "", properties: [ReportProperty] = []) {
+        self.name = name
+        self.cohesion = cohesion
+        self.properties = properties
+    }
 }
 
-public struct ReportProperties: Codable {
+public struct ReportProperty: Codable {
     let name: String
-    let present: Bool
 }
