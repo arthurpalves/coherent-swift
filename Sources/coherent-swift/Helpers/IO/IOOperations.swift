@@ -9,7 +9,7 @@ import PathKit
 import SwiftCLI
 
 typealias FinalCohesion = (overall: Double, accumulative: Double, fileCount: Int)
-typealias StepCohesionHandler = (String, Double, [ReportClass]) -> Void
+typealias StepCohesionHandler = (String, Double?, [ReportDefinition], Bool) -> Void
 
 public enum ParseType: String {
     case definition = "Definition"
@@ -69,13 +69,20 @@ extension IOOperations {
         let enumerator = fileManager.enumerator(atPath: path.absolute().description)
         while let filename = enumerator?.nextObject() as? String {
             if filename.hasSuffix(".swift") {
-                processFile(filename: filename, in: path) { (filename, cohesion, definitions) in
-                    let cohesionString = String(format: "%.2f", cohesion)
+                processFile(filename: filename, in: path) { (filename, cohesion, definitions, validFile) in
                     
-                    report = localFileManager.addToReport(file: filename, cohesion: cohesionString+"%", meetsThreshold: cohesionString.double >= threshold, definitions: definitions, to: report)
-                    
-                    accumulativeCohesion += cohesion
-                    fileAmount += 1
+                    switch validFile {
+                    case false:
+                        break
+                    case true:
+                        let cohesion = cohesion ?? Double(0)
+                        let cohesionString = cohesion.formattedCohesion()
+                        
+                        report = localFileManager.addToReport(file: filename, cohesion: cohesionString+"%", meetsThreshold: cohesionString.double >= threshold, definitions: definitions, to: report)
+                        
+                        accumulativeCohesion += cohesion
+                        fileAmount += 1
+                    }
                 }
             }
         }
@@ -98,25 +105,31 @@ extension IOOperations {
     private func processFile(filename: String, in path: Path, onSuccess: StepCohesionHandler) {
         logger.logInfo("File: ", item: filename, color: .purple)
         
-        var finalDefinitions: [ReportClass] = []
+        var finalDefinitions: [ReportDefinition] = []
     
         swiftParser.parseFile(filename: filename, in: path) { (definitions) in
             finalDefinitions = definitions
         }
         
-        let cohesion = Double.random(in: 0.0 ..< 100.0)
-        let cohesionString = String(format: "%.2f", cohesion)
+        if finalDefinitions.isEmpty {
+            logger.logInfo("Ignored: ", item: "No implementation found", indentationLevel: 1, color: .purple)
+            onSuccess(filename, nil, [], false)
+            return
+        }
+        
+        let cohesion = Cohesion.main.generateCohesion(for: finalDefinitions)
         let color = printColor(for: cohesion, threshold: defaultThreshold)
+        let cohesionString = cohesion.formattedCohesion()
         
         logger.logInfo("Cohesion: ", item: cohesionString+"%%", indentationLevel: 1, color: color)
         
-        onSuccess(filename, cohesion, finalDefinitions)
+        onSuccess(filename, cohesion, finalDefinitions, true)
     }
     
     private func processOverallCohesion(configuration: Configuration, finalCohesion: FinalCohesion, threshold: Double, report: ReportOutput, onSuccess: ((ReportOutput) -> Void)? = nil) {
         let overallCohesion = finalCohesion.accumulative / Double(finalCohesion.fileCount)
         let color = printColor(for: overallCohesion, threshold: threshold, fallback: .green)
-        let cohesionString = String(format: "%.2f", overallCohesion)
+        let cohesionString = overallCohesion.formattedCohesion()
         
         logger.logInfo("Analyzed \(finalCohesion.fileCount) files with \(cohesionString)%% overall cohesion", item: "", color: color)
 

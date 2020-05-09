@@ -23,7 +23,7 @@ extension YamlParser {
             let encodedYAML = try String(contentsOfFile: configurationPath, encoding: .utf8)
             let decoded: Configuration = try decoder.decode(Configuration.self, from: encodedYAML)
             
-            logger.log("Configuration:", item: "", logLevel: .verbose)
+            logger.log("Loaded configuration:", item: "", logLevel: .verbose)
             let encoded = try encoder.encode(decoded)
             let nsString = encoded as NSString
             nsString.enumerateLines { (stringLine, _) in
