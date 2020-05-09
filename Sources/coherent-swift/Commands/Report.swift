@@ -47,8 +47,12 @@ final class Report: Command, IOOperations {
             guard let configuration = try decode(configuration: specsPath) else { return }
             try readSpecs(configuration: configuration, configurationPath: Path(configurationPath).parent(), threshold: defaultThreshold)
         } catch {
-            logger.logError(item: error.localizedDescription)
-            throw CLI.Error(message: error.localizedDescription)
+            guard
+                let cliError = error as? CLI.Error,
+                let message = cliError.message
+            else { return }
+            logger.logError(item: message)
+            throw cliError
         }
     }
 }
@@ -58,9 +62,7 @@ extension Report: YamlParser {
     private func decode(configuration: Path) throws -> Configuration? {
         logger.logInfo("Configuration path: ", item: configuration.absolute().description)
         guard configuration.absolute().exists else {
-            logger.logError(item: "Parameter not specified: -s | --spec = path to your coherent-swift.yml")
-            
-            throw CLI.Error(message: "Couldn't find specs path")
+            throw CLI.Error(message: "Couldn't find specs path. Specify with parameter -s | --spec or use default at ./coherent-swift.yml")
         }
         
         do {
@@ -68,8 +70,7 @@ extension Report: YamlParser {
             defaultThreshold = configuration.threshold() ?? 100.0
             return configuration
         } catch {
-            logger.logError(item: error.localizedDescription)
+            throw CLI.Error(message: error.localizedDescription)
         }
-        return nil
     }
 }

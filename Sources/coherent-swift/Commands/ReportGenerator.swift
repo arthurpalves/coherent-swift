@@ -12,7 +12,7 @@ public protocol ReportGenerator {
     var reports_file: String { get }
     var reports_path: String { get set }
     
-    func addToReport(file: String, cohesion: String, meetsThreshold: Bool, to report: ReportOutput) -> ReportOutput
+    func addToReport(file: String, cohesion: String, meetsThreshold: Bool, definitions: [ReportClass], to report: ReportOutput) -> ReportOutput
     func generateReport(_ report: ReportOutput) -> (Bool, Path?)
 }
 
@@ -20,8 +20,8 @@ extension ReportGenerator {
     public var reports_file: String { "coherent-swift.json" }
     var reports_path: String { "/tmp/coherent-swift/" }
     
-    public func addToReport(file: String, cohesion: String, meetsThreshold: Bool, to report: ReportOutput) -> ReportOutput {
-        let individualReport = IndividualReport(file: file, cohesion: cohesion, meets_threshold: meetsThreshold, classes: nil)
+    public func addToReport(file: String, cohesion: String, meetsThreshold: Bool, definitions: [ReportClass], to report: ReportOutput) -> ReportOutput {
+        let individualReport = IndividualReport(file: file, cohesion: cohesion, meets_threshold: meetsThreshold, classes: definitions)
         var reportCopy = report
         reportCopy.appendReport(individualReport)
         return reportCopy
