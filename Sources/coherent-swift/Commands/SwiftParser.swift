@@ -8,6 +8,8 @@ import Foundation
 import PathKit
 import SwiftCLI
 
+typealias ParsedItem = (item: String, range: NSRange)
+
 public class SwiftParser {
     let logger = Logger.shared
     static let shared = SwiftParser()
@@ -24,6 +26,7 @@ public class SwiftParser {
         else { return }
         
         let classes = parseDefinition(stringContent: stringData)
+
         classes.forEach {
             logger.logDebug("Definition: ", item: $0.name, indentationLevel: 1, color: .cyan)
             $0.properties.forEach { (property) in
@@ -45,132 +48,119 @@ public class SwiftParser {
     }
     
     private func parseDefinition(stringContent: String) -> [ReportClass] {
-        var finalDefinitions: [ReportClass] = []
+        var definitions: [ReportClass] = []
+    
+        let parseType: ParseType = .definition
         
-        let type: ParseType = .definition
-        let definitions = parseSwift(stringContent: stringContent, type: type)
-        
-        for iterator in 0...definitions.count-1 {
-            let currentDefinition = definitions[iterator].item
+        let rawDefinitions = parseSwift(stringContent: stringContent, type: parseType)
+        for iterator in 0...rawDefinitions.count-1 {
+            let definitionName = rawDefinitions[iterator].item
+            var definition: ReportClass = ReportClass(name: definitionName)
             
-            var reportDefinition: ReportClass = ReportClass(name: currentDefinition)
-            let nextDefinition = iterator+1 > definitions.count-1 ? "\\}" : "(\(type.regex())) \(definitions[iterator+1].item)"
-
-            let pattern = "(?s)(?<=\(currentDefinition)).*(?=\(nextDefinition))"
-            if let range = stringContent.range(of: pattern, options: .regularExpression) {
-                let text = String(stringContent[range])
+            let delimiter = iterator+1 > rawDefinitions.count-1 ? "\\}" : "(\(parseType.regex())) \(rawDefinitions[iterator+1].item)"
+            let regexPattern = "(?s)(?<=\(definitionName)).*(?=\(delimiter))"
+            
+            if let range = stringContent.range(of: regexPattern, options: .regularExpression) {
+                let definitionContent = String(stringContent[range])
                 
-                print("Class: \(text)")
-                
-                let methods = parseSwift(stringContent: text, type: .method)
-                reportDefinition.methods = methods.map { ReportMethod(name: $0.item) }
-                
-                var tempProperties: [String: [ReportProperty]] = [:]
-                methods.forEach { method in
-                    
-                    let internalRange = NSRange(location: method.range.location+method.range.length, length: stringContent.utf16.count-method.range.location)
-                    
-                    let start = String.Index(encodedOffset: method.range.location+method.range.length)
-                    let end = String.Index(encodedOffset: stringContent.utf16.count-method.range.location)
-                    let temporaryContent = String(stringContent[start..<end])
-
-                    let internalP = parseSwift(stringContent: temporaryContent, type: .property)
-                    let rProperty = internalP.map { ReportProperty(name: $0.item) }
-
-                    tempProperties[method.item] = rProperty
-                }
-                
-                for (index, _) in reportDefinition.methods.enumerated() {
-                    print("Method: \(reportDefinition.methods[index].name), properties: \(tempProperties[reportDefinition.methods[index].name])")
-                    reportDefinition.methods[index].properties = tempProperties[reportDefinition.methods[index].name] ?? []
-                }
-                
-                let properties = parseSwift(stringContent: text, type: .property)
-                reportDefinition.properties = properties.map { ReportProperty(name: $0.item) }
+                definition.properties = parseSwiftProperties(stringContent: definitionContent)
+                definition.methods = parseSwiftMethod(stringContent: definitionContent, definitionProperties: definition.properties)
             }
-            finalDefinitions.append(reportDefinition)
+            definitions.append(definition)
         }
         
-        return finalDefinitions
+        return definitions
     }
     
-    private func parseMethods() -> [ReportMethod] {
-        return []
+    private func parseSwiftProperties(stringContent: String) -> [ReportProperty] {
+        var properties: [ReportProperty] = []
+        let rawProperties = parseSwift(stringContent: stringContent, type: .property)
+        properties = rawProperties.map { ReportProperty(name: $0.item) }
+        return properties
     }
     
-    private func parseSwift(stringContent: String, type: ParseType, specialRange: NSRange? = nil) -> [(item: String, range: NSRange)] {
-        let range = specialRange ?? NSRange(location: 0, length: stringContent.utf16.count)
-        let delimiter = type.delimiter()
+    private func parseSwiftMethod(stringContent: String, definitionProperties: [ReportProperty]) -> [ReportMethod] {
+        var methods: [ReportMethod] = []
+        let rawMethods = parseSwift(stringContent: stringContent, type: .method)
         
-        let regex = try! NSRegularExpression(pattern: "(?<=\(type.regex()) )(.*)(\(delimiter))")
+        if rawMethods.isEmpty { return [] }
         
-        var finalResults: [(item: String, range: NSRange)] = []
-        
-        if specialRange == nil && delimiter == ParseType.property.delimiter() {
-            var shouldKeepLooking = true
+        for iterator in 0...rawMethods.count-1 {
+            let methodName = rawMethods[iterator].item
+            var method: ReportMethod = ReportMethod(name: methodName)
+            let delimiter = iterator+1 > rawMethods.count-1 ? "\\}" : "\(ParseType.method.regex())"
+            let regexPattern = "(?s)(?<=\(methodName)).*(\(delimiter))"
             
-            var allLines: [String] = []
-            stringContent.enumerateLines { (line, _) in
-                allLines.append(line)
+            if let range = stringContent.range(of: regexPattern, options: .regularExpression) {
+                let methodContent = String(stringContent[range])
+                method.properties = parseSwiftProperties(stringContent: methodContent)
             }
             
-            for line in 0...allLines.count-1 {
-                let codeLine = allLines[line]
-                
-                let innerRegex = try! NSRegularExpression(pattern: "(?<=\(ParseType.method.regex()) )(.*)(\(ParseType.method.delimiter()))")
-                let innerRange = NSRange(location: 0, length: codeLine.utf16.count)
-
-                let tempResults = innerRegex.matches(in: codeLine, range: innerRange)
-                shouldKeepLooking = tempResults.isEmpty
-                
-                if !shouldKeepLooking { break }
-                
-                let innerResults = regex.matches(in: codeLine, range: innerRange)
-                innerResults.forEach { result in
-                    if
-                        let range = Range(result.range, in: codeLine),
-                        let substring = String(codeLine[range]).split(separator: ":").first,
-                        let finalSubstring = String(substring).split(separator: " ").first {
-                        
-                        finalResults.append((item: String(finalSubstring), range: result.range))
-                    }
-                }
-            }
-            
-        } else {
-            let results = regex.matches(in: stringContent, range: range)
-            results.forEach { result in
-                if
-                    let range = Range(result.range, in: stringContent),
-                    let substring = String(stringContent[range]).split(separator: ":").first,
-                    let finalSubstring = String(substring).split(separator: " ").first {
-                    
-                    finalResults.append((item: String(finalSubstring), range: result.range))
-                }
-            }
-            
+            methods.append(method)
         }
-        return finalResults
+        return methods
+    }
+    
+    private func parseSwift(stringContent: String, type: ParseType) -> [ParsedItem] {
+        let range = NSRange(location: 0, length: stringContent.utf16.count)
+        let regex = try! NSRegularExpression(pattern: "(?<=\(type.regex()) )(.*)(\(type.delimiter()))")
+        var parsedItems: [ParsedItem] = []
+        
+        switch type {
+        case .property:
+            propertyLineParsing(stringContent: stringContent).forEach {
+                parsedItems.append($0)
+            }
+        default:
+            let matches = regex.matches(in: stringContent, range: range)
+            
+            processParsedItems(with: matches, in: stringContent).forEach {
+                parsedItems.append($0)
+            }
+        }
+        return parsedItems
+    }
+    
+    private func propertyLineParsing(stringContent: String) -> [ParsedItem] {
+        var parsedItems: [ParsedItem] = []
+        let regex = try! NSRegularExpression(pattern: "(?<=\(ParseType.property.regex()) )(.*)(\(ParseType.property.delimiter()))")
+        var dictionaryContent: [String] = []
+        
+        stringContent.enumerateLines { (line, _) in
+            dictionaryContent.append(line)
+        }
+        
+        for lineCount in 0...dictionaryContent.count-1 {
+            let lineContent = dictionaryContent[lineCount]
+            
+            let methodRegex = try! NSRegularExpression(pattern: "(?<=\(ParseType.method.regex()) )(.*)(\(ParseType.method.delimiter()))")
+            let range = NSRange(location: 0, length: lineContent.utf16.count)
+
+            let methodMatches = methodRegex.matches(in: lineContent, range: range)
+            if !methodMatches.isEmpty { break }
+            
+            let matches = regex.matches(in: lineContent, range: range)
+            
+            processParsedItems(with: matches, in: lineContent).forEach {
+                parsedItems.append($0)
+            }
+        }
+        
+        return parsedItems
+    }
+    
+    private func processParsedItems(with regexMatches: [NSTextCheckingResult], in contentString: String) -> [ParsedItem] {
+        var parsedItems: [ParsedItem] = []
+        
+        regexMatches.forEach { match in
+            if
+                let range = Range(match.range, in: contentString),
+                let substringNoColons = String(contentString[range]).split(separator: ":").first,
+                let substringNoSpaces = String(substringNoColons).split(separator: " ").first {
+                
+                parsedItems.append((item: String(substringNoSpaces), range: match.range))
+            }
+        }
+        return parsedItems
     }
 }
-
-
-//public extension NSRange {
-//    private init(string: String, lowerBound: String.Index, upperBound: String.Index) {
-//        let utf16 = string.utf16
-//
-//        let lowerBound = lowerBound.samePosition(in: utf16)
-//        let location = utf16.distance(from: utf16.startIndex, to: lowerBound)
-//        let length = utf16.distance(from: lowerBound, to: upperBound.samePosition(in: utf16))
-//
-//        self.init(location: location, length: length)
-//    }
-//
-//    init(range: Range<String.Index>, in string: String) {
-//        self.init(string: string, lowerBound: range.lowerBound, upperBound: range.upperBound)
-//    }
-//
-//    init(range: ClosedRange<String.Index>, in string: String) {
-//        self.init(string: string, lowerBound: range.lowerBound, upperBound: range.upperBound)
-//    }
-//}
