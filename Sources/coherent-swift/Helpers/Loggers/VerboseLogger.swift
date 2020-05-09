@@ -48,20 +48,14 @@ extension VerboseLogger {
         let indentation = String(repeating: "   ", count: indentationLevel)
         var command = ""
         let arguments =  [
-            "\(logLevel.rawValue)[\(currentTimestamp())]: ▸ ",
+            "\(logLevel.rawValue)",
+            "[\(Date().logTimestamp())]: ▸ ",
             "\(indentation)",
             "\(color.bold())\(prefix)",
             "\(color.rawValue)\(item)\(ShellColor.neutral.rawValue)"
         ]
         arguments.forEach { command.append($0) }
         try? Task.run("printf", command+"\n")
-    }
-    
-    private func currentTimestamp() -> String {
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return formatter.string(from: date)
     }
 }
 

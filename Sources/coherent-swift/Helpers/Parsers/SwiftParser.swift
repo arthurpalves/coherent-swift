@@ -14,7 +14,7 @@ public class SwiftParser {
     let logger = Logger.shared
     static let shared = SwiftParser()
     
-    func parseFile(filename: String, in path: Path, onSucces: (([ReportClass]) -> Void)? = nil) {
+    func parseFile(filename: String, in path: Path, onSucces: (([ReportDefinition]) -> Void)? = nil) {
         let fileManager = FileManager.default
         let filePath = Path("\(path)/\(filename)")
         let fileData = fileManager.contents(atPath: filePath.absolute().description)
@@ -47,15 +47,15 @@ public class SwiftParser {
         onSucces?(classes)
     }
     
-    private func parseDefinition(stringContent: String) -> [ReportClass] {
-        var definitions: [ReportClass] = []
+    private func parseDefinition(stringContent: String) -> [ReportDefinition] {
+        var definitions: [ReportDefinition] = []
     
         let parseType: ParseType = .definition
         
         let rawDefinitions = parseSwift(stringContent: stringContent, type: parseType)
         for iterator in 0...rawDefinitions.count-1 {
             let definitionName = rawDefinitions[iterator].item
-            var definition: ReportClass = ReportClass(name: definitionName)
+            var definition: ReportDefinition = ReportDefinition(name: definitionName)
             
             let delimiter = iterator+1 > rawDefinitions.count-1 ? "\\}" : "(\(parseType.regex())) \(rawDefinitions[iterator+1].item)"
             let regexPattern = "(?s)(?<=\(definitionName)).*(?=\(delimiter))"

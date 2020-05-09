@@ -9,7 +9,7 @@ import PathKit
 import SwiftCLI
 
 typealias FinalCohesion = (overall: Double, accumulative: Double, fileCount: Int)
-typealias StepCohesionHandler = (String, Double, [ReportClass]) -> Void
+typealias StepCohesionHandler = (String, Double, [ReportDefinition]) -> Void
 
 public enum ParseType: String {
     case definition = "Definition"
@@ -98,7 +98,7 @@ extension IOOperations {
     private func processFile(filename: String, in path: Path, onSuccess: StepCohesionHandler) {
         logger.logInfo("File: ", item: filename, color: .purple)
         
-        var finalDefinitions: [ReportClass] = []
+        var finalDefinitions: [ReportDefinition] = []
     
         swiftParser.parseFile(filename: filename, in: path) { (definitions) in
             finalDefinitions = definitions
