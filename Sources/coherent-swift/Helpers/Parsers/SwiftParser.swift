@@ -124,7 +124,6 @@ public class SwiftParser {
                 let methodCohesion = Cohesion.main.generateCohesion(for: method, withinDefinition: definition)
                 method.cohesion = methodCohesion.formattedCohesion()
             }
-            
             methods.append(method)
         }
         return methods
@@ -182,8 +181,8 @@ public class SwiftParser {
         var parsedItems: [ParsedItem] = []
         
         regexMatches.forEach { match in
+            
             if let range = Range(match.range, in: contentString) {
-                
                 var finalType = ""
                 switch type {
                 case .method:
@@ -193,15 +192,25 @@ public class SwiftParser {
                     let finalString = String(methodSubstring).trimmingCharacters(in: [" "])
                     parsedItems.append((item: finalString, range: match.range, type: type.rawValue))
                     
-                default:
-                    finalType = type.rawValue
-                    if type == .property {
-                        finalType = PropertyType.instanceProperty.rawValue
-                        if contentString.contains(PropertyType.classProperty.rawValue) {
-                            finalType = PropertyType.classProperty.rawValue
-                        }
+                case .property:
+                    finalType = PropertyType.instanceProperty.rawValue
+                    if contentString.contains(PropertyType.classProperty.rawValue) {
+                        finalType = PropertyType.classProperty.rawValue
                     }
                     
+                    var propertiesInLine: [String] = []
+                    if contentString.contains("let (") || contentString.contains("var (") {
+                        propertiesInLine = processTuple(in: String(contentString[range]))
+                    } else if let processedPropertyName = processPropertyName(in: String(contentString[range])) {
+                        propertiesInLine.append(processedPropertyName)
+                    }
+                    
+                    propertiesInLine.forEach { property in
+                        parsedItems.append((item: property, range: match.range, type: finalType))
+                    }
+                    
+                default:
+                    finalType = type.rawValue
                     guard
                         let substringNoColons = String(contentString[range]).split(separator: ":").first,
                         let finalString = String(substringNoColons).split(separator: " ").first
@@ -217,5 +226,33 @@ public class SwiftParser {
         guard let cleanSubstring = name.split(separator: "(").first
         else { return name }
         return String(cleanSubstring)
+    }
+    
+    private func processTuple(in contentString: String) -> [String] {
+        let cleanString = contentString
+            .replacingOccurrences(of: "(", with: "")
+            .replacingOccurrences(of: ")", with: "")
+            .replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: "=", with: "")
+        guard
+            let substringNoColons = cleanString.split(separator: ":").first
+        else { return [] }
+        
+        let allStrings = String(substringNoColons).split(separator: ",")
+        return allStrings.map { String($0) }
+    }
+    
+    private func processPropertyName(in contentString: String) -> String? {
+        let cleanString = contentString
+            .replacingOccurrences(of: "(", with: "")
+            .replacingOccurrences(of: ")", with: "")
+            .replacingOccurrences(of: " ", with: "")
+        
+        guard
+            let substringNoColons = cleanString.split(separator: ":").first,
+            let substringNoClosure = String(substringNoColons).split(separator: "=").first,
+            let finalString = String(substringNoClosure).split(separator: " ").first
+        else { return nil }
+        return String(finalString)
     }
 }
