@@ -69,7 +69,7 @@ swift run coherent-swift
 
 ## Usage
 
-```
+```sh
 Usage: coherent-swift <command> [options]
 
 A command-line tool to analyze and report Swift code cohesion
@@ -84,7 +84,7 @@ Commands:
 
 Before running the `report` command you must first have a spec/configuration file. This is a YAML file containing the basic configuration for *coherent-swift*.
 This configuration is expected as follows:
-```
+```sh
 source: ./MyProject/Sources/ 
 minimum_threshold: 80
 ignore_output_result: false
@@ -95,7 +95,7 @@ reports_folder: ./coherent-swift-reports/
 
 ### Scan and report
 
-```
+```sh
 Usage: coherent-swift report [options]
 
 Generate a report on Swift code cohesion
@@ -108,13 +108,13 @@ Options:
 
 #### Example
 
-```
+```sh
 coherent-swift report -s ./configs/coherent-swift.yml
 ```
 
 #### Output
 
-```
+```sh
 INFO  [2020-05-10 23:26:12]: ▸ --------------------------------------------------------------------------------------
 INFO  [2020-05-10 23:26:13]: ▸ $ coherent-swift report
 INFO  [2020-05-10 23:26:13]: ▸ --------------------------------------------------------------------------------------
@@ -148,10 +148,9 @@ INFO  [2020-05-10 23:26:15]: ▸ -----------------------------------------------
 
 ## Thanks
 
-- [Omar Albeik](https://github.com/omaralbeik), colleague, whose contribution to Open Source served as inspiration to put this out here.
-- [Mattt](https://twitter.com/mattt) for his great post [Swift Program Distribution with Homebrew](https://nshipster.com/homebrew/)
-- [Yonas Kolb](https://github.com/yonaskolb) for his very organized README and scripts in [XcodeGen](https://github.com/yonaskolb/XcodeGen) that I ended up copying most of it 😅
+- [mschwager](https://github.com/mschwager), who has built [cohesion](https://github.com/mschwager/cohesion), a tool for measuring Python class cohesion.
+- [Omar Albeik](https://github.com/omaralbeik), colleague, whose contribution to Open Source served as inspiration to put this out here. This README is also inspired by his work on [SketchGen](https://github.com/omaralbeik/SketchGen) and inherits all appreciation to those who made that possible.
 
 ## License
 
-SketchGen is released under the MIT license. See [LICENSE](https://github.com/omaralbeik/SketchGen/blob/master/LICENSE) for more information.
+coherent-swift is released under the MIT license. See [LICENSE](https://github.com/arthurpalves/coherent-swift/blob/master/LICENSE) for more information.
