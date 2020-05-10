@@ -1,6 +1,5 @@
 //
-//  File.swift
-//  
+//  coherent-swift
 //
 //  Created by Arthur Alves on 06/05/2020.
 //
@@ -20,6 +19,10 @@ public class Logger: VerboseLogger {
     
     func logInfo(_ prefix: Any = "", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral) {
         log(prefix, item: item, indentationLevel: indentationLevel, color: color, logLevel: .info)
+    }
+    
+    func logDebug(_ prefix: Any = "", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral) {
+        log(prefix, item: item, indentationLevel: indentationLevel, color: color, logLevel: .verbose)
     }
     
     func logSection(_ prefix: Any = "", item: Any, color: ShellColor = .neutral) {
