@@ -7,7 +7,8 @@
 ## Features
 
 - ✅ Measures the cohesion of your Swift code
-- ✅ That is about it 
+- ✅ Ability to validate cohesion against a minimum threshold
+- ✅ Ability to ignore output for a passive scan
 
 ## What is Cohesion?
 
@@ -30,6 +31,8 @@ Some of the advantages of high cohesion, also by Wikipedia:
 * Increased module reusability, because application developers will find
   the component they need more easily among the cohesive set of operations
   provided by the module.
+
+> coherent-swift is inspired by [cohesion](https://github.com/mschwager/cohesion).
 
 ## Installation
 
@@ -63,3 +66,92 @@ git clone https://github.com/arthurpalves/coherent-swift.git
 cd coherent-swift
 swift run coherent-swift
 ```
+
+## Usage
+
+```
+Usage: coherent-swift <command> [options]
+
+A command-line tool to analyze and report Swift code cohesion
+
+Commands:
+  report          Generate a report on Swift code cohesion
+  help            Prints help information
+  version         Prints the current version of this app
+```
+
+### Specs | Configuration
+
+Before running the `report` command you must first have a spec/configuration file. This is a YAML file containing the basic configuration for *coherent-swift*.
+This configuration is expected as follows:
+```
+source: ./MyProject/Sources/ 
+minimum_threshold: 80
+ignore_output_result: false
+reports_folder: ./coherent-swift-reports/
+```
+
+> NOTE: By default, `coherent-swift` expects to find the configuration above in `./coherent-swift.yml`, if you do have this file elsewhere or with a different name, please specify it's path by using the parameter `-s | --spec`.
+
+### Scan and report
+
+```
+Usage: coherent-swift report [options]
+
+Generate a report on Swift code cohesion
+
+Options:
+  -h, --help            Show help information
+  -s, --spec <value>    Use a yaml configuration file
+  -v, --verbose         Log tech details for nerds
+```
+
+#### Example
+
+```
+coherent-swift report -s ./configs/coherent-swift.yml
+```
+
+#### Output
+
+```
+INFO  [2020-05-10 23:26:12]: ▸ --------------------------------------------------------------------------------------
+INFO  [2020-05-10 23:26:13]: ▸ $ coherent-swift report
+INFO  [2020-05-10 23:26:13]: ▸ --------------------------------------------------------------------------------------
+INFO  [2020-05-10 23:26:13]: ▸ Configuration path: /Users/arthur/Projects/ios-project/configs/coherent-swift.yml
+INFO  [2020-05-10 23:26:13]: ▸ --------------------------------------------------------------------------------------
+INFO  [2020-05-10 23:26:13]: ▸ Running Analysis
+INFO  [2020-05-10 23:26:13]: ▸ --------------------------------------------------------------------------------------
+INFO  [2020-05-10 23:26:13]: ▸ File: Configurations/AppConfiguration.swift
+INFO  [2020-05-10 23:26:13]: ▸    Cohesion: 100.00%
+INFO  [2020-05-10 23:26:13]: ▸ File: DesignSystem/DesignSystem+MyProject.swift
+INFO  [2020-05-10 23:26:13]: ▸    Cohesion: 100.00%
+INFO  [2020-05-10 23:26:13]: ▸ File: DesignSystem/ButtonType+MyProject.swift
+INFO  [2020-05-10 23:26:13]: ▸    Cohesion: 100.00%
+INFO  [2020-05-10 23:26:13]: ▸ File: DesignSystem/Grid.swift
+INFO  [2020-05-10 23:26:13]: ▸    Cohesion: 100.00%
+INFO  [2020-05-10 23:26:14]: ▸ File: Functionalities/Welcome/ViewModel.swift
+INFO  [2020-05-10 23:26:14]: ▸    Cohesion: 100.00%
+INFO  [2020-05-10 23:26:14]: ▸ File: Functionalities/Welcome/Welcome.swift
+INFO  [2020-05-10 23:26:14]: ▸    Cohesion: 100.00%
+INFO  [2020-05-10 23:26:14]: ▸ File: Functionalities/Welcome/ViewController.swift
+INFO  [2020-05-10 23:26:14]: ▸    Cohesion: 68.94%
+INFO  [2020-05-10 23:26:14]: ▸ File: Functionalities/Welcome/WelcomeUseCase.swift
+INFO  [2020-05-10 23:26:14]: ▸    Ignored: No implementation found
+INFO  [2020-05-10 23:26:14]: ▸ File: Functionalities/Welcome/Router.swift
+INFO  [2020-05-10 23:26:14]: ▸    Cohesion: 100.00%
+INFO  [2020-05-10 23:26:14]: ▸ Analyzed 8 files with 96.12% overall cohesion. Threshold is 60%
+INFO  [2020-05-10 23:26:14]: ▸ --------------------------------------------------------------------------------------
+INFO  [2020-05-10 23:26:14]: ▸ Report: /Users/arthur/Projects/ios-project/coherent-swift-reports/coherent-swift.json
+INFO  [2020-05-10 23:26:15]: ▸ --------------------------------------------------------------------------------------
+```
+
+## Thanks
+
+- [Omar Albeik](https://github.com/omaralbeik), colleague, whose contribution to Open Source served as inspiration to put this out here.
+- [Mattt](https://twitter.com/mattt) for his great post [Swift Program Distribution with Homebrew](https://nshipster.com/homebrew/)
+- [Yonas Kolb](https://github.com/yonaskolb) for his very organized README and scripts in [XcodeGen](https://github.com/yonaskolb/XcodeGen) that I ended up copying most of it 😅
+
+## License
+
+SketchGen is released under the MIT license. See [LICENSE](https://github.com/omaralbeik/SketchGen/blob/master/LICENSE) for more information.
