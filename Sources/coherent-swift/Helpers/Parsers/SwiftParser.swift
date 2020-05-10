@@ -38,7 +38,7 @@ public class SwiftParser {
                     logger.logDebug("Property: ", item: property.name, indentationLevel: 3, color: .cyan)
                 }
                 
-                logger.logDebug("Cohesion: ", item: method.cohesion, indentationLevel: 3, color: .cyan)
+                logger.logDebug("Cohesion: ", item: method.cohesion+"%%", indentationLevel: 3, color: .cyan)
             }
             logger.logDebug("Cohesion: ", item: $0.cohesion, indentationLevel: 2, color: .cyan)
         }
@@ -141,7 +141,7 @@ public class SwiftParser {
         default:
             let matches = regex.matches(in: stringContent, range: range)
             
-            processParsedItems(with: matches, in: stringContent).forEach {
+            processParsedItems(with: matches, in: stringContent, type: type).forEach {
                 parsedItems.append($0)
             }
         }
@@ -168,7 +168,7 @@ public class SwiftParser {
             
             let matches = regex.matches(in: lineContent, range: range)
             
-            processParsedItems(with: matches, in: lineContent).forEach {
+            processParsedItems(with: matches, in: lineContent, type: .property).forEach {
                 parsedItems.append($0)
             }
         }
@@ -176,16 +176,26 @@ public class SwiftParser {
         return parsedItems
     }
     
-    private func processParsedItems(with regexMatches: [NSTextCheckingResult], in contentString: String) -> [ParsedItem] {
+    private func processParsedItems(with regexMatches: [NSTextCheckingResult], in contentString: String, type: ParseType) -> [ParsedItem] {
         var parsedItems: [ParsedItem] = []
         
         regexMatches.forEach { match in
-            if
-                let range = Range(match.range, in: contentString),
-                let substringNoColons = String(contentString[range]).split(separator: ":").first,
-                let substringNoSpaces = String(substringNoColons).split(separator: " ").first {
+            if let range = Range(match.range, in: contentString) {
                 
-                parsedItems.append((item: String(substringNoSpaces), range: match.range))
+                switch type {
+                case .method:
+                    guard
+                        let methodSubstring = String(contentString[range]).split(separator: "{").first
+                        else { return }
+                    let finalString = String(methodSubstring).trimmingCharacters(in: [" "])
+                    parsedItems.append((item: finalString, range: match.range))
+                default:
+                    guard
+                        let substringNoColons = String(contentString[range]).split(separator: ":").first,
+                        let finalString = String(substringNoColons).split(separator: " ").first
+                        else { return }
+                    parsedItems.append((item: String(finalString), range: match.range))
+                }
             }
         }
         return parsedItems
