@@ -26,7 +26,6 @@ public class SwiftParser {
         else { return }
         
         let classes = parseDefinition(stringContent: stringData)
-
         classes.forEach {
             logger.logDebug("Definition: ", item: $0.name, indentationLevel: 1, color: .cyan)
             $0.properties.forEach { (property) in
@@ -62,6 +61,8 @@ public class SwiftParser {
         let parseType: ParseType = .definition
         
         let rawDefinitions = parseSwift(stringContent: stringContent, type: parseType)
+        if rawDefinitions.isEmpty { return [] }
+        
         for iterator in 0...rawDefinitions.count-1 {
             let definitionName = rawDefinitions[iterator].item
             var definition: ReportDefinition = ReportDefinition(name: definitionName)
@@ -79,7 +80,7 @@ public class SwiftParser {
                 if !definition.methods.isEmpty {
                     cohesion = Cohesion.main.generateCohesion(for: definition)
                     
-                } else if definition.properties.isEmpty {
+                } else {
                     /*
                      * if a definition doesn't contain properties nor methods, its
                      * still considered to have high cohesion
