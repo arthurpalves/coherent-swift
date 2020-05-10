@@ -30,7 +30,7 @@ public enum ParseType: String {
     func delimiter() -> String {
         switch self {
         case .definition:
-            return "?=:"
+            return "?=(:|\\{)"
         case .method:
             return "?=\\{"
         case .property:
