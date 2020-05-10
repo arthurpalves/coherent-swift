@@ -110,9 +110,11 @@ public class SwiftParser {
         
         for iterator in 0...rawMethods.count-1 {
             let methodName = rawMethods[iterator].item
+            let processedForRegex = processedMethodName(methodName)
+            
             var method: ReportMethod = ReportMethod(name: methodName)
             let delimiter = iterator+1 > rawMethods.count-1 ? "\\}" : "\(ParseType.method.regex())"
-            let regexPattern = "(?s)(?<=\(methodName)).*(\(delimiter))"
+            let regexPattern = "(?s)(?<=\(processedForRegex)).*(\(delimiter))"
             
             if let range = stringContent.range(of: regexPattern, options: .regularExpression) {
                 let methodContent = String(stringContent[range])
@@ -199,5 +201,11 @@ public class SwiftParser {
             }
         }
         return parsedItems
+    }
+    
+    private func processedMethodName(_ name: String) -> String {
+        guard let cleanSubstring = name.split(separator: "(").first
+        else { return name }
+        return String(cleanSubstring)
     }
 }
