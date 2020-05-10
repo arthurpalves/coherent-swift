@@ -8,7 +8,7 @@ import Foundation
 import PathKit
 import SwiftCLI
 
-typealias ParsedItem = (item: String, range: NSRange)
+typealias ParsedItem = (item: String, range: NSRange, type: String)
 
 public class SwiftParser {
     let logger = Logger.shared
@@ -40,7 +40,7 @@ public class SwiftParser {
                 
                 logger.logDebug("Cohesion: ", item: method.cohesion+"%%", indentationLevel: 3, color: .cyan)
             }
-            logger.logDebug("Cohesion: ", item: $0.cohesion, indentationLevel: 2, color: .cyan)
+            logger.logDebug("Cohesion: ", item: $0.cohesion+"%%", indentationLevel: 2, color: .cyan)
         }
         
         onSucces?(classes)
@@ -98,7 +98,7 @@ public class SwiftParser {
     private func parseSwiftProperties(stringContent: String) -> [ReportProperty] {
         var properties: [ReportProperty] = []
         let rawProperties = parseSwift(stringContent: stringContent, type: .property)
-        properties = rawProperties.map { ReportProperty(name: $0.item) }
+        properties = rawProperties.map { ReportProperty(name: $0.item, propertyType: PropertyType(rawValue: $0.type) ?? .instanceProperty) }
         return properties
     }
     
@@ -184,19 +184,29 @@ public class SwiftParser {
         regexMatches.forEach { match in
             if let range = Range(match.range, in: contentString) {
                 
+                var finalType = ""
                 switch type {
                 case .method:
                     guard
                         let methodSubstring = String(contentString[range]).split(separator: "{").first
                         else { return }
                     let finalString = String(methodSubstring).trimmingCharacters(in: [" "])
-                    parsedItems.append((item: finalString, range: match.range))
+                    parsedItems.append((item: finalString, range: match.range, type: type.rawValue))
+                    
                 default:
+                    finalType = type.rawValue
+                    if type == .property {
+                        finalType = PropertyType.instanceProperty.rawValue
+                        if contentString.contains(PropertyType.classProperty.rawValue) {
+                            finalType = PropertyType.classProperty.rawValue
+                        }
+                    }
+                    
                     guard
                         let substringNoColons = String(contentString[range]).split(separator: ":").first,
                         let finalString = String(substringNoColons).split(separator: " ").first
-                        else { return }
-                    parsedItems.append((item: String(finalString), range: match.range))
+                    else { return }
+                    parsedItems.append((item: String(finalString), range: match.range, type: finalType))
                 }
             }
         }

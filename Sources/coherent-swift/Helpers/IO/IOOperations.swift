@@ -12,9 +12,9 @@ typealias FinalCohesion = (overall: Double, accumulative: Double, fileCount: Int
 typealias StepCohesionHandler = (String, Double?, [ReportDefinition], Bool) -> Void
 
 public enum ParseType: String {
-    case definition = "Definition"
-    case method = "Method"
-    case property = "Property"
+    case definition = "definition"
+    case method = "method"
+    case property = "property"
     
     func regex() -> String {
         switch self {
