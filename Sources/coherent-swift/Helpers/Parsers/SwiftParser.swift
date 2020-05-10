@@ -8,7 +8,7 @@ import Foundation
 import PathKit
 import SwiftCLI
 
-typealias ParsedItem = (item: String, range: NSRange)
+typealias ParsedItem = (item: String, range: NSRange, type: String)
 
 public class SwiftParser {
     let logger = Logger.shared
@@ -26,7 +26,6 @@ public class SwiftParser {
         else { return }
         
         let classes = parseDefinition(stringContent: stringData)
-
         classes.forEach {
             logger.logDebug("Definition: ", item: $0.name, indentationLevel: 1, color: .cyan)
             $0.properties.forEach { (property) in
@@ -39,9 +38,9 @@ public class SwiftParser {
                     logger.logDebug("Property: ", item: property.name, indentationLevel: 3, color: .cyan)
                 }
                 
-                logger.logDebug("Cohesion: ", item: method.cohesion, indentationLevel: 3, color: .cyan)
+                logger.logDebug("Cohesion: ", item: method.cohesion+"%%", indentationLevel: 3, color: .cyan)
             }
-            logger.logDebug("Cohesion: ", item: $0.cohesion, indentationLevel: 2, color: .cyan)
+            logger.logDebug("Cohesion: ", item: $0.cohesion+"%%", indentationLevel: 2, color: .cyan)
         }
         
         onSucces?(classes)
@@ -62,6 +61,8 @@ public class SwiftParser {
         let parseType: ParseType = .definition
         
         let rawDefinitions = parseSwift(stringContent: stringContent, type: parseType)
+        if rawDefinitions.isEmpty { return [] }
+        
         for iterator in 0...rawDefinitions.count-1 {
             let definitionName = rawDefinitions[iterator].item
             var definition: ReportDefinition = ReportDefinition(name: definitionName)
@@ -79,7 +80,7 @@ public class SwiftParser {
                 if !definition.methods.isEmpty {
                     cohesion = Cohesion.main.generateCohesion(for: definition)
                     
-                } else if definition.properties.isEmpty {
+                } else {
                     /*
                      * if a definition doesn't contain properties nor methods, its
                      * still considered to have high cohesion
@@ -97,7 +98,7 @@ public class SwiftParser {
     private func parseSwiftProperties(stringContent: String) -> [ReportProperty] {
         var properties: [ReportProperty] = []
         let rawProperties = parseSwift(stringContent: stringContent, type: .property)
-        properties = rawProperties.map { ReportProperty(name: $0.item) }
+        properties = rawProperties.map { ReportProperty(name: $0.item, propertyType: PropertyType(rawValue: $0.type) ?? .instanceProperty) }
         return properties
     }
     
@@ -109,9 +110,11 @@ public class SwiftParser {
         
         for iterator in 0...rawMethods.count-1 {
             let methodName = rawMethods[iterator].item
+            let processedForRegex = processedMethodName(methodName)
+            
             var method: ReportMethod = ReportMethod(name: methodName)
             let delimiter = iterator+1 > rawMethods.count-1 ? "\\}" : "\(ParseType.method.regex())"
-            let regexPattern = "(?s)(?<=\(methodName)).*(\(delimiter))"
+            let regexPattern = "(?s)(?<=\(processedForRegex)).*(\(delimiter))"
             
             if let range = stringContent.range(of: regexPattern, options: .regularExpression) {
                 let methodContent = String(stringContent[range])
@@ -121,7 +124,6 @@ public class SwiftParser {
                 let methodCohesion = Cohesion.main.generateCohesion(for: method, withinDefinition: definition)
                 method.cohesion = methodCohesion.formattedCohesion()
             }
-            
             methods.append(method)
         }
         return methods
@@ -140,7 +142,7 @@ public class SwiftParser {
         default:
             let matches = regex.matches(in: stringContent, range: range)
             
-            processParsedItems(with: matches, in: stringContent).forEach {
+            processParsedItems(with: matches, in: stringContent, type: type).forEach {
                 parsedItems.append($0)
             }
         }
@@ -167,7 +169,7 @@ public class SwiftParser {
             
             let matches = regex.matches(in: lineContent, range: range)
             
-            processParsedItems(with: matches, in: lineContent).forEach {
+            processParsedItems(with: matches, in: lineContent, type: .property).forEach {
                 parsedItems.append($0)
             }
         }
@@ -175,18 +177,82 @@ public class SwiftParser {
         return parsedItems
     }
     
-    private func processParsedItems(with regexMatches: [NSTextCheckingResult], in contentString: String) -> [ParsedItem] {
+    private func processParsedItems(with regexMatches: [NSTextCheckingResult], in contentString: String, type: ParseType) -> [ParsedItem] {
         var parsedItems: [ParsedItem] = []
         
         regexMatches.forEach { match in
-            if
-                let range = Range(match.range, in: contentString),
-                let substringNoColons = String(contentString[range]).split(separator: ":").first,
-                let substringNoSpaces = String(substringNoColons).split(separator: " ").first {
-                
-                parsedItems.append((item: String(substringNoSpaces), range: match.range))
+            
+            if let range = Range(match.range, in: contentString) {
+                var finalType = ""
+                switch type {
+                case .method:
+                    guard
+                        let methodSubstring = String(contentString[range]).split(separator: "{").first
+                        else { return }
+                    let finalString = String(methodSubstring).trimmingCharacters(in: [" "])
+                    parsedItems.append((item: finalString, range: match.range, type: type.rawValue))
+                    
+                case .property:
+                    finalType = PropertyType.instanceProperty.rawValue
+                    if contentString.contains(PropertyType.classProperty.rawValue) {
+                        finalType = PropertyType.classProperty.rawValue
+                    }
+                    
+                    var propertiesInLine: [String] = []
+                    if contentString.contains("let (") || contentString.contains("var (") {
+                        propertiesInLine = processTuple(in: String(contentString[range]))
+                    } else if let processedPropertyName = processPropertyName(in: String(contentString[range])) {
+                        propertiesInLine.append(processedPropertyName)
+                    }
+                    
+                    propertiesInLine.forEach { property in
+                        parsedItems.append((item: property, range: match.range, type: finalType))
+                    }
+                    
+                default:
+                    finalType = type.rawValue
+                    guard
+                        let substringNoColons = String(contentString[range]).split(separator: ":").first,
+                        let finalString = String(substringNoColons).split(separator: " ").first
+                    else { return }
+                    parsedItems.append((item: String(finalString), range: match.range, type: finalType))
+                }
             }
         }
         return parsedItems
+    }
+    
+    private func processedMethodName(_ name: String) -> String {
+        guard let cleanSubstring = name.split(separator: "(").first
+        else { return name }
+        return String(cleanSubstring)
+    }
+    
+    private func processTuple(in contentString: String) -> [String] {
+        let cleanString = contentString
+            .replacingOccurrences(of: "(", with: "")
+            .replacingOccurrences(of: ")", with: "")
+            .replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: "=", with: "")
+        guard
+            let substringNoColons = cleanString.split(separator: ":").first
+        else { return [] }
+        
+        let allStrings = String(substringNoColons).split(separator: ",")
+        return allStrings.map { String($0) }
+    }
+    
+    private func processPropertyName(in contentString: String) -> String? {
+        let cleanString = contentString
+            .replacingOccurrences(of: "(", with: "")
+            .replacingOccurrences(of: ")", with: "")
+            .replacingOccurrences(of: " ", with: "")
+        
+        guard
+            let substringNoColons = cleanString.split(separator: ":").first,
+            let substringNoClosure = String(substringNoColons).split(separator: "=").first,
+            let finalString = String(substringNoClosure).split(separator: " ").first
+        else { return nil }
+        return String(finalString)
     }
 }

@@ -11,14 +11,24 @@ public class Cohesion {
     static let main = Cohesion()
     
     func generateCohesion(for method: ReportMethod, withinDefinition definition: ReportDefinition) -> Double {
-        let combinedPropertyCount = (definition.properties + method.properties).count
+        var shouldProcessParentProperties = true
+        let parentProperties = definition.properties.filter { $0.propertyType != .classProperty }
         
         var containsPropertyCount = 0
+        var combinedPropertyCount = method.properties.count
+        if !parentProperties.isEmpty {
+            shouldProcessParentProperties = true
+            combinedPropertyCount = (parentProperties + method.properties).count
+        }
         
-        definition.properties.forEach {
-            containsPropertyCount += parser.method(method, containsProperty: $0)
-                ? 1
-                : 0
+        guard combinedPropertyCount > 0 else { return Double(100) }
+        
+        if shouldProcessParentProperties {
+            parentProperties.forEach {
+                containsPropertyCount += parser.method(method, containsProperty: $0)
+                    ? 1
+                    : 0
+            }
         }
         
         method.properties.forEach {

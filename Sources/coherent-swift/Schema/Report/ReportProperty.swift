@@ -8,4 +8,5 @@ import Foundation
 
 public struct ReportProperty: Codable {
     let name: String
+    let propertyType: PropertyType
 }

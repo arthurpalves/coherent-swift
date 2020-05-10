@@ -12,14 +12,14 @@ typealias FinalCohesion = (overall: Double, accumulative: Double, fileCount: Int
 typealias StepCohesionHandler = (String, Double?, [ReportDefinition], Bool) -> Void
 
 public enum ParseType: String {
-    case definition = "Definition"
-    case method = "Method"
-    case property = "Property"
+    case definition = "definition"
+    case method = "method"
+    case property = "property"
     
     func regex() -> String {
         switch self {
         case .definition:
-            return "class|struct"
+            return "class|struct|extension"
         case .method:
             return "func"
         case .property:
@@ -30,11 +30,11 @@ public enum ParseType: String {
     func delimiter() -> String {
         switch self {
         case .definition:
-            return "?=:"
+            return "?=(:|\\{)"
         case .method:
             return "?=\\{"
         case .property:
-            return "( |:)"//(\\=|:)"
+            return "( |:)"
         }
     }
 }
@@ -99,6 +99,10 @@ extension IOOperations {
                                 if success, let path = reportPath {
                                     self.logger.logSection("Report: ", item: "\(path.absolute().description)")
                                 }
+                                
+                                if !configuration.ignore_output_result && !finalReport.meets_threshold {
+                                    exit(1)
+                                }
         }
     }
     
@@ -131,13 +135,14 @@ extension IOOperations {
         let color = printColor(for: overallCohesion, threshold: threshold, fallback: .green)
         let cohesionString = overallCohesion.formattedCohesion()
         
-        logger.logInfo("Analyzed \(finalCohesion.fileCount) files with \(cohesionString)%% overall cohesion", item: "", color: color)
+        logger.logInfo("Analyzed \(finalCohesion.fileCount) files with \(cohesionString)%% overall cohesion. ", item: "Threshold is \(configuration.minimum_threshold)%%", color: color)
 
         var finalReport = report
         
         finalReport.minimum_threshold = configuration.minimum_threshold+"%"
         finalReport.source = configuration.source
         finalReport.cohesion = cohesionString+"%"
+        finalReport.meets_threshold = overallCohesion >= threshold
         
         onSuccess?(finalReport)
     }
