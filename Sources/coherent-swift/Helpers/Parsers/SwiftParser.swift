@@ -48,7 +48,7 @@ public class SwiftParser {
     
     func method(_ method: ReportMethod, containsProperty property: ReportProperty, numberOfOccasions: Int = 1) -> Bool {
         let range = NSRange(location: 0, length: method.contentString.utf16.count)
-        let regex = try! NSRegularExpression(pattern: property.name)
+        guard let regex = try? NSRegularExpression(pattern: property.name) else { return false }
         let matches = regex.matches(in: method.contentString, range: range)
         return matches.count >= numberOfOccasions
     }
@@ -131,7 +131,12 @@ public class SwiftParser {
     
     private func parseSwift(stringContent: String, type: ParseType) -> [ParsedItem] {
         let range = NSRange(location: 0, length: stringContent.utf16.count)
-        let regex = try! NSRegularExpression(pattern: "(?<=\(type.regex()) )(.*)(\(type.delimiter()))")
+        let pattern = "(?<=\(type.regex()) )(.*)(\(type.delimiter()))"
+        guard let regex = try? NSRegularExpression(pattern: pattern)
+        else {
+            logger.logError("Couldn't create NSRegularExpression with: ", item: pattern)
+            return []
+        }
         var parsedItems: [ParsedItem] = []
         
         switch type {
@@ -151,17 +156,30 @@ public class SwiftParser {
     
     private func propertyLineParsing(stringContent: String) -> [ParsedItem] {
         var parsedItems: [ParsedItem] = []
-        let regex = try! NSRegularExpression(pattern: "(?<=\(ParseType.property.regex()) )(.*)(\(ParseType.property.delimiter()))")
+        let type = ParseType.property
+        let pattern = "(?<=\(type.regex()) )(.*)(\(type.delimiter()))"
+        guard let regex = try? NSRegularExpression(pattern: pattern)
+        else {
+            logger.logError("Couldn't create NSRegularExpression with: ", item: pattern)
+            return parsedItems
+        }
+        
         var dictionaryContent: [String] = []
         
         stringContent.enumerateLines { (line, _) in
             dictionaryContent.append(line)
         }
         
+        let methodType = ParseType.method
+        let methodPattern = "(?<=\(methodType.regex()) )(.*)(\(methodType.delimiter()))"
+        guard let methodRegex = try? NSRegularExpression(pattern: methodPattern)
+        else {
+            logger.logError("Couldn't create NSRegularExpression with: ", item: methodPattern)
+            return parsedItems
+        }
+        
         for lineCount in 0...dictionaryContent.count-1 {
             let lineContent = dictionaryContent[lineCount]
-            
-            let methodRegex = try! NSRegularExpression(pattern: "(?<=\(ParseType.method.regex()) )(.*)(\(ParseType.method.delimiter()))")
             let range = NSRange(location: 0, length: lineContent.utf16.count)
 
             let methodMatches = methodRegex.matches(in: lineContent, range: range)
