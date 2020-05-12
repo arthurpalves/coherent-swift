@@ -5,6 +5,7 @@ on:
     branches: [ cohesion-badge ]
 env:
   DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+  GITHUB_TOKEN: ${{ secrets.PAT }} # Required
 
 jobs:
   build:
@@ -13,11 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Switch to badge branch
-      run: |
-        git fetch origin badge
-        git checkout badge
-
     - name: Swift Package Resolve
       run: swift package resolve
 
@@ -25,8 +21,7 @@ jobs:
       run: swift run coherent-swift report
 
     - name: Sync with badge branch
-      run: |
-        git add .
-        git commit -m "automatic: generated new report and badge" -a
-        git remote set-url origin https://arthurpalves:${{ secrets.PAT }}@github.com/arthurpalves/coherent-swift.git
-        git push origin badge -f
+      uses: Automattic/action-commit-to-branch@master
+      with:
+        branch: 'badge'
+        commit_message: 'automatic sync reports'
