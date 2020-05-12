@@ -8,7 +8,6 @@ import Foundation
 import SwiftCLI
 
 public class Logger: VerboseLogger {
-    public var stdout: WritableStream?
     static let shared = Logger()
     
     func logError(_ prefix: Any = "", item: Any, color: ShellColor = .red) {

@@ -65,11 +65,12 @@ public class SwiftParser {
         
         for iterator in 0...rawDefinitions.count-1 {
             let definitionName = rawDefinitions[iterator].item
+            
             var definition: ReportDefinition = ReportDefinition(name: definitionName)
             
             let delimiter = iterator+1 > rawDefinitions.count-1 ? "\\}" : "(\(parseType.regex())) \(rawDefinitions[iterator+1].item)"
             let regexPattern = "(?s)(?<=\(definitionName)).*(?=\(delimiter))"
-            
+
             if let range = stringContent.range(of: regexPattern, options: .regularExpression) {
                 let definitionContent = String(stringContent[range])
                 
@@ -130,6 +131,7 @@ public class SwiftParser {
     }
     
     private func parseSwift(stringContent: String, type: ParseType) -> [ParsedItem] {
+        
         let range = NSRange(location: 0, length: stringContent.utf16.count)
         let pattern = "(?<=\(type.regex()) )(.*)(\(type.delimiter()))"
         guard let regex = try? NSRegularExpression(pattern: pattern)
@@ -146,7 +148,6 @@ public class SwiftParser {
             }
         default:
             let matches = regex.matches(in: stringContent, range: range)
-            
             processParsedItems(with: matches, in: stringContent, type: type).forEach {
                 parsedItems.append($0)
             }
