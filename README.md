@@ -1,3 +1,8 @@
+[![License](https://img.shields.io/github/license/arthurpalves/coherent-swift)](https://github.com/arthurpalves/coherent-swift/blob/master/LICENSE)
+[![Version](https://img.shields.io/github/v/release/arthurpalves/coherent-swift)](https://github.com/arthurpalves/coherent-swift/releases)
+[![Language](https://img.shields.io/badge/language-swift-orange.svg?style=flat)](https://developer.apple.com/swift)
+![Platform](https://img.shields.io/badge/platform-osx-lightgrey)
+
 <p align="center">
 <img src="Assets/logo-long.svg" title="CoherentSwift">
 </p>
