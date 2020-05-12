@@ -1,0 +1,27 @@
+name: master
+
+on:
+  push:
+    branches: [ master ]
+env:
+  DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+  GITHUB_TOKEN: ${{ secrets.PAT }}
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Swift Package Resolve
+      run: swift package resolve
+
+    - name: Run coherent-swift report on itself
+      run: swift run coherent-swift report
+
+    - name: Sync with badge branch
+      run: |
+        git add .
+        git commit -m "automatic: sync report and badge files"
+        git push origin master:badge -f
