@@ -24,7 +24,7 @@ final class Report: Command, IOOperations {
     // --------------
     // MARK: Configuration Properties
     @Key("-s", "--spec", description: "Use a yaml configuration file")
-    var specs: String
+    var specs: String?
     
     
     var configurationPath: String = "coherent-swift.yml"
