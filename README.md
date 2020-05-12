@@ -114,42 +114,21 @@ Options:
 #### Example
 
 ```sh
-coherent-swift report -s ./configs/coherent-swift.yml
+coherent-swift report
 ```
 
-#### Output
+<p align="center">
+<img src="Assets/GIF/report-animated.gif" alt="coherent-swift report" />
+</p>
 
 ```sh
-INFO  [2020-05-10 23:26:12]: ▸ --------------------------------------------------------------------------------------
-INFO  [2020-05-10 23:26:13]: ▸ $ coherent-swift report
-INFO  [2020-05-10 23:26:13]: ▸ --------------------------------------------------------------------------------------
-INFO  [2020-05-10 23:26:13]: ▸ Configuration path: /Users/arthur/Projects/ios-project/configs/coherent-swift.yml
-INFO  [2020-05-10 23:26:13]: ▸ --------------------------------------------------------------------------------------
-INFO  [2020-05-10 23:26:13]: ▸ Running Analysis
-INFO  [2020-05-10 23:26:13]: ▸ --------------------------------------------------------------------------------------
-INFO  [2020-05-10 23:26:13]: ▸ File: Configurations/AppConfiguration.swift
-INFO  [2020-05-10 23:26:13]: ▸    Cohesion: 100.00%
-INFO  [2020-05-10 23:26:13]: ▸ File: DesignSystem/DesignSystem+MyProject.swift
-INFO  [2020-05-10 23:26:13]: ▸    Cohesion: 100.00%
-INFO  [2020-05-10 23:26:13]: ▸ File: DesignSystem/ButtonType+MyProject.swift
-INFO  [2020-05-10 23:26:13]: ▸    Cohesion: 100.00%
-INFO  [2020-05-10 23:26:13]: ▸ File: DesignSystem/Grid.swift
-INFO  [2020-05-10 23:26:13]: ▸    Cohesion: 100.00%
-INFO  [2020-05-10 23:26:14]: ▸ File: Functionalities/Welcome/ViewModel.swift
-INFO  [2020-05-10 23:26:14]: ▸    Cohesion: 100.00%
-INFO  [2020-05-10 23:26:14]: ▸ File: Functionalities/Welcome/Welcome.swift
-INFO  [2020-05-10 23:26:14]: ▸    Cohesion: 100.00%
-INFO  [2020-05-10 23:26:14]: ▸ File: Functionalities/Welcome/ViewController.swift
-INFO  [2020-05-10 23:26:14]: ▸    Cohesion: 68.94%
-INFO  [2020-05-10 23:26:14]: ▸ File: Functionalities/Welcome/WelcomeUseCase.swift
-INFO  [2020-05-10 23:26:14]: ▸    Ignored: No implementation found
-INFO  [2020-05-10 23:26:14]: ▸ File: Functionalities/Welcome/Router.swift
-INFO  [2020-05-10 23:26:14]: ▸    Cohesion: 100.00%
-INFO  [2020-05-10 23:26:14]: ▸ Analyzed 8 files with 96.12% overall cohesion. Threshold is 60%
-INFO  [2020-05-10 23:26:14]: ▸ --------------------------------------------------------------------------------------
-INFO  [2020-05-10 23:26:14]: ▸ Report: /Users/arthur/Projects/ios-project/coherent-swift-reports/coherent-swift.json
-INFO  [2020-05-10 23:26:15]: ▸ --------------------------------------------------------------------------------------
+coherent-swift report --verbose
 ```
+
+<p align="center">
+<img src="Assets/GIF/report-verbose-animated.gif" alt="coherent-swift report --verbose" />
+</p>
+
 
 ## Thanks
 
