@@ -21,7 +21,7 @@ jobs:
       run: swift run coherent-swift report
 
     - name: Sync with badge branch
-      uses: Automattic/action-commit-to-branch@master
-      with:
-        branch: 'badge'
-        commit_message: 'automatic sync reports'
+      run: |
+        git add .
+        git commit -m "automatic: sync report and badge files"
+        git push origin cohesion-badge:badge -f
