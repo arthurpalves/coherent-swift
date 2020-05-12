@@ -2,10 +2,10 @@ name: master
 
 on:
   push:
-    branches: [ cohesion-badge ]
+    branches: [ master ]
 env:
   DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
-  GITHUB_TOKEN: ${{ secrets.PAT }} # Required
+  GITHUB_TOKEN: ${{ secrets.PAT }}
 
 jobs:
   build:
@@ -24,4 +24,4 @@ jobs:
       run: |
         git add .
         git commit -m "automatic: sync report and badge files"
-        git push origin cohesion-badge:badge -f
+        git push origin master:badge -f
