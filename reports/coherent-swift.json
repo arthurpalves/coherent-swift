@@ -1,8 +1,8 @@
 {
-  "cohesion" : "86.66%",
+  "cohesion" : "87.36%",
   "meets_threshold" : true,
   "minimum_threshold" : "80%",
-  "report_date" : "2020-05-12 20:38:38",
+  "report_date" : "2020-05-12 21:18:30",
   "result" : [
     {
       "classes" : [
@@ -255,6 +255,38 @@
       "cohesion" : "16.67%",
       "file" : "coherent-swift/Schema/Report/ReportOutput.swift",
       "meets_threshold" : false
+    },
+    {
+      "classes" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "CoherentBadge",
+          "properties" : [
+            {
+              "name" : "schemaVersion",
+              "propertyType" : "instance"
+            },
+            {
+              "name" : "label",
+              "propertyType" : "instance"
+            },
+            {
+              "name" : "message",
+              "propertyType" : "instance"
+            },
+            {
+              "name" : "color",
+              "propertyType" : "instance"
+            }
+          ]
+        }
+      ],
+      "cohesion" : "100.00%",
+      "file" : "coherent-swift/Schema/CoherentBadge.swift",
+      "meets_threshold" : true
     },
     {
       "classes" : [
@@ -890,6 +922,10 @@
               "propertyType" : "instance"
             },
             {
+              "name" : "badge_file",
+              "propertyType" : "instance"
+            },
+            {
               "name" : "shared",
               "propertyType" : "static"
             }
@@ -903,14 +939,18 @@
     {
       "classes" : [
         {
-          "cohesion" : "83.34",
+          "cohesion" : "83.33",
           "methods" : [
             {
-              "cohesion" : "66.67",
+              "cohesion" : "100.00",
               "name" : "addToReport(file: String, cohesion: String, meetsThreshold: Bool, definitions: [ReportDefinition], to report: ReportOutput) -> ReportOutput",
               "properties" : [
                 {
                   "name" : "reports_file",
+                  "propertyType" : "instance"
+                },
+                {
+                  "name" : "badge_file",
                   "propertyType" : "instance"
                 },
                 {
@@ -928,7 +968,47 @@
                   "propertyType" : "instance"
                 },
                 {
+                  "name" : "badge_file",
+                  "propertyType" : "instance"
+                },
+                {
                   "name" : "reports_path",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "name" : "generateBadge(_ report: ReportOutput) -> (Bool, Path?)",
+              "properties" : [
+                {
+                  "name" : "reports_file",
+                  "propertyType" : "instance"
+                },
+                {
+                  "name" : "badge_file",
+                  "propertyType" : "instance"
+                },
+                {
+                  "name" : "reports_path",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "33.33",
+              "name" : "write<T>(_ encodableObject: T, toFile file: Path) -> (Bool, Path?) where T : Encodable",
+              "properties" : [
+                {
+                  "name" : "encoder",
+                  "propertyType" : "instance"
+                },
+                {
+                  "name" : "encoded",
+                  "propertyType" : "instance"
+                },
+                {
+                  "name" : "encodedJSONString",
                   "propertyType" : "instance"
                 }
               ]
@@ -941,11 +1021,19 @@
               "propertyType" : "instance"
             },
             {
+              "name" : "badge_file",
+              "propertyType" : "instance"
+            },
+            {
               "name" : "reports_path",
               "propertyType" : "instance"
             },
             {
               "name" : "reports_file",
+              "propertyType" : "instance"
+            },
+            {
+              "name" : "badge_file",
               "propertyType" : "instance"
             },
             {
@@ -955,7 +1043,7 @@
           ]
         }
       ],
-      "cohesion" : "83.34%",
+      "cohesion" : "83.33%",
       "file" : "coherent-swift/Helpers/IO/ReportGenerator.swift",
       "meets_threshold" : true
     },
