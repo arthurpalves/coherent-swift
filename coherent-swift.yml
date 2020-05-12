@@ -1,0 +1,4 @@
+source: ./Sources/
+minimum_threshold: 80
+reports_folder: ./reports/
+ignore_output_result: false
