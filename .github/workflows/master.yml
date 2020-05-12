@@ -13,6 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Switch to badge branch
+      run: |
+        git fetch origin badge
+        git checkout badge
+
     - name: Swift Package Resolve
       run: swift package resolve
 
@@ -21,8 +26,6 @@ jobs:
 
     - name: Sync with badge branch
       run: |
-        git fetch origin badge
-        git checkout badge
         git add .
         git commit -m "automatic: generated new report and badge" -a
         git remote set-url origin https://arthurpalves:${{ secrets.PAT }}@github.com/arthurpalves/coherent-swift.git

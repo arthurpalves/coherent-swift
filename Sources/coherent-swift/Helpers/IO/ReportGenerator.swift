@@ -38,7 +38,7 @@ extension ReportGenerator {
         
         do {
             try Task.run(bash: "mkdir -p \(reports_path)")
-            generateBadge(reportCopy)
+            let _ = generateBadge(reportCopy)
             return write(reportCopy, toFile: path)
         } catch {
             return (false, nil)
