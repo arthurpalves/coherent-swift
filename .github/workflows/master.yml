@@ -1,0 +1,28 @@
+name: master
+
+on:
+  push:
+    branches: [ master ]
+env:
+  DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Swift Package Resolve
+      run: swift package resolve
+
+    - name: Run coherent-swift report on itself
+      run: swift run coherent-swift report
+
+    - name: Sync with badge branch
+      run: |
+        git checkout badge
+        git add .
+        git commit -m "automatic: generated new report and badge" -a
+        git remote set-url origin https://arthurpalves:${{ secrets.PAT }}@github.com/arthurpalves/coherent-swift.git
+        git push origin badge -f
