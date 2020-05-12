@@ -34,7 +34,6 @@ public enum LogLevel: String {
 
 public protocol VerboseLogger {
     var verbose: Bool { get }
-    var stdout: SwiftCLI.WritableStream? { get }
     func log(_ prefix: Any, item: Any, indentationLevel: Int, color: ShellColor, logLevel: LogLevel)
 }
 

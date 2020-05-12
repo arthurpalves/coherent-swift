@@ -19,7 +19,7 @@ public enum ParseType: String {
     func regex() -> String {
         switch self {
         case .definition:
-            return "class|struct|extension"
+            return "class |struct |extension"
         case .method:
             return "func"
         case .property:
