@@ -25,7 +25,8 @@ public class SwiftParser {
             !stringData.isEmpty
         else { return }
         
-        let classes = parseDefinition(stringContent: stringData)
+        let cleanContent = excludeComments(stringContent: stringData)
+        let classes = parseDefinition(stringContent: cleanContent)
         classes.forEach {
             logger.logDebug("Definition: ", item: $0.name, indentationLevel: 1, color: .cyan)
             $0.properties.forEach { (property) in
@@ -54,6 +55,26 @@ public class SwiftParser {
     }
     
     // MARK: - Private methods
+    
+    private func excludeComments(stringContent: String) -> String {
+        let range = NSRange(location: 0, length: stringContent.utf16.count)
+        let pattern = "(/\\*(.|\n)*?\\*/|//(.*?)\r?\n|@(\"[^\"]*\")+)"
+        guard let regex = try? NSRegularExpression(pattern: pattern)
+        else {
+            logger.logError("Couldn't create NSRegularExpression to exclude comments from file content: ", item: pattern)
+            return stringContent
+        }
+        var cleanContent = stringContent
+        let matches = regex.matches(in: stringContent, range: range)
+        matches.forEach { match in
+            if let range = Range(match.range, in: stringContent) {
+                let methodSubstring = String(stringContent[range])
+                cleanContent = cleanContent.replacingOccurrences(of: methodSubstring, with: "")
+            }
+        }
+        
+        return cleanContent
+    }
     
     private func parseDefinition(stringContent: String) -> [ReportDefinition] {
         var definitions: [ReportDefinition] = []
