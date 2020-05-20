@@ -12,6 +12,9 @@ typealias ParsedItem = (item: String, range: NSRange, type: String)
 
 public class SwiftParser {
     let logger = Logger.shared
+    let inlineParser = InlineParser.shared
+    let cleaner = Cleaner.shared
+    
     static let shared = SwiftParser()
     
     func parseFile(filename: String, in path: Path, onSucces: (([ReportDefinition]) -> Void)? = nil) {
@@ -21,11 +24,13 @@ public class SwiftParser {
         
         guard
             let data = fileData,
-            let stringData = String(data: data, encoding: .utf8),
-            !stringData.isEmpty
+            let string = String(data: data, encoding: .utf8),
+            !string.isEmpty
         else { return }
         
-        let classes = parseDefinition(stringContent: stringData)
+        let definitions = inlineParser.parseFileContent(string)
+        let classes: [ReportDefinition] = parseDefinitions(rawDefinitions: definitions)
+        
         classes.forEach {
             logger.logDebug("Definition: ", item: $0.name, indentationLevel: 1, color: .cyan)
             $0.properties.forEach { (property) in
@@ -55,51 +60,36 @@ public class SwiftParser {
     
     // MARK: - Private methods
     
-    private func parseDefinition(stringContent: String) -> [ReportDefinition] {
+    private func parseDefinitions(rawDefinitions: [DefinitionTuple]) -> [ReportDefinition] {
         var definitions: [ReportDefinition] = []
     
-        let parseType: ParseType = .definition
-        
-        let rawDefinitions = parseSwift(stringContent: stringContent, type: parseType)
-        if rawDefinitions.isEmpty { return [] }
-        
-        for iterator in 0...rawDefinitions.count-1 {
-            let definitionName = rawDefinitions[iterator].item
+        rawDefinitions.forEach { (rawDefinition) in
+            var definition: ReportDefinition = ReportDefinition(name: rawDefinition.name)
             
-            var definition: ReportDefinition = ReportDefinition(name: definitionName)
+            definition.properties = parseSwiftProperties(stringContent: rawDefinition.content)
+            definition.methods = parseSwiftMethod(stringContent: rawDefinition.content, withinDefinition: definition)
             
-            let delimiter = iterator+1 > rawDefinitions.count-1 ? "\\}" : "(\(parseType.regex())) \(rawDefinitions[iterator+1].item)"
-            let regexPattern = "(?s)(?<=\(definitionName)).*(?=\(delimiter))"
-
-            if let range = stringContent.range(of: regexPattern, options: .regularExpression) {
-                let definitionContent = String(stringContent[range])
-                
-                definition.properties = parseSwiftProperties(stringContent: definitionContent)
-                definition.methods = parseSwiftMethod(stringContent: definitionContent, withinDefinition: definition)
-                
-                var cohesion: Double = 0
-                if !definition.methods.isEmpty {
-                    cohesion = Cohesion.main.generateCohesion(for: definition)
-                    
-                } else {
-                    /*
-                     * if a definition doesn't contain properties nor methods, its
-                     * still considered to have high cohesion
-                     */
-                    cohesion = 100
-                }
-                definition.cohesion = cohesion.formattedCohesion()
+            var cohesion: Double = 0
+            if !definition.methods.isEmpty {
+                cohesion = Cohesion.main.generateCohesion(for: definition)
+            } else {
+                /*
+                 * if a definition doesn't contain properties nor methods, its
+                 * still considered as highly cohesive
+                 */
+                cohesion = 100
             }
+            definition.cohesion = cohesion.formattedCohesion()
             definitions.append(definition)
         }
-        
         return definitions
     }
     
     private func parseSwiftProperties(stringContent: String) -> [ReportProperty] {
         var properties: [ReportProperty] = []
         let rawProperties = parseSwift(stringContent: stringContent, type: .property)
-        properties = rawProperties.map { ReportProperty(name: $0.item, propertyType: PropertyType(rawValue: $0.type) ?? .instanceProperty) }
+        properties = rawProperties.map { ReportProperty(name: $0.item,
+                                                        propertyType: PropertyType(rawValue: $0.type) ?? .instanceProperty) }
         return properties
     }
     
@@ -111,7 +101,7 @@ public class SwiftParser {
         
         for iterator in 0...rawMethods.count-1 {
             let methodName = rawMethods[iterator].item
-            let processedForRegex = processedMethodName(methodName)
+            let processedForRegex = cleaner.cleanMethodName(methodName)
             
             var method: ReportMethod = ReportMethod(name: methodName)
             let delimiter = iterator+1 > rawMethods.count-1 ? "\\}" : "\(ParseType.method.regex())"
@@ -131,7 +121,6 @@ public class SwiftParser {
     }
     
     private func parseSwift(stringContent: String, type: ParseType) -> [ParsedItem] {
-        
         let range = NSRange(location: 0, length: stringContent.utf16.count)
         let pattern = "(?<=\(type.regex()) )(.*)(\(type.delimiter()))"
         guard let regex = try? NSRegularExpression(pattern: pattern)
@@ -198,9 +187,7 @@ public class SwiftParser {
     
     private func processParsedItems(with regexMatches: [NSTextCheckingResult], in contentString: String, type: ParseType) -> [ParsedItem] {
         var parsedItems: [ParsedItem] = []
-        
         regexMatches.forEach { match in
-            
             if let range = Range(match.range, in: contentString) {
                 var finalType = ""
                 switch type {
@@ -219,8 +206,8 @@ public class SwiftParser {
                     
                     var propertiesInLine: [String] = []
                     if contentString.contains("let (") || contentString.contains("var (") {
-                        propertiesInLine = processTuple(in: String(contentString[range]))
-                    } else if let processedPropertyName = processPropertyName(in: String(contentString[range])) {
+                        propertiesInLine = cleaner.cleanTuple(in: String(contentString[range]))
+                    } else if let processedPropertyName = cleaner.cleanPropertyName(in: String(contentString[range])) {
                         propertiesInLine.append(processedPropertyName)
                     }
                     
@@ -239,39 +226,5 @@ public class SwiftParser {
             }
         }
         return parsedItems
-    }
-    
-    private func processedMethodName(_ name: String) -> String {
-        guard let cleanSubstring = name.split(separator: "(").first
-        else { return name }
-        return String(cleanSubstring)
-    }
-    
-    private func processTuple(in contentString: String) -> [String] {
-        let cleanString = contentString
-            .replacingOccurrences(of: "(", with: "")
-            .replacingOccurrences(of: ")", with: "")
-            .replacingOccurrences(of: " ", with: "")
-            .replacingOccurrences(of: "=", with: "")
-        guard
-            let substringNoColons = cleanString.split(separator: ":").first
-        else { return [] }
-        
-        let allStrings = String(substringNoColons).split(separator: ",")
-        return allStrings.map { String($0) }
-    }
-    
-    private func processPropertyName(in contentString: String) -> String? {
-        let cleanString = contentString
-            .replacingOccurrences(of: "(", with: "")
-            .replacingOccurrences(of: ")", with: "")
-            .replacingOccurrences(of: " ", with: "")
-        
-        guard
-            let substringNoColons = cleanString.split(separator: ":").first,
-            let substringNoClosure = String(substringNoColons).split(separator: "=").first,
-            let finalString = String(substringNoClosure).split(separator: " ").first
-        else { return nil }
-        return String(finalString)
     }
 }
