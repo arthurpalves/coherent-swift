@@ -92,17 +92,22 @@ extension IOOperations {
                                threshold: threshold,
                                report: report) { (finalReport) in
                                 
-                                let reportsFolder = Path("\(configurationPath)/\(configuration.reportsPath().abbreviate())")
-                                self.localFileManager.reports_path = reportsFolder.absolute().description
+            let reportsFolder = Path("\(configurationPath)/\(configuration.reportsPath().abbreviate())")
+            self.localFileManager.reports_path = reportsFolder.absolute().description
+            
+            var reportFormat: ReportFormat = .json
+            if let format = ReportFormat(rawValue: configuration.report_format ?? "json") {
+                reportFormat = format
+            }
                                 
-                                let (success, reportPath) = self.localFileManager.generateReport(finalReport)
-                                if success, let path = reportPath {
-                                    self.logger.logSection("Report: ", item: "\(path.absolute().description)")
-                                }
-                                
-                                if !configuration.ignore_output_result && !finalReport.meets_threshold {
-                                    exit(1)
-                                }
+            let (success, reportPath) = self.localFileManager.generateReport(finalReport, format: reportFormat)
+            if success, let path = reportPath {
+                self.logger.logSection("Report: ", item: "\(path.absolute().description)")
+            }
+            
+            if !configuration.ignore_output_result && !finalReport.meets_threshold {
+                exit(1)
+            }
         }
     }
     

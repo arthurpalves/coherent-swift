@@ -12,6 +12,7 @@ public struct Configuration: Codable {
     let minimum_threshold: String
     let reports_folder: String
     let ignore_output_result: Bool
+    let report_format: String?
     
     func threshold() -> Double? {
         return Double(input: minimum_threshold)

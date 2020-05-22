@@ -56,5 +56,18 @@ extension VerboseLogger {
         arguments.forEach { command.append($0) }
         try? Task.run("printf", command+"\n")
     }
+    
+    public func logBack(_ prefix: Any = "", item: Any, indentationLevel: Int = 0) -> String {
+        let indentation = String(repeating: "   ", count: indentationLevel)
+        var command = ""
+        let arguments =  [
+            "[\(Date().logTimestamp())]: ▸ ",
+            "\(indentation)",
+            "\(prefix)",
+            "\(item)"
+        ]
+        arguments.forEach { command.append($0) }
+        return command
+    }
 }
 
