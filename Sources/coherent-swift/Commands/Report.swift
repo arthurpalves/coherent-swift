@@ -26,7 +26,6 @@ final class Report: Command, IOOperations {
     @Key("-s", "--spec", description: "Use a yaml configuration file")
     var specs: String?
     
-    
     var configurationPath: String = "coherent-swift.yml"
     var defaultThreshold: Double = 100.0
     var report: ReportOutput = ReportOutput()
@@ -45,7 +44,9 @@ final class Report: Command, IOOperations {
         
         do {
             guard let configuration = try decode(configuration: specsPath) else { return }
-            try readSpecs(configuration: configuration, configurationPath: Path(configurationPath).parent(), threshold: defaultThreshold)
+            try readSpecs(configuration: configuration,
+                          configurationPath: Path(configurationPath).parent(),
+                          threshold: defaultThreshold)
         } catch {
             guard
                 let cliError = error as? CLI.Error,

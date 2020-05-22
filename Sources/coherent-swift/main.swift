@@ -12,5 +12,6 @@ cli.commands = [
 ]
 
 cli.globalOptions.append(VerboseFlag)
+cli.globalOptions.append(DiffsFlag)
 
 _ = cli.go()
