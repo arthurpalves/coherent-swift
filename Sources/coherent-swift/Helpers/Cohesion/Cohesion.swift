@@ -10,7 +10,8 @@ public class Cohesion {
     let parser = SwiftParser()
     static let main = Cohesion()
     
-    func generateCohesion(for method: ReportMethod, withinDefinition definition: ReportDefinition) -> Double {
+    func generateCohesion(for method: ReportMethod,
+                          withinDefinition definition: ReportDefinition) -> Double {
         var shouldProcessParentProperties = true
         let parentProperties = definition.properties.filter { $0.propertyType != .classProperty }
         
@@ -25,16 +26,17 @@ public class Cohesion {
         
         if shouldProcessParentProperties {
             parentProperties.forEach {
-                containsPropertyCount += parser.method(method, containsProperty: $0)
-                    ? 1
-                    : 0
+                containsPropertyCount += parser.content(method.contentString,
+                                                        hasOccuranceOf: $0.name)
+                    ? 1 : 0
             }
         }
         
         method.properties.forEach {
-            containsPropertyCount += parser.method(method, containsProperty: $0, numberOfOccasions: 2)
-                ? 1
-                : 0
+            containsPropertyCount += parser.content(method.contentString,
+                                                    hasOccuranceOf: $0.name,
+                                                    numberOfOccasions: 2)
+                ? 1 : 0
         }
         
         return (Double(containsPropertyCount) / Double(combinedPropertyCount)) * Double(100)
@@ -45,7 +47,28 @@ public class Cohesion {
         let accumulatedCohesion = definition.methods
             .compactMap { Double(input: $0.cohesion) }
             .reduce(0) { $0 + $1 }
-        return accumulatedCohesion / Double(methodsCount)
+        
+        let accumulatedMethodsCohesion = accumulatedCohesion / Double(methodsCount)
+        
+        let privateMethods = definition.methods.filter { $0.methodType == .privateMethod }
+        guard !privateMethods.isEmpty
+        else { return accumulatedMethodsCohesion }
+        /*
+         * If private methods exist within this definition
+         * the usage of this method contributes to the overall
+         * cohesion.
+         *
+         * - This method is then added to the usage count.
+         * - It's cohesion can be either 100 or 0, used or not.
+         */
+        var privateMethodsCohesion: Double = 0
+        privateMethods.forEach { (privateMethod) in
+            privateMethodsCohesion += parser.content(definition.contentString,
+                                                     hasOccuranceOf: privateMethod.name,
+                                                     numberOfOccasions: 2)
+                ? 100 : 0
+        }
+        return (privateMethodsCohesion + accumulatedMethodsCohesion) / (Double(privateMethods.count)+1)
     }
     
     func generateCohesion(for definitions: [ReportDefinition]) -> Double {
