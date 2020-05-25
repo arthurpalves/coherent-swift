@@ -65,6 +65,7 @@ public class SwiftParser {
     
         rawDefinitions.forEach { (rawDefinition) in
             var definition: ReportDefinition = ReportDefinition(name: rawDefinition.name)
+            definition.contentString = rawDefinition.content
             
             definition.properties = parseSwiftProperties(stringContent: rawDefinition.content)
             definition.methods = parseSwiftMethod(stringContent: rawDefinition.content, withinDefinition: definition)

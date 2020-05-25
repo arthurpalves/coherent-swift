@@ -25,4 +25,11 @@ class Labeler {
         }
         return methodType
     }
+    
+    func printColor(for cohesion: Double, threshold: Double, fallback: ShellColor = .purple) -> ShellColor {
+        if cohesion < threshold {
+            return .red
+        }
+        return fallback
+    }
 }

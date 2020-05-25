@@ -64,10 +64,11 @@ public class Cohesion {
         var privateMethodsCohesion: Double = 0
         privateMethods.forEach { (privateMethod) in
             privateMethodsCohesion += parser.content(definition.contentString,
-                                                     hasOccuranceOf: privateMethod.name,
+                                                     hasOccuranceOf: Cleaner.shared.cleanMethodName(privateMethod.name),
                                                      numberOfOccasions: 2)
                 ? 100 : 0
         }
+        
         return (privateMethodsCohesion + accumulatedMethodsCohesion) / (Double(privateMethods.count)+1)
     }
     

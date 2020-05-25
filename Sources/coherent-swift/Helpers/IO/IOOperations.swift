@@ -160,7 +160,7 @@ extension IOOperations {
         }
         
         let cohesion = Cohesion.main.generateCohesion(for: finalDefinitions)
-        let color = printColor(for: cohesion, threshold: defaultThreshold)
+        let color = Labeler.shared.printColor(for: cohesion, threshold: defaultThreshold)
         let cohesionString = cohesion.formattedCohesion()
         
         logger.logInfo("Cohesion: ", item: cohesionString+"%%", indentationLevel: 1, color: color)
@@ -170,7 +170,7 @@ extension IOOperations {
     
     private func processOverallCohesion(configuration: Configuration, finalCohesion: FinalCohesion, threshold: Double, report: ReportOutput, onSuccess: ((ReportOutput) -> Void)? = nil) {
         let overallCohesion = finalCohesion.accumulative / Double(finalCohesion.fileCount)
-        let color = printColor(for: overallCohesion, threshold: threshold, fallback: .green)
+        let color = Labeler.shared.printColor(for: overallCohesion, threshold: threshold, fallback: .green)
         let cohesionString = overallCohesion.formattedCohesion()
         
         logger.logInfo("Analyzed \(finalCohesion.fileCount) files with \(cohesionString)%% overall cohesion. ", item: "Threshold is \(configuration.minimum_threshold)%%", color: color)
@@ -183,12 +183,5 @@ extension IOOperations {
         finalReport.meets_threshold = overallCohesion >= threshold
         
         onSuccess?(finalReport)
-    }
-    
-    private func printColor(for cohesion: Double, threshold: Double, fallback: ShellColor = .purple) -> ShellColor {
-        if cohesion < threshold {
-            return .red
-        }
-        return fallback
     }
 }
