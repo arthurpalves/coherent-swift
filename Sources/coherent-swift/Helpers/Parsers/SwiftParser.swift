@@ -51,10 +51,10 @@ public class SwiftParser {
         onSucces?(classes)
     }
     
-    func method(_ method: ReportMethod, containsProperty property: ReportProperty, numberOfOccasions: Int = 1) -> Bool {
-        let range = NSRange(location: 0, length: method.contentString.utf16.count)
-        guard let regex = try? NSRegularExpression(pattern: property.name) else { return false }
-        let matches = regex.matches(in: method.contentString, range: range)
+    func content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool {
+        let range = NSRange(location: 0, length: contentString.utf16.count)
+        guard let regex = try? NSRegularExpression(pattern: name) else { return false }
+        let matches = regex.matches(in: contentString, range: range)
         return matches.count >= numberOfOccasions
     }
     
@@ -96,19 +96,19 @@ public class SwiftParser {
     private func parseSwiftMethod(stringContent: String, withinDefinition definition: ReportDefinition) -> [ReportMethod] {
         var methods: [ReportMethod] = []
         let rawMethods = parseSwift(stringContent: stringContent, type: .method)
-        
         if rawMethods.isEmpty { return [] }
-        
+
         for iterator in 0...rawMethods.count-1 {
             let methodName = rawMethods[iterator].item
             let processedForRegex = cleaner.cleanMethodName(methodName)
             
-            var method: ReportMethod = ReportMethod(name: methodName)
+            var method: ReportMethod = ReportMethod(name: methodName, methodType: MethodType(rawValue: rawMethods[iterator].type) ?? .publicMethod)
             let delimiter = iterator+1 > rawMethods.count-1 ? "\\}" : "\(ParseType.method.regex())"
             let regexPattern = "(?s)(?<=\(processedForRegex)).*(\(delimiter))"
             
             if let range = stringContent.range(of: regexPattern, options: .regularExpression) {
                 let methodContent = String(stringContent[range])
+                
                 method.contentString = methodContent
                 method.properties = parseSwiftProperties(stringContent: methodContent)
                 
@@ -121,32 +121,21 @@ public class SwiftParser {
     }
     
     private func parseSwift(stringContent: String, type: ParseType) -> [ParsedItem] {
-        let range = NSRange(location: 0, length: stringContent.utf16.count)
-        let pattern = "(?<=\(type.regex()) )(.*)(\(type.delimiter()))"
-        guard let regex = try? NSRegularExpression(pattern: pattern)
-        else {
-            logger.logError("Couldn't create NSRegularExpression with: ", item: pattern)
-            return []
-        }
         var parsedItems: [ParsedItem] = []
-        
         switch type {
-        case .property:
-            propertyLineParsing(stringContent: stringContent).forEach {
-                parsedItems.append($0)
-            }
+        case .definition:
+            break
         default:
-            let matches = regex.matches(in: stringContent, range: range)
-            processParsedItems(with: matches, in: stringContent, type: type).forEach {
+            lineParsing(stringContent: stringContent, type: type).forEach {
                 parsedItems.append($0)
             }
         }
         return parsedItems
     }
     
-    private func propertyLineParsing(stringContent: String) -> [ParsedItem] {
+    private func lineParsing(stringContent: String, type: ParseType) -> [ParsedItem] {
         var parsedItems: [ParsedItem] = []
-        let type = ParseType.property
+        
         let pattern = "(?<=\(type.regex()) )(.*)(\(type.delimiter()))"
         guard let regex = try? NSRegularExpression(pattern: pattern)
         else {
@@ -155,11 +144,8 @@ public class SwiftParser {
         }
         
         var dictionaryContent: [String] = []
-        
-        stringContent.enumerateLines { (line, _) in
-            dictionaryContent.append(line)
-        }
-        
+        stringContent.enumerateLines { (lineContent, _) in dictionaryContent.append(lineContent) }
+
         let methodType = ParseType.method
         let methodPattern = "(?<=\(methodType.regex()) )(.*)(\(methodType.delimiter()))"
         guard let methodRegex = try? NSRegularExpression(pattern: methodPattern)
@@ -172,12 +158,14 @@ public class SwiftParser {
             let lineContent = dictionaryContent[lineCount]
             let range = NSRange(location: 0, length: lineContent.utf16.count)
 
-            let methodMatches = methodRegex.matches(in: lineContent, range: range)
-            if !methodMatches.isEmpty { break }
-            
+            if
+                type == .property,
+                !methodRegex.matches(in: lineContent, range: range).isEmpty {
+                break
+            }
+
             let matches = regex.matches(in: lineContent, range: range)
-            
-            processParsedItems(with: matches, in: lineContent, type: .property).forEach {
+            processParsedItems(with: matches, in: lineContent, type: type).forEach {
                 parsedItems.append($0)
             }
         }
@@ -196,7 +184,9 @@ public class SwiftParser {
                         let methodSubstring = String(contentString[range]).split(separator: "{").first
                         else { return }
                     let finalString = String(methodSubstring).trimmingCharacters(in: [" "])
-                    parsedItems.append((item: finalString, range: match.range, type: type.rawValue))
+                    
+                    let methodType = Labeler.shared.methodType(String(methodSubstring), lineContent: contentString)
+                    parsedItems.append((item: finalString, range: match.range, type: methodType.rawValue))
                     
                 case .property:
                     finalType = PropertyType.instanceProperty.rawValue
