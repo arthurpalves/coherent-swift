@@ -11,11 +11,16 @@ public struct ReportDefinition: Codable {
     var cohesion: String
     var properties: [ReportProperty]
     var methods: [ReportMethod]
+    var contentString: String = ""
     
     init(name: String, cohesion: String = "", properties: [ReportProperty] = [], methods: [ReportMethod] = []) {
         self.name = name
         self.cohesion = cohesion
         self.properties = properties
         self.methods = methods
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case name, cohesion, properties, methods
     }
 }
