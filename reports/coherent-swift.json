@@ -1,8 +1,8 @@
 {
-  "cohesion" : "78.65%",
-  "meets_threshold" : false,
+  "cohesion" : "87.55%",
+  "meets_threshold" : true,
   "minimum_threshold" : "80%",
-  "report_date" : "2020-05-25 12:55:40",
+  "report_date" : "2020-05-25 13:21:19",
   "result" : [
     {
       "classes" : [
@@ -419,10 +419,10 @@
     {
       "classes" : [
         {
-          "cohesion" : "60.00",
+          "cohesion" : "75.00",
           "methods" : [
             {
-              "cohesion" : "60.00",
+              "cohesion" : "75.00",
               "methodType" : "public",
               "name" : "execute() throws",
               "properties" : [
@@ -457,18 +457,6 @@
             },
             {
               "name" : "shortDescription",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "overallCohesion",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "accumulativeCohesion",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "fileAmount",
               "propertyType" : "instance"
             },
             {
@@ -514,14 +502,14 @@
           ]
         }
       ],
-      "cohesion" : "55.00%",
+      "cohesion" : "62.50%",
       "file" : "coherent-swift/Commands/Report.swift",
       "meets_threshold" : false
     },
     {
       "classes" : [
         {
-          "cohesion" : "14.20",
+          "cohesion" : "89.20",
           "methods" : [
             {
               "cohesion" : "90.00",
@@ -633,9 +621,9 @@
           ]
         }
       ],
-      "cohesion" : "14.20%",
+      "cohesion" : "89.20%",
       "file" : "coherent-swift/Helpers/Parsers/SwiftParser.swift",
-      "meets_threshold" : false
+      "meets_threshold" : true
     },
     {
       "classes" : [
@@ -691,7 +679,7 @@
     {
       "classes" : [
         {
-          "cohesion" : "50.00",
+          "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
@@ -829,9 +817,9 @@
           ]
         }
       ],
-      "cohesion" : "50.00%",
+      "cohesion" : "100.00%",
       "file" : "coherent-swift/Helpers/Parsers/InlineParser.swift",
-      "meets_threshold" : false
+      "meets_threshold" : true
     },
     {
       "classes" : [
@@ -967,6 +955,14 @@
                   "name" : "type",
                   "propertyType" : "instance"
                 }
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "public",
+              "name" : "printColor(for cohesion: Double, threshold: Double, fallback: ShellColor = .purple) -> ShellColor",
+              "properties" : [
+
               ]
             }
           ],
@@ -1172,7 +1168,7 @@
     {
       "classes" : [
         {
-          "cohesion" : "15.28",
+          "cohesion" : "96.37",
           "methods" : [
             {
               "cohesion" : "95.24",
@@ -1357,17 +1353,6 @@
                   "propertyType" : "instance"
                 }
               ]
-            },
-            {
-              "cohesion" : "40.00",
-              "methodType" : "private",
-              "name" : "printColor(for cohesion: Double, threshold: Double, fallback: ShellColor = .purple) -> ShellColor",
-              "properties" : [
-                {
-                  "name" : "cohesionString",
-                  "propertyType" : "instance"
-                }
-              ]
             }
           ],
           "name" : "IOOperations ",
@@ -1391,9 +1376,9 @@
           ]
         }
       ],
-      "cohesion" : "15.28%",
+      "cohesion" : "96.37%",
       "file" : "coherent-swift/Helpers/IO/IOOperations.swift",
-      "meets_threshold" : false
+      "meets_threshold" : true
     },
     {
       "classes" : [
