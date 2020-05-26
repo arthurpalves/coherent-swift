@@ -34,12 +34,11 @@ class Cleaner {
         let cleanString = contentString
             .replacingOccurrences(of: "(", with: "")
             .replacingOccurrences(of: ")", with: "")
-            .replacingOccurrences(of: " ", with: "")
         
         guard
             let substringNoColons = cleanString.split(separator: ":").first,
             let substringNoClosure = String(substringNoColons).split(separator: "=").first,
-            let finalString = String(substringNoClosure).split(separator: " ").first
+            let finalString = String(substringNoClosure).split(separator: " ").last
         else { return nil }
         return String(finalString)
     }

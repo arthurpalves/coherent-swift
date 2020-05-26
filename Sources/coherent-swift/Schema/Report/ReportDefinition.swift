@@ -19,6 +19,7 @@ public struct ReportDefinition: Codable {
     var cohesion: String
     var properties: [ReportProperty]
     var methods: [ReportMethod]
+    var contentString: String = ""
     
     init(name: String, type: DefinitionType = .Class,
          cohesion: String = "", properties: [ReportProperty] = [], methods: [ReportMethod] = []) {
@@ -27,5 +28,9 @@ public struct ReportDefinition: Codable {
         self.cohesion = cohesion
         self.properties = properties
         self.methods = methods
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case name, cohesion, properties, methods
     }
 }
