@@ -7,6 +7,7 @@
 import Foundation
 
 public enum PropertyType: String, Codable {
-    case classProperty = "static"
-    case instanceProperty = "instance"
+    case Static = "static"
+    case Instance = "instance"
+    case Private = "private"
 }

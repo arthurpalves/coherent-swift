@@ -4,85 +4,113 @@
 //  Created by Arthur Alves on 25/05/2020.
 //
 
-import Foundation
+import AppKit
 import SwiftSyntax
 import PathKit
 
 class SwiftSyntaxParser: SyntaxVisitor {
-    var classes: [Syntax: [ReportDefinition]] = [:]
-    var definitions: [AnyHashable: ReportDefinition] = [:]
-    var structs: [ReportDefinition] = []
-    
-    var fileDefinitions: [String: ReportDefinition] = [:]
+    var extensions: [String: ReportDefinition] = [:]
+    var mainDefinitions: [String: ReportDefinition] = [:]
     var currentDefintion: ReportDefinition?
     
     override func visit(_ node: ClassDeclSyntax) -> SyntaxVisitorContinueKind {
-        var definition = ReportDefinition(name: node.identifier.text)
+        var definition = ReportDefinition(name: node.identifier.text, type: .Class)
         var reportProperties: [ReportProperty] = []
-
-        Logger.shared.logInfo("Class: ", item: definition.name, indentationLevel: 1, color: .purple)
+        
         let properties = node.members.members.filter { $0.decl.is(VariableDeclSyntax.self) }
         properties.forEach { (property) in
-            let props = processProperties(property.tokens, identation: 2)
+            let props = processProperties(property.tokens)
             reportProperties.append(contentsOf: props)
         }
         definition.properties = reportProperties
         currentDefintion = definition
-        fileDefinitions[definition.name] = definition
+        mainDefinitions[definition.name] = definition
         
-        return SyntaxVisitorContinueKind.visitChildren
+        return .visitChildren
+    }
+    
+    override func visit(_ node: StructDeclSyntax) -> SyntaxVisitorContinueKind {
+        var definition = ReportDefinition(name: node.identifier.text, type: .Struct)
+        var reportProperties: [ReportProperty] = []
+
+        let properties = node.members.members.filter { $0.decl.is(VariableDeclSyntax.self) }
+        properties.forEach { (property) in
+            let props = processProperties(property.tokens)
+            reportProperties.append(contentsOf: props)
+        }
+        definition.properties = reportProperties
+        mainDefinitions[definition.name] = definition
+
+        return .visitChildren
     }
     
     override func visit(_ node: FunctionDeclSyntax) -> SyntaxVisitorContinueKind {
         guard var definition = currentDefintion else { return .skipChildren }
-        Logger.shared.logInfo("Method: ", item: node.identifier, indentationLevel: 2, color: .purple)
-        var method = ReportMethod(name: node.identifier.text)
+        var method = ReportMethod(name: node.identifier.description+node.signature.description)
         
         let properties = node.body?.statements.filter { $0.item.is(VariableDeclSyntax.self) }
         properties?.forEach { (property) in
-            let props = processProperties(property.tokens, identation: 3)
+            let props = processProperties(property.tokens)
             method.properties.append(contentsOf: props)
         }
         
-        method.contentString = node.body!.description
-        let methodCohesion = Measurer.shared.generateCohesion(for: method, withinDefinition: definition)
-        method.cohesion = methodCohesion.formattedCohesion()
-        Logger.shared.logInfo("Cohesion: ", item: method.cohesion+"%%", indentationLevel: 3, color: .purple)
+        if let body = node.body?.description {
+            method.contentString = node.body!.description
+            let methodCohesion = Measurer.shared.generateCohesion(for: method, withinDefinition: definition)
+            method.cohesion = methodCohesion.formattedCohesion()
+        } else {
+            method.cohesion = "0.00"
+        }
         
         definition.methods.append(method)
         
         currentDefintion = definition
-        fileDefinitions[definition.name] = definition
-        return SyntaxVisitorContinueKind.skipChildren
+        if definition.type == .Extension {
+            extensions[definition.name] = definition
+        } else {
+            mainDefinitions[definition.name] = definition
+        }
+        return .skipChildren
     }
     
     override func visit(_ node: ExtensionDeclSyntax) -> SyntaxVisitorContinueKind {
-        if node.modifiers?.contains(where: { $0.name.tokenKind == .publicKeyword }) == true {
-            print("ExtensionDeclSyntax: ")
+        let name = "\(node.extendedType)"
+        if let existingDefinition = mainDefinitions[name] {
+            currentDefintion = existingDefinition
+        } else {
+            let definition = ReportDefinition(name: name, type: .Extension)
+            currentDefintion = definition
+            extensions[name] = definition
         }
-        return SyntaxVisitorContinueKind.visitChildren
+        return .visitChildren
     }
     
-    private func processProperties(_ tokens: TokenSequence, identation: Int = 0) -> [ReportProperty] {
+    private func processHighLevelDefinition(_ definition: ReportDefinition) {
+        
+    }
+    private func processProperties(_ tokens: TokenSequence, defaultType: PropertyType = .Instance) -> [ReportProperty] {
         var properties: [ReportProperty] = []
         
         if tokens.contains(where: { (syntax) -> Bool in
-            syntax.tokenKind == .letKeyword || syntax.tokenKind == .varKeyword
+            syntax.tokenKind == .letKeyword
+                || syntax.tokenKind == .varKeyword
         }) {
             var keyword = ""
             var propertyName = ""
-            var type: PropertyType = .instanceProperty
+            var type = defaultType
 
             tokens.forEach { (item) in
                 switch item.tokenKind {
-                case .identifier(let name):
-                    propertyName = name
+                case .identifier(let name) where !["IBOutlet", "weak"].contains(where: { $0.contains(name) }):
+                    propertyName = propertyName.isEmpty ? name : propertyName
                 case .letKeyword:
                     keyword = "let"
                 case .varKeyword:
                     keyword = "var"
                 case .staticKeyword:
-                    type = .classProperty
+                    type = .Static
+                case .privateKeyword:
+                    type = .Private
                 default:
                     break
                 }
@@ -91,7 +119,6 @@ class SwiftSyntaxParser: SyntaxVisitor {
                 properties.append(ReportProperty(keyword: keyword,
                                                        name: propertyName,
                                                        propertyType: type))
-                Logger.shared.logInfo("Property: ", item: propertyName, indentationLevel: identation, color: .purple)
             }
         }
         return properties

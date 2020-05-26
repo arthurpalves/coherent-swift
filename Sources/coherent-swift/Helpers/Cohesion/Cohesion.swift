@@ -13,7 +13,7 @@ public class Measurer {
     
     func generateCohesion(for method: ReportMethod, withinDefinition definition: ReportDefinition) -> Double {
         var shouldProcessParentProperties = true
-        let parentProperties = definition.properties.filter { $0.propertyType != .classProperty }
+        let parentProperties = definition.properties.filter { $0.propertyType != .Static }
         
         var containsPropertyCount = 0
         var combinedPropertyCount = method.properties.count
@@ -48,7 +48,7 @@ public class Cohesion {
     
     func generateCohesion(for method: ReportMethod, withinDefinition definition: ReportDefinition) -> Double {
         var shouldProcessParentProperties = true
-        let parentProperties = definition.properties.filter { $0.propertyType != .classProperty }
+        let parentProperties = definition.properties.filter { $0.propertyType != .Static }
         
         var containsPropertyCount = 0
         var combinedPropertyCount = method.properties.count

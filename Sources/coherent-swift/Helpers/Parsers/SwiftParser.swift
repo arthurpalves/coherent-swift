@@ -89,7 +89,7 @@ public class SwiftParser {
         var properties: [ReportProperty] = []
         let rawProperties = parseSwift(stringContent: stringContent, type: .property)
         properties = rawProperties.map { ReportProperty(name: $0.item,
-                                                        propertyType: PropertyType(rawValue: $0.type) ?? .instanceProperty) }
+                                                        propertyType: PropertyType(rawValue: $0.type) ?? .Instance) }
         return properties
     }
     
@@ -199,9 +199,9 @@ public class SwiftParser {
                     parsedItems.append((item: finalString, range: match.range, type: type.rawValue))
                     
                 case .property:
-                    finalType = PropertyType.instanceProperty.rawValue
-                    if contentString.contains(PropertyType.classProperty.rawValue) {
-                        finalType = PropertyType.classProperty.rawValue
+                    finalType = PropertyType.Instance.rawValue
+                    if contentString.contains(PropertyType.Static.rawValue) {
+                        finalType = PropertyType.Static.rawValue
                     }
                     
                     var propertiesInLine: [String] = []

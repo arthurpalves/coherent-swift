@@ -96,7 +96,7 @@ final class Syntaxy: Command, IOOperations {
         logger.logSection("Running Analysis", item: "")
         enumaratedString.enumerateLines { (line, _) in
             let filename = self.processFilePath(filename: line, sourcePath: configuration.sourcePath().lastComponent)
-            if filename.hasSuffix(".swift"), filename.contains("ViewController") {
+            if filename.hasSuffix(".swift") {
                 self.processNewFile(filename: filename, in: path) { (filename, cohesion, definitions, validFile) in
                     let filePath = Path("\(path.absolute())/\(filename)")
                     let url = filePath.absolute().url
@@ -104,13 +104,83 @@ final class Syntaxy: Command, IOOperations {
                         let sourceFile = try SyntaxParser.parse(url)
                         let parser = SwiftSyntaxParser()
                         parser.walk(sourceFile)
-//                        dump(parser.currentDefintion)
                         
-                        print(parser.fileDefinitions.count)
+                        let definitions = self.mapExtensions(parser.extensions, to: parser.mainDefinitions)
+                        
+                        definitions.forEach { (key, value) in
+                            self.logger.logDebug("\(value.type): ", item: value.name, indentationLevel: 1, color: .cyan)
+                            value.properties.forEach { (property) in
+                                self.logger.logDebug("Property: ", item: "\(property.name), type: \(property.propertyType.rawValue)",
+                                    indentationLevel: 2, color: .cyan)
+                            }
+                            value.methods.forEach { (method) in
+                                self.logger.logDebug("Method: ", item: method.name, indentationLevel: 2, color: .cyan)
+                                
+                                method.properties.forEach { (property) in
+                                    self.logger.logDebug("Property: ", item: "\(property.name), type: \(property.propertyType.rawValue)",
+                                        indentationLevel: 3, color: .cyan)
+                                }
+                                
+                                self.logger.logDebug("Cohesion: ", item: method.cohesion+"%%", indentationLevel: 3, color: .cyan)
+                            }
+                            self.logger.logDebug("Cohesion: ", item: value.cohesion+"%%", indentationLevel: 2, color: .cyan)
+                        }
+                        
+                        let cohesion = Cohesion.main.generateCohesion(for: definitions.map { $0.value })
+                        let color = self.printColor(for: cohesion, threshold: self.defaultThreshold)
+                        let cohesionString = cohesion.formattedCohesion()
+                        
+                        self.logger.logInfo("Cohesion: ", item: cohesionString+"%%", indentationLevel: 1, color: color)
                     } catch {}
                 }
             }
         }
+    }
+    
+    private func printColor(for cohesion: Double, threshold: Double, fallback: ShellColor = .purple) -> ShellColor {
+        if cohesion < threshold {
+            return .red
+        }
+        return fallback
+    }
+    
+    private func measureCohesion(for definition: ReportDefinition) -> ReportDefinition {
+        var cohesion: Double = 0
+        var definition = definition
+        if !definition.methods.isEmpty {
+            cohesion = Cohesion.main.generateCohesion(for: definition)
+        } else {
+            /*
+             * if a definition doesn't contain properties nor methods, its
+             * still considered as highly cohesive
+             */
+            cohesion = 100
+        }
+        definition.cohesion = cohesion.formattedCohesion()
+        return definition
+    }
+    
+    private func mapExtensions(_ extensions: [String: ReportDefinition], to highLevelDefinitions: [String: ReportDefinition]) -> [String: ReportDefinition] {
+        
+        var finalDefinitions: [String: ReportDefinition] = highLevelDefinitions
+        extensions.forEach { (key, value) in
+            var definition = value
+            if var existingDefinition = highLevelDefinitions[key] {
+                definition.methods.mutateEach { (method) in
+                    let cohesion = Cohesion.main.generateCohesion(for: method, withinDefinition: existingDefinition)
+                    method.cohesion = cohesion.formattedCohesion()
+                    existingDefinition.methods.append(method)
+                }
+                definition = existingDefinition
+            }
+            finalDefinitions[definition.name] = definition
+        }
+        
+        finalDefinitions.forEach { (key, value) in
+            finalDefinitions[key] = measureCohesion(for: value)
+        }
+        
+        return finalDefinitions
     }
     
     private func processFilePath(filename: String, sourcePath: String) -> String {
@@ -141,6 +211,15 @@ extension Syntaxy: YamlParser {
             return configuration
         } catch {
             throw CLI.Error(message: error.localizedDescription)
+        }
+    }
+}
+
+
+extension MutableCollection {
+    mutating func mutateEach(_ body: (inout Element) throws -> Void) rethrows {
+        for index in self.indices {
+            try body(&self[index])
         }
     }
 }

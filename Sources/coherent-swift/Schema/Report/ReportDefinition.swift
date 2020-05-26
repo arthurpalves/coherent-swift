@@ -6,14 +6,24 @@
 
 import Foundation
 
+public enum DefinitionType: String, Codable {
+    case Class
+    case Struct
+    case Enum
+    case Extension
+}
+
 public struct ReportDefinition: Codable {
     let name: String
+    let type: DefinitionType
     var cohesion: String
     var properties: [ReportProperty]
     var methods: [ReportMethod]
     
-    init(name: String, cohesion: String = "", properties: [ReportProperty] = [], methods: [ReportMethod] = []) {
+    init(name: String, type: DefinitionType = .Class,
+         cohesion: String = "", properties: [ReportProperty] = [], methods: [ReportMethod] = []) {
         self.name = name
+        self.type = type
         self.cohesion = cohesion
         self.properties = properties
         self.methods = methods
