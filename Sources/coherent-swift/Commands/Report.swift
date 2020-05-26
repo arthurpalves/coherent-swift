@@ -17,10 +17,6 @@ final class Report: Command, IOOperations {
     let name: String = "report"
     let shortDescription: String = "Generate a report on Swift code cohesion"
     
-    var overallCohesion: Double = 0.0
-    var accumulativeCohesion: Double = 0.0
-    var fileAmount: Int = 0
-    
     // --------------
     // MARK: Configuration Properties
     @Key("-s", "--spec", description: "Use a yaml configuration file")
