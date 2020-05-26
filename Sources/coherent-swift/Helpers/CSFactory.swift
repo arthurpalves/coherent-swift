@@ -10,7 +10,7 @@ import SwiftSyntax
 typealias FactoryDefinitionResponse = ((_ name: String, _ definition: CSDefinition) -> Void)
 typealias FactoryMethodResponse = ((inout CSMethod) -> Void)
 
-public class SwiftFactory {
+public class CSFactory {
     
     func process(definition: CSDefinition,
                  withMembers members: MemberDeclListSyntax,
@@ -28,7 +28,8 @@ public class SwiftFactory {
     }
     
     func process(node: FunctionDeclSyntax, completion: @escaping FactoryMethodResponse) {
-        let name = node.identifier.description+node.signature.description
+        var name = node.identifier.description+node.signature.description
+        name = Cleaner.shared.methodName(name)
         var method = CSMethod(name: name)
         
         node.modifiers?.tokens.forEach { (item) in
@@ -59,9 +60,9 @@ public class SwiftFactory {
         completion(&method)
     }
     
-    func mapExtensions(_ extensions: [String: CSDefinition], to highLevelDefinitions: [String: CSDefinition]) -> [String: CSDefinition] {
+    func mapExtensions(_ extensions: ParsingDefition, to highLevelDefinitions: ParsingDefition) -> ParsingDefition {
         
-        var finalDefinitions: [String: CSDefinition] = highLevelDefinitions
+        var finalDefinitions: ParsingDefition = highLevelDefinitions
         extensions.forEach { (key, value) in
             var definition = value
             if var existingDefinition = highLevelDefinitions[key] {

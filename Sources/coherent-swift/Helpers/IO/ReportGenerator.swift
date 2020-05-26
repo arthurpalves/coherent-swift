@@ -54,7 +54,7 @@ extension ReportGenerator {
     
     public func generateBadge(_ report: CSReport) -> (Bool, Path?) {
         let path = Path("\(reports_path)/\(badge_file)")
-        let coherentBadge = CoherentBadge(schemaVersion: 1, label: "cohesion", message: report.cohesion, color: "blue")
-        return fileOutput.write(coherentBadge, toFile: path)
+        let badge = CSBadge(schemaVersion: 1, label: "cohesion", message: report.cohesion, color: "blue")
+        return fileOutput.write(badge, toFile: path)
     }
 }

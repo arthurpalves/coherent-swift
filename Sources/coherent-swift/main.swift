@@ -8,8 +8,7 @@ let cli = CLI(
 )
 
 cli.commands = [
-    Report(),
-    Syntaxy()
+    Report()
 ]
 
 cli.globalOptions.append(VerboseFlag)

@@ -1,18 +1,19 @@
 {
-  "cohesion" : "87.55%",
+  "cohesion" : "88.14%",
   "meets_threshold" : true,
   "minimum_threshold" : "80%",
-  "report_date" : "2020-05-25 13:21:19",
+  "report_date" : "2020-05-26 14:34:46",
   "result" : [
     {
-      "classes" : [
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
           "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "formattedCohesion() -> String",
+              "methodType" : "Public",
+              "name" : "formattedCohesion() -> String ",
               "properties" : [
 
               ]
@@ -21,24 +22,26 @@
           "name" : "Double ",
           "properties" : [
 
-          ]
+          ],
+          "type" : "Extension"
         }
       ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Extensions/Double+String.swift",
+      "filename" : "coherent-swift/Extensions/Double+String.swift",
       "meets_threshold" : true
     },
     {
-      "classes" : [
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
           "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "logTimestamp() -> String",
+              "methodType" : "Public",
+              "name" : "logTimestamp() -> String ",
               "properties" : [
                 {
+                  "keyword" : "let",
                   "name" : "formatter",
                   "propertyType" : "instance"
                 }
@@ -48,75 +51,104 @@
           "name" : "Date ",
           "properties" : [
 
-          ]
+          ],
+          "type" : "Extension"
         }
       ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Extensions/Date+Log.swift",
+      "filename" : "coherent-swift/Extensions/Date+Log.swift",
       "meets_threshold" : true
     },
     {
-      "classes" : [
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
           "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "appendLine(to file: Path) throws",
+              "methodType" : "Public",
+              "name" : "appendLine(to file: Path) throws ",
               "properties" : [
 
               ]
             },
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "appendLineToURL(fileURL: URL) throws",
+              "methodType" : "Public",
+              "name" : "appendLineToURL(fileURL: URL) throws ",
               "properties" : [
 
               ]
             },
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "appendToURL(fileURL: URL) throws",
+              "methodType" : "Public",
+              "name" : "appendToURL(fileURL: URL) throws ",
               "properties" : [
-
+                {
+                  "keyword" : "let",
+                  "name" : "data",
+                  "propertyType" : "instance"
+                }
               ]
             }
           ],
           "name" : "String ",
           "properties" : [
 
-          ]
+          ],
+          "type" : "Extension"
         },
         {
           "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "append(fileURL: URL) throws",
+              "methodType" : "Public",
+              "name" : "append(fileURL: URL) throws ",
               "properties" : [
-                {
-                  "name" : "fileHandle",
-                  "propertyType" : "instance"
-                }
+
               ]
             }
           ],
           "name" : "Data ",
           "properties" : [
 
-          ]
+          ],
+          "type" : "Extension"
         }
       ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Extensions/String+File.swift",
+      "filename" : "coherent-swift/Extensions/String+File.swift",
       "meets_threshold" : true
     },
     {
-      "classes" : [
+      "cohesion" : "100.00%",
+      "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "mutateEach(_ body: (inout Element) throws -> Void) rethrows ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "MutableCollection ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
+        }
+      ],
+      "filename" : "coherent-swift/Extensions/Collection+Mutable.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
           "cohesion" : "100.00",
           "methods" : [
@@ -124,543 +156,398 @@
           ],
           "name" : "String ",
           "properties" : [
-            {
-              "name" : "double",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "doubleValue",
-              "propertyType" : "instance"
-            }
-          ]
+
+          ],
+          "type" : "Extension"
         }
       ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Extensions/String+Double.swift",
+      "filename" : "coherent-swift/Extensions/String+Double.swift",
       "meets_threshold" : true
     },
     {
-      "classes" : [
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
           "cohesion" : "100.00",
           "methods" : [
 
           ],
-          "name" : "CSMethod: Codable ",
+          "name" : "CSBadge",
           "properties" : [
             {
-              "name" : "name",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "cohesion",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "contentString",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "methodType",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "properties",
-              "propertyType" : "instance"
-            }
-          ]
-        }
-      ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Schema/Report/CSMethod.swift",
-      "meets_threshold" : true
-    },
-    {
-      "classes" : [
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-
-          ],
-          "name" : "CSFileReport: Codable ",
-          "properties" : [
-            {
-              "name" : "file",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "cohesion",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "meets_threshold",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "classes",
-              "propertyType" : "instance"
-            }
-          ]
-        }
-      ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Schema/Report/CSFileReport.swift",
-      "meets_threshold" : true
-    },
-    {
-      "classes" : [
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-
-          ],
-          "name" : "CSProperty: Codable ",
-          "properties" : [
-            {
-              "name" : "name",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "propertyType",
-              "propertyType" : "instance"
-            }
-          ]
-        }
-      ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Schema/Report/CSProperty.swift",
-      "meets_threshold" : true
-    },
-    {
-      "classes" : [
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-
-          ],
-          "name" : "CSDefinition: Codable ",
-          "properties" : [
-            {
-              "name" : "name",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "cohesion",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "properties",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "methods",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "contentString",
-              "propertyType" : "instance"
-            }
-          ]
-        }
-      ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Schema/Report/CSDefinition.swift",
-      "meets_threshold" : true
-    },
-    {
-      "classes" : [
-        {
-          "cohesion" : "16.67",
-          "methods" : [
-            {
-              "cohesion" : "16.67",
-              "methodType" : "public",
-              "name" : "appendReport(_ report: CSFileReport)",
-              "properties" : [
-
-              ]
-            }
-          ],
-          "name" : "CSReport: Codable ",
-          "properties" : [
-            {
-              "name" : "source",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "minimum_threshold",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "meets_threshold",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "report_date",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "cohesion",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "result",
-              "propertyType" : "instance"
-            }
-          ]
-        }
-      ],
-      "cohesion" : "16.67%",
-      "file" : "coherent-swift/Schema/Report/CSReport.swift",
-      "meets_threshold" : false
-    },
-    {
-      "classes" : [
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-
-          ],
-          "name" : "CoherentBadge: Codable ",
-          "properties" : [
-            {
+              "keyword" : "let",
               "name" : "schemaVersion",
               "propertyType" : "instance"
             },
             {
+              "keyword" : "let",
               "name" : "label",
               "propertyType" : "instance"
             },
             {
+              "keyword" : "let",
               "name" : "message",
               "propertyType" : "instance"
             },
             {
+              "keyword" : "let",
               "name" : "color",
               "propertyType" : "instance"
             }
-          ]
+          ],
+          "type" : "Struct"
         }
       ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Schema/CoherentBadge.swift",
+      "filename" : "coherent-swift/Schema/CSBadge.swift",
       "meets_threshold" : true
     },
     {
-      "classes" : [
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
-          "cohesion" : "34.17",
+          "cohesion" : "100.00",
           "methods" : [
-            {
-              "cohesion" : "62.50",
-              "methodType" : "public",
-              "name" : "threshold() -> Double?",
-              "properties" : [
-                {
-                  "name" : "reports_folder",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "ignore_output_result",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "report_format",
-                  "propertyType" : "instance"
-                }
-              ]
-            },
-            {
-              "cohesion" : "20.00",
-              "methodType" : "public",
-              "name" : "sourcePath() -> Path",
-              "properties" : [
 
-              ]
-            },
-            {
-              "cohesion" : "20.00",
-              "methodType" : "public",
-              "name" : "reportsPath() -> Path",
-              "properties" : [
-
-              ]
-            }
           ],
-          "name" : "Configuration: Codable ",
+          "name" : "CSMethod",
           "properties" : [
             {
-              "name" : "source",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "minimum_threshold",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "reports_folder",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "ignore_output_result",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "report_format",
-              "propertyType" : "instance"
-            }
-          ]
-        }
-      ],
-      "cohesion" : "34.17%",
-      "file" : "coherent-swift/Schema/Configuration.swift",
-      "meets_threshold" : false
-    },
-    {
-      "classes" : [
-        {
-          "cohesion" : "75.00",
-          "methods" : [
-            {
-              "cohesion" : "75.00",
-              "methodType" : "public",
-              "name" : "execute() throws",
-              "properties" : [
-                {
-                  "name" : "spec",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "specsPath",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "configuration",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "cliError",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "message",
-                  "propertyType" : "instance"
-                }
-              ]
-            }
-          ],
-          "name" : "Report: Command, IOOperations ",
-          "properties" : [
-            {
+              "keyword" : "let",
               "name" : "name",
               "propertyType" : "instance"
             },
             {
-              "name" : "shortDescription",
+              "keyword" : "var",
+              "name" : "cohesion",
               "propertyType" : "instance"
             },
             {
-              "name" : "specs",
+              "keyword" : "var",
+              "name" : "contentString",
               "propertyType" : "instance"
             },
             {
-              "name" : "configurationPath",
+              "keyword" : "var",
+              "name" : "methodType",
               "propertyType" : "instance"
             },
             {
-              "name" : "defaultThreshold",
+              "keyword" : "var",
+              "name" : "properties",
               "propertyType" : "instance"
-            },
-            {
-              "name" : "report",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "reports_path",
-              "propertyType" : "instance"
-            }
-          ]
-        },
-        {
-          "cohesion" : "50.00",
-          "methods" : [
-            {
-              "cohesion" : "100.00",
-              "methodType" : "private",
-              "name" : "decode(configuration: Path) throws -> Configuration?",
-              "properties" : [
-                {
-                  "name" : "configuration",
-                  "propertyType" : "instance"
-                }
-              ]
             }
           ],
-          "name" : "Report: YamlParser ",
-          "properties" : [
-
-          ]
+          "type" : "Struct"
         }
       ],
-      "cohesion" : "62.50%",
-      "file" : "coherent-swift/Commands/Report.swift",
-      "meets_threshold" : false
+      "filename" : "coherent-swift/Schema/Report/CSMethod.swift",
+      "meets_threshold" : true
     },
     {
-      "classes" : [
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
-          "cohesion" : "89.20",
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "CSProperty",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "keyword",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "name",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "propertyType",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Struct"
+        }
+      ],
+      "filename" : "coherent-swift/Schema/Report/CSProperty.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "100.00%",
+      "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "CSDefinition",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "name",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "type",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "cohesion",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "properties",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "methods",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "contentString",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Struct"
+        }
+      ],
+      "filename" : "coherent-swift/Schema/Report/CSDefinition.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "100.00%",
+      "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "CSReport",
+          "properties" : [
+            {
+              "keyword" : "var",
+              "name" : "source",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "minimum_threshold",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "meets_threshold",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "report_date",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "cohesion",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "result",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Struct"
+        }
+      ],
+      "filename" : "coherent-swift/Schema/Report/CSReport.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "100.00%",
+      "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "CSFileReport",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "filename",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "cohesion",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "meets_threshold",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "definitions",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Struct"
+        }
+      ],
+      "filename" : "coherent-swift/Schema/Report/CSFileReport.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "100.00%",
+      "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "Configuration",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "source",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "minimum_threshold",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "reports_folder",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "ignore_output_result",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "report_format",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Struct"
+        }
+      ],
+      "filename" : "coherent-swift/Schema/Configuration.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "17.36%",
+      "definitions" : [
+        {
+          "cohesion" : "17.36",
           "methods" : [
             {
-              "cohesion" : "90.00",
-              "methodType" : "public",
-              "name" : "parseFile(filename: String, in path: Path, onSucces: (([CSDefinition]) -> Void)? = nil)",
+              "cohesion" : "44.44",
+              "methodType" : "Public",
+              "name" : "execute() throws ",
               "properties" : [
                 {
-                  "name" : "fileManager",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "filePath",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "fileData",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "data",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "string",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "definitions",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "classes",
+                  "keyword" : "let",
+                  "name" : "specsPath",
                   "propertyType" : "instance"
                 }
-              ]
-            },
-            {
-              "cohesion" : "85.71",
-              "methodType" : "public",
-              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool",
-              "properties" : [
-                {
-                  "name" : "data",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "string",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "definitions",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "classes",
-                  "propertyType" : "instance"
-                }
-              ]
-            },
-            {
-              "cohesion" : "33.33",
-              "methodType" : "private",
-              "name" : "parseDefinitions(rawDefinitions: [DefinitionTuple]) -> [CSDefinition]",
-              "properties" : [
-
               ]
             },
             {
               "cohesion" : "25.00",
-              "methodType" : "private",
-              "name" : "parseSwiftProperties(stringContent: String) -> [CSProperty]",
+              "methodType" : "Private",
+              "name" : "decode(configuration: Path) throws -> Configuration? ",
               "properties" : [
-                {
-                  "name" : "cohesion",
-                  "propertyType" : "instance"
-                }
-              ]
-            },
-            {
-              "cohesion" : "50.00",
-              "methodType" : "private",
-              "name" : "parseSwiftMethod(stringContent: String, withinDefinition definition: CSDefinition) -> [CSMethod]",
-              "properties" : [
-                {
-                  "name" : "cohesion",
-                  "propertyType" : "instance"
-                }
+
               ]
             }
           ],
-          "name" : "SwiftParser ",
+          "name" : "Report",
           "properties" : [
             {
+              "keyword" : "let",
+              "name" : "name",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "shortDescription",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "Key",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "configurationPath",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "defaultThreshold",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "report",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "reports_path",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
               "name" : "logger",
               "propertyType" : "instance"
-            },
-            {
-              "name" : "inlineParser",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "cleaner",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "shared",
-              "propertyType" : "static"
             }
-          ]
+          ],
+          "type" : "Class"
         }
       ],
-      "cohesion" : "89.20%",
-      "file" : "coherent-swift/Helpers/Parsers/SwiftParser.swift",
-      "meets_threshold" : true
+      "filename" : "coherent-swift/Commands/Report.swift",
+      "meets_threshold" : false
     },
     {
-      "classes" : [
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
           "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "extractConfiguration(from configurationPath: String) throws -> Configuration",
+              "methodType" : "Public",
+              "name" : "extractConfiguration(from configurationPath: String) throws -> Configuration ",
               "properties" : [
                 {
+                  "keyword" : "let",
                   "name" : "decoder",
                   "propertyType" : "instance"
                 },
                 {
+                  "keyword" : "let",
                   "name" : "encoder",
                   "propertyType" : "instance"
                 },
                 {
+                  "keyword" : "let",
                   "name" : "logger",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "encodedYAML",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "decoded",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "encoded",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "nsString",
                   "propertyType" : "instance"
                 }
               ]
@@ -669,247 +556,223 @@
           "name" : "YamlParser ",
           "properties" : [
 
-          ]
+          ],
+          "type" : "Extension"
         }
       ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Helpers/Parsers/YamlParser.swift",
+      "filename" : "coherent-swift/Helpers/Parsers/YamlParser.swift",
       "meets_threshold" : true
     },
     {
-      "classes" : [
+      "cohesion" : "82.92%",
+      "definitions" : [
         {
-          "cohesion" : "100.00",
+          "cohesion" : "65.84",
           "methods" : [
             {
-              "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "parseFileContent(_ fileContent: String) -> [DefinitionTuple]",
+              "cohesion" : "66.67",
+              "methodType" : "Public",
+              "name" : "visit(_ node: ClassDeclSyntax) -> SyntaxVisitorContinueKind ",
               "properties" : [
                 {
-                  "name" : "rawDefinitions",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "cleanFileContent",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "openBracketCount",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "definitionTemporaryContent",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "definitionTemporaryName",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "pattern",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "regex",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "range",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "matches",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "firstMatch",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "firstMarchRange",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "rawDefinitionName",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "remainingNSRange",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "remainingRange",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "remainingLine",
+                  "keyword" : "let",
+                  "name" : "definition",
                   "propertyType" : "instance"
                 }
               ]
             },
             {
-              "cohesion" : "100.00",
-              "methodType" : "private",
-              "name" : "excludeCodeComments(from content: String) -> String",
+              "cohesion" : "50.00",
+              "methodType" : "Public",
+              "name" : "visit(_ node: StructDeclSyntax) -> SyntaxVisitorContinueKind ",
               "properties" : [
                 {
-                  "name" : "openBracketCount",
+                  "keyword" : "let",
+                  "name" : "definition",
                   "propertyType" : "instance"
-                },
+                }
+              ]
+            },
+            {
+              "cohesion" : "80.00",
+              "methodType" : "Public",
+              "name" : "visit(_ node: FunctionDeclSyntax) -> SyntaxVisitorContinueKind ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "66.67",
+              "methodType" : "Public",
+              "name" : "visit(_ node: ExtensionDeclSyntax) -> SyntaxVisitorContinueKind ",
+              "properties" : [
                 {
-                  "name" : "definitionTemporaryContent",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "definitionTemporaryName",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "pattern",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "regex",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "range",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "matches",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "firstMatch",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "firstMarchRange",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "rawDefinitionName",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "remainingNSRange",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "remainingRange",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "remainingLine",
+                  "keyword" : "let",
+                  "name" : "name",
                   "propertyType" : "instance"
                 }
               ]
             }
           ],
-          "name" : "InlineParser ",
+          "name" : "SwiftParser",
           "properties" : [
             {
-              "name" : "shared",
-              "propertyType" : "static"
+              "keyword" : "var",
+              "name" : "extensions",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "mainDefinitions",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "currentDefintion",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "logger",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "factory",
+              "propertyType" : "instance"
             }
-          ]
-        }
-      ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Helpers/Parsers/InlineParser.swift",
-      "meets_threshold" : true
-    },
-    {
-      "classes" : [
+          ],
+          "type" : "Class"
+        },
         {
           "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "logError(_ prefix: Any = \"\", item: Any, color: ShellColor = .red)",
+              "methodType" : "Public",
+              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "range",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "matches",
+                  "propertyType" : "instance"
+                }
+              ]
+            }
+          ],
+          "name" : "SwiftParser ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
+        }
+      ],
+      "filename" : "coherent-swift/Helpers/Parsers/SwiftSyntaxParser.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "100.00%",
+      "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "logError(_ prefix: Any = \"\", item: Any, color: ShellColor = .red) ",
               "properties" : [
 
               ]
             },
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "logInfo(_ prefix: Any = \"\", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral)",
+              "methodType" : "Public",
+              "name" : "logInfo(_ prefix: Any = \"\", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral) ",
               "properties" : [
 
               ]
             },
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "logDebug(_ prefix: Any = \"\", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral)",
+              "methodType" : "Public",
+              "name" : "logDebug(_ prefix: Any = \"\", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral) ",
               "properties" : [
 
               ]
             },
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "logSection(_ prefix: Any = \"\", item: Any, color: ShellColor = .neutral)",
+              "methodType" : "Public",
+              "name" : "logSection(_ prefix: Any = \"\", item: Any, color: ShellColor = .neutral) ",
               "properties" : [
 
               ]
             }
           ],
-          "name" : "Logger: VerboseLogger ",
+          "name" : "Logger",
           "properties" : [
             {
+              "keyword" : "let",
               "name" : "shared",
               "propertyType" : "static"
             }
-          ]
+          ],
+          "type" : "Class"
         }
       ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Helpers/Loggers/Logger.swift",
+      "filename" : "coherent-swift/Helpers/Loggers/Logger.swift",
       "meets_threshold" : true
     },
     {
-      "classes" : [
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
-          "cohesion" : "87.50",
+          "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "log(_ prefix: Any = \"\", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral, logLevel: LogLevel = .none)",
+              "methodType" : "Public",
+              "name" : "log(_ prefix: Any = \"\", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral, logLevel: LogLevel = .none) ",
               "properties" : [
                 {
+                  "keyword" : "let",
                   "name" : "indentation",
                   "propertyType" : "instance"
                 },
                 {
+                  "keyword" : "var",
                   "name" : "command",
                   "propertyType" : "instance"
                 },
                 {
+                  "keyword" : "let",
                   "name" : "arguments",
                   "propertyType" : "instance"
                 }
               ]
             },
             {
-              "cohesion" : "75.00",
-              "methodType" : "public",
-              "name" : "logBack(_ prefix: Any = \"\", item: Any, indentationLevel: Int = 0) -> String",
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "logBack(_ prefix: Any = \"\", item: Any, indentationLevel: Int = 0) -> String ",
               "properties" : [
                 {
+                  "keyword" : "let",
                   "name" : "indentation",
                   "propertyType" : "instance"
                 },
                 {
+                  "keyword" : "var",
                   "name" : "command",
                   "propertyType" : "instance"
                 },
                 {
+                  "keyword" : "let",
                   "name" : "arguments",
                   "propertyType" : "instance"
                 }
@@ -918,438 +781,195 @@
           ],
           "name" : "VerboseLogger ",
           "properties" : [
-            {
-              "name" : "verbose",
-              "propertyType" : "instance"
-            }
-          ]
-        }
-      ],
-      "cohesion" : "87.50%",
-      "file" : "coherent-swift/Helpers/Loggers/VerboseLogger.swift",
-      "meets_threshold" : true
-    },
-    {
-      "classes" : [
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-            {
-              "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "methodType(_ name: String, lineContent: String) -> CSMethodType",
-              "properties" : [
-                {
-                  "name" : "methodsCleanName",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "methodType",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "lineItems",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "type",
-                  "propertyType" : "instance"
-                }
-              ]
-            },
-            {
-              "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "printColor(for cohesion: Double, threshold: Double, fallback: ShellColor = .purple) -> ShellColor",
-              "properties" : [
 
-              ]
-            }
           ],
-          "name" : "Labeler ",
-          "properties" : [
-            {
-              "name" : "shared",
-              "propertyType" : "static"
-            }
-          ]
+          "type" : "Extension"
         }
       ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Helpers/Labeler.swift",
+      "filename" : "coherent-swift/Helpers/Loggers/VerboseLogger.swift",
       "meets_threshold" : true
     },
     {
-      "classes" : [
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-            {
-              "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "generateCohesion(for definition: CSDefinition) -> Double",
-              "properties" : [
-                {
-                  "name" : "shouldProcessParentProperties",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "parentProperties",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "containsPropertyCount",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "combinedPropertyCount",
-                  "propertyType" : "instance"
-                }
-              ]
-            },
-            {
-              "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "generateCohesion(for definitions: [CSDefinition]) -> Double",
-              "properties" : [
-                {
-                  "name" : "shouldProcessParentProperties",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "parentProperties",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "containsPropertyCount",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "combinedPropertyCount",
-                  "propertyType" : "instance"
-                }
-              ]
-            }
-          ],
-          "name" : "Cohesion ",
-          "properties" : [
-            {
-              "name" : "parser",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "main",
-              "propertyType" : "static"
-            },
-            {
-              "name" : "shouldProcessParentProperties",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "parentProperties",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "containsPropertyCount",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "combinedPropertyCount",
-              "propertyType" : "instance"
-            }
-          ]
-        }
-      ],
       "cohesion" : "100.00%",
-      "file" : "coherent-swift/Helpers/Cohesion/Cohesion.swift",
-      "meets_threshold" : true
-    },
-    {
-      "classes" : [
+      "definitions" : [
         {
           "cohesion" : "100.00",
           "methods" : [
 
           ],
-          "name" : "LocalFileManager: ReportGenerator ",
+          "name" : "Labeler",
+          "properties" : [
+
+          ],
+          "type" : "Struct"
+        }
+      ],
+      "filename" : "coherent-swift/Helpers/Labeler.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "100.00%",
+      "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "LocalFileManager",
           "properties" : [
             {
+              "keyword" : "var",
               "name" : "reports_path",
               "propertyType" : "instance"
             },
             {
+              "keyword" : "var",
               "name" : "badge_file",
               "propertyType" : "instance"
             },
             {
+              "keyword" : "let",
               "name" : "shared",
               "propertyType" : "static"
             }
-          ]
+          ],
+          "type" : "Class"
         }
       ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Helpers/IO/LocalFileManager.swift",
+      "filename" : "coherent-swift/Helpers/IO/LocalFileManager.swift",
       "meets_threshold" : true
     },
     {
-      "classes" : [
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
-          "cohesion" : "81.35",
+          "cohesion" : "100.00",
           "methods" : [
             {
-              "cohesion" : "83.33",
-              "methodType" : "public",
-              "name" : "addToReport(file: String, cohesion: String, meetsThreshold: Bool, definitions: [CSDefinition], to report: CSReport) -> CSReport",
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "addToReport(file: String, cohesion: String, meetsThreshold: Bool, definitions: [CSDefinition], to report: CSReport) -> CSReport ",
               "properties" : [
                 {
-                  "name" : "cohesionReport",
+                  "keyword" : "let",
+                  "name" : "fileReport",
                   "propertyType" : "instance"
                 },
                 {
-                  "name" : "reportCopy",
+                  "keyword" : "var",
+                  "name" : "overallReportCopy",
                   "propertyType" : "instance"
                 }
               ]
             },
             {
-              "cohesion" : "85.71",
-              "methodType" : "public",
-              "name" : "generateReport(_ report: CSReport, format: ReportFormat = .json) -> (Bool, Path?)",
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "generateReport(_ report: CSReport, format: ReportFormat = .json) -> (Bool, Path?) ",
               "properties" : [
                 {
+                  "keyword" : "let",
                   "name" : "path",
                   "propertyType" : "instance"
                 },
                 {
-                  "name" : "reportCopy",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "_",
+                  "keyword" : "var",
+                  "name" : "overallReportCopy",
                   "propertyType" : "instance"
                 }
               ]
             },
             {
-              "cohesion" : "75.00",
-              "methodType" : "public",
-              "name" : "generateBadge(_ report: CSReport) -> (Bool, Path?)",
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "generateBadge(_ report: CSReport) -> (Bool, Path?) ",
               "properties" : [
-
+                {
+                  "keyword" : "let",
+                  "name" : "path",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "badge",
+                  "propertyType" : "instance"
+                }
               ]
             }
           ],
           "name" : "ReportGenerator ",
           "properties" : [
-            {
-              "name" : "fileOutput",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "reports_file",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "badge_file",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "reports_path",
-              "propertyType" : "instance"
-            }
-          ]
+
+          ],
+          "type" : "Extension"
         }
       ],
-      "cohesion" : "81.35%",
-      "file" : "coherent-swift/Helpers/IO/ReportGenerator.swift",
+      "filename" : "coherent-swift/Helpers/IO/ReportGenerator.swift",
       "meets_threshold" : true
     },
     {
-      "classes" : [
+      "cohesion" : "50.00%",
+      "definitions" : [
         {
-          "cohesion" : "96.37",
+          "cohesion" : "50.00",
           "methods" : [
             {
-              "cohesion" : "95.24",
-              "methodType" : "public",
-              "name" : "readSpecs(configuration: Configuration, configurationPath: Path, threshold: Double) throws",
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "readInputFiles(with configuration: Configuration, configurationPath: Path) throws -> FileInputData ",
               "properties" : [
                 {
+                  "keyword" : "let",
                   "name" : "path",
                   "propertyType" : "instance"
                 },
                 {
+                  "keyword" : "var",
                   "name" : "enumaratedString",
                   "propertyType" : "instance"
                 },
                 {
-                  "name" : "accumulativeCohesion",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "fileAmount",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "report",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "result",
-                  "propertyType" : "instance"
-                },
-                {
+                  "keyword" : "let",
                   "name" : "fileManager",
                   "propertyType" : "instance"
                 },
                 {
+                  "keyword" : "let",
                   "name" : "enumerator",
                   "propertyType" : "instance"
-                },
+                }
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "parse(with fileInputData: FileInputData, configuration: Configuration, configurationPath: Path, threshold: Double) ",
+              "properties" : [
                 {
-                  "name" : "filename",
+                  "keyword" : "var",
+                  "name" : "accumulativeCohesion",
                   "propertyType" : "instance"
                 },
                 {
-                  "name" : "cohesion",
+                  "keyword" : "var",
+                  "name" : "fileAmount",
                   "propertyType" : "instance"
                 },
                 {
-                  "name" : "cohesionString",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "reportsFolder",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "reportFormat",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "success",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "reportPathself.localFileManager.generateReportfinalReport",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "format",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "path",
+                  "keyword" : "var",
+                  "name" : "report",
                   "propertyType" : "instance"
                 }
               ]
             },
             {
-              "cohesion" : "83.33",
-              "methodType" : "private",
-              "name" : "processFilePath(filename: String, sourcePath: String) -> String",
+              "cohesion" : "100.00",
+              "methodType" : "Private",
+              "name" : "processFilePath(filename: String, sourcePath: String) -> String ",
               "properties" : [
                 {
-                  "name" : "cohesion",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "cohesionString",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "reportsFolder",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "reportFormat",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "success",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "reportPathself.localFileManager.generateReportfinalReport",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "format",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "path",
-                  "propertyType" : "instance"
-                }
-              ]
-            },
-            {
-              "cohesion" : "83.33",
-              "methodType" : "private",
-              "name" : "processFile(filename: String, in path: Path, onSuccess: StepCohesionHandler)",
-              "properties" : [
-                {
-                  "name" : "cohesion",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "cohesionString",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "reportsFolder",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "reportFormat",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "success",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "reportPathself.localFileManager.generateReportfinalReport",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "format",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "path",
-                  "propertyType" : "instance"
-                }
-              ]
-            },
-            {
-              "cohesion" : "80.00",
-              "methodType" : "private",
-              "name" : "processOverallCohesion(configuration: Configuration, finalCohesion: FinalCohesion, threshold: Double, report: CSReport, onSuccess: ((CSReport) -> Void)? = nil)",
-              "properties" : [
-                {
-                  "name" : "reportsFolder",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "reportFormat",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "success",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "reportPathself.localFileManager.generateReportfinalReport",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "format",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "path",
+                  "keyword" : "var",
+                  "name" : "filepath",
                   "propertyType" : "instance"
                 }
               ]
@@ -1357,117 +977,226 @@
           ],
           "name" : "IOOperations ",
           "properties" : [
-            {
-              "name" : "logger",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "swiftParser",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "localFileManager",
-              "propertyType" : "instance"
-            },
-            {
-              "name" : "shouldOnlyScanChanges",
-              "propertyType" : "instance"
-            }
-          ]
+
+          ],
+          "type" : "Extension"
         }
       ],
-      "cohesion" : "96.37%",
-      "file" : "coherent-swift/Helpers/IO/IOOperations.swift",
-      "meets_threshold" : true
+      "filename" : "coherent-swift/Helpers/IO/IOOperations.swift",
+      "meets_threshold" : false
     },
     {
-      "classes" : [
+      "cohesion" : "33.33%",
+      "definitions" : [
         {
           "cohesion" : "33.33",
           "methods" : [
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "write<T>(_ encodableObject: T, toFile file: Path, format: ReportFormat = .json) -> (Bool, Path?) where T : Encodable",
+              "methodType" : "Public",
+              "name" : "write(_ encodableObject: T, toFile file: Path, format: ReportFormat = .json) -> (Bool, Path?) ",
               "properties" : [
 
               ]
             },
             {
               "cohesion" : "100.00",
-              "methodType" : "private",
-              "name" : "writeJSON<T>(_ encodableObject: T, toFile file: Path) -> (Bool, Path?) where T : Encodable",
+              "methodType" : "Private",
+              "name" : "writeJSON(_ encodableObject: T, toFile file: Path) -> (Bool, Path?) ",
               "properties" : [
                 {
+                  "keyword" : "let",
                   "name" : "encoder",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "encoded",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "encodedJSONString",
                   "propertyType" : "instance"
                 }
               ]
             },
             {
               "cohesion" : "100.00",
-              "methodType" : "private",
-              "name" : "writePlain<T>(_ encodableObject: T, toFile file: Path) -> (Bool, Path?) where T : Encodable",
+              "methodType" : "Private",
+              "name" : "writePlain(_ encodableObject: T, toFile file: Path) -> (Bool, Path?) ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "FileOutput",
+          "properties" : [
+
+          ],
+          "type" : "Class"
+        }
+      ],
+      "filename" : "coherent-swift/Helpers/IO/FileOutput.swift",
+      "meets_threshold" : false
+    },
+    {
+      "cohesion" : "86.67%",
+      "definitions" : [
+        {
+          "cohesion" : "86.67",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "generateCohesion(for method: CSMethod, withinDefinition definition: CSDefinition) -> Double ",
               "properties" : [
                 {
-                  "name" : "report",
+                  "keyword" : "var",
+                  "name" : "shouldProcessParentProperties",
                   "propertyType" : "instance"
                 },
                 {
-                  "name" : "logger",
+                  "keyword" : "let",
+                  "name" : "parentProperties",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "var",
+                  "name" : "containsPropertyCount",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "var",
+                  "name" : "combinedPropertyCount",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "generateCohesion(for definition: CSDefinition) -> Double ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "methodsCount",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "accumulatedCohesion",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "accumulatedMethodsCohesion",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "privateMethods",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "var",
+                  "name" : "privateMethodsCohesion",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "66.67",
+              "methodType" : "Public",
+              "name" : "generateCohesion(for definitions: [CSDefinition]) -> Double ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "definitionsCount",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "accumulatedCohesion",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "80.00",
+              "methodType" : "Public",
+              "name" : "processOverallCohesion(configuration: Configuration, finalCohesion: FinalCohesion, threshold: Double, report: CSReport, onSuccess: ((CSReport, ShellColor) -> Void)? = nil) ",
+              "properties" : [
+                {
+                  "keyword" : "var",
+                  "name" : "finalReport",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "overallCohesion",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "color",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "cohesionString",
                   "propertyType" : "instance"
                 }
               ]
             }
           ],
-          "name" : "FileOutput ",
+          "name" : "Measurer",
           "properties" : [
-
-          ]
+            {
+              "keyword" : "let",
+              "name" : "shared",
+              "propertyType" : "static"
+            },
+            {
+              "keyword" : "let",
+              "name" : "parser",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Class"
         }
       ],
-      "cohesion" : "33.33%",
-      "file" : "coherent-swift/Helpers/IO/FileOutput.swift",
-      "meets_threshold" : false
+      "filename" : "coherent-swift/Helpers/Measurer/Measurer.swift",
+      "meets_threshold" : true
     },
     {
-      "classes" : [
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
           "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "cleanMethodName(_ name: String) -> String",
+              "methodType" : "Public",
+              "name" : "simpleMethodName(_ name: String) -> String ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "methodName(_ name: String) -> String ",
               "properties" : [
                 {
-                  "name" : "cleanSubstring",
+                  "keyword" : "var",
+                  "name" : "finalName",
                   "propertyType" : "instance"
                 }
               ]
             },
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "cleanTuple(in contentString: String) -> [String]",
+              "methodType" : "Public",
+              "name" : "cleanTuple(in contentString: String) -> [String] ",
               "properties" : [
                 {
+                  "keyword" : "let",
                   "name" : "cleanString",
                   "propertyType" : "instance"
                 },
                 {
-                  "name" : "substringNoColons",
-                  "propertyType" : "instance"
-                },
-                {
+                  "keyword" : "let",
                   "name" : "allStrings",
                   "propertyType" : "instance"
                 }
@@ -1475,40 +1204,132 @@
             },
             {
               "cohesion" : "100.00",
-              "methodType" : "public",
-              "name" : "cleanPropertyName(in contentString: String) -> String?",
+              "methodType" : "Public",
+              "name" : "cleanPropertyName(in contentString: String) -> String? ",
               "properties" : [
                 {
+                  "keyword" : "let",
                   "name" : "cleanString",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "substringNoColons",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "substringNoClosure",
-                  "propertyType" : "instance"
-                },
-                {
-                  "name" : "finalString",
                   "propertyType" : "instance"
                 }
               ]
             }
           ],
-          "name" : "Cleaner ",
+          "name" : "Cleaner",
           "properties" : [
             {
+              "keyword" : "let",
               "name" : "shared",
               "propertyType" : "static"
             }
-          ]
+          ],
+          "type" : "Class"
         }
       ],
-      "cohesion" : "100.00%",
-      "file" : "coherent-swift/Helpers/Cleaner.swift",
+      "filename" : "coherent-swift/Helpers/Cleaner.swift",
       "meets_threshold" : true
+    },
+    {
+      "cohesion" : "33.33%",
+      "definitions" : [
+        {
+          "cohesion" : "33.33",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "process(definition: CSDefinition, withMembers members: MemberDeclListSyntax, completion: @escaping FactoryDefinitionResponse) ",
+              "properties" : [
+                {
+                  "keyword" : "var",
+                  "name" : "localDefinition",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "var",
+                  "name" : "reportProperties",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "properties",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "process(node: FunctionDeclSyntax, completion: @escaping FactoryMethodResponse) ",
+              "properties" : [
+                {
+                  "keyword" : "var",
+                  "name" : "name",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "var",
+                  "name" : "method",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "properties",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "mapExtensions(_ extensions: ParsingDefition, to highLevelDefinitions: ParsingDefition) -> ParsingDefition ",
+              "properties" : [
+                {
+                  "keyword" : "var",
+                  "name" : "finalDefinitions",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Private",
+              "name" : "processProperties(_ tokens: TokenSequence, defaultType: CSPropertyType = .Instance) -> [CSProperty] ",
+              "properties" : [
+                {
+                  "keyword" : "var",
+                  "name" : "properties",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Private",
+              "name" : "processCohesion(for definition: CSDefinition) -> CSDefinition ",
+              "properties" : [
+                {
+                  "keyword" : "var",
+                  "name" : "cohesion",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "var",
+                  "name" : "definition",
+                  "propertyType" : "instance"
+                }
+              ]
+            }
+          ],
+          "name" : "CSFactory",
+          "properties" : [
+
+          ],
+          "type" : "Class"
+        }
+      ],
+      "filename" : "coherent-swift/Helpers/CSFactory.swift",
+      "meets_threshold" : false
     }
   ],
   "source" : "./Sources/"
