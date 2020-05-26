@@ -15,17 +15,20 @@ class SwiftSyntaxParser: SyntaxVisitor {
     
     override func visit(_ node: ClassDeclSyntax) -> SyntaxVisitorContinueKind {
         var definition = ReportDefinition(name: node.identifier.text, type: .Class)
-        var reportProperties: [ReportProperty] = []
+        processHighLevelDefinition(&definition,
+                                   withMembers: node.members.members,
+                                   markAsCurrentDefinition: true)
         
-        let properties = node.members.members.filter { $0.decl.is(VariableDeclSyntax.self) }
-        properties.forEach { (property) in
-            let props = processProperties(property.tokens)
-            reportProperties.append(contentsOf: props)
-        }
-        definition.properties = reportProperties
-        currentDefintion = definition
-        mainDefinitions[definition.name] = definition
-        
+//        var reportProperties: [ReportProperty] = []
+//        let properties = node.members.members.filter { $0.decl.is(VariableDeclSyntax.self) }
+//        properties.forEach { (property) in
+//            let props = processProperties(property.tokens)
+//            reportProperties.append(contentsOf: props)
+//        }
+//        definition.properties = reportProperties
+//        currentDefintion = definition
+//        mainDefinitions[definition.name] = definition
+//
         return .visitChildren
     }
     
@@ -85,9 +88,22 @@ class SwiftSyntaxParser: SyntaxVisitor {
         return .visitChildren
     }
     
-    private func processHighLevelDefinition(_ definition: ReportDefinition) {
+    private func processHighLevelDefinition(_ definition: inout ReportDefinition,
+                                            withMembers members: MemberDeclListSyntax,
+                                            markAsCurrentDefinition: Bool = false) {
+        var reportProperties: [ReportProperty] = []
         
+        let properties = members.filter { $0.decl.is(VariableDeclSyntax.self) }
+        properties.forEach { (property) in
+            let props = processProperties(property.tokens)
+            reportProperties.append(contentsOf: props)
+        }
+        definition.properties = reportProperties
+        mainDefinitions[definition.name] = definition
+        
+        if markAsCurrentDefinition { currentDefintion = definition }
     }
+    
     private func processProperties(_ tokens: TokenSequence, defaultType: PropertyType = .Instance) -> [ReportProperty] {
         var properties: [ReportProperty] = []
         
