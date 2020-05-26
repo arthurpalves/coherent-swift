@@ -1,8 +1,8 @@
 {
-  "cohesion" : "88.14%",
+  "cohesion" : "92.71%",
   "meets_threshold" : true,
   "minimum_threshold" : "80%",
-  "report_date" : "2020-05-26 14:34:46",
+  "report_date" : "2020-05-26 15:18:53",
   "result" : [
     {
       "cohesion" : "100.00%",
@@ -449,13 +449,13 @@
       "meets_threshold" : true
     },
     {
-      "cohesion" : "17.36%",
+      "cohesion" : "20.14%",
       "definitions" : [
         {
-          "cohesion" : "17.36",
+          "cohesion" : "20.14",
           "methods" : [
             {
-              "cohesion" : "44.44",
+              "cohesion" : "55.56",
               "methodType" : "Public",
               "name" : "execute() throws ",
               "properties" : [
@@ -525,7 +525,58 @@
       "meets_threshold" : false
     },
     {
-      "cohesion" : "100.00%",
+      "cohesion" : "70.83%",
+      "definitions" : [
+        {
+          "cohesion" : "70.83",
+          "methods" : [
+            {
+              "cohesion" : "50.00",
+              "methodType" : "Public",
+              "name" : "execute() throws ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "templateFolder",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "33.33",
+              "methodType" : "Private",
+              "name" : "generateConfig(path: Path) throws ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "Initializer",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "name",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "shortDescription",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "logger",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Class"
+        }
+      ],
+      "filename" : "coherent-swift/Commands/Initializer.swift",
+      "meets_threshold" : false
+    },
+    {
+      "cohesion" : "82.92%",
       "definitions" : [
         {
           "cohesion" : "100.00",
@@ -533,39 +584,27 @@
             {
               "cohesion" : "100.00",
               "methodType" : "Public",
-              "name" : "extractConfiguration(from configurationPath: String) throws -> Configuration ",
+              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool ",
               "properties" : [
                 {
                   "keyword" : "let",
-                  "name" : "decoder",
+                  "name" : "range",
                   "propertyType" : "instance"
                 },
                 {
                   "keyword" : "let",
-                  "name" : "encoder",
-                  "propertyType" : "instance"
-                },
-                {
-                  "keyword" : "let",
-                  "name" : "logger",
+                  "name" : "matches",
                   "propertyType" : "instance"
                 }
               ]
             }
           ],
-          "name" : "YamlParser ",
+          "name" : "SwiftParser ",
           "properties" : [
 
           ],
           "type" : "Extension"
-        }
-      ],
-      "filename" : "coherent-swift/Helpers/Parsers/YamlParser.swift",
-      "meets_threshold" : true
-    },
-    {
-      "cohesion" : "82.92%",
-      "definitions" : [
+        },
         {
           "cohesion" : "65.84",
           "methods" : [
@@ -643,36 +682,48 @@
             }
           ],
           "type" : "Class"
-        },
+        }
+      ],
+      "filename" : "coherent-swift/Helpers/Parsers/SwiftParser.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "100.00%",
+      "definitions" : [
         {
           "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
               "methodType" : "Public",
-              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool ",
+              "name" : "extractConfiguration(from configurationPath: String) throws -> Configuration ",
               "properties" : [
                 {
                   "keyword" : "let",
-                  "name" : "range",
+                  "name" : "decoder",
                   "propertyType" : "instance"
                 },
                 {
                   "keyword" : "let",
-                  "name" : "matches",
+                  "name" : "encoder",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "logger",
                   "propertyType" : "instance"
                 }
               ]
             }
           ],
-          "name" : "SwiftParser ",
+          "name" : "YamlParser ",
           "properties" : [
 
           ],
           "type" : "Extension"
         }
       ],
-      "filename" : "coherent-swift/Helpers/Parsers/SwiftSyntaxParser.swift",
+      "filename" : "coherent-swift/Helpers/Parsers/YamlParser.swift",
       "meets_threshold" : true
     },
     {
@@ -986,10 +1037,10 @@
       "meets_threshold" : false
     },
     {
-      "cohesion" : "33.33%",
+      "cohesion" : "100.00%",
       "definitions" : [
         {
-          "cohesion" : "33.33",
+          "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
@@ -1028,7 +1079,7 @@
         }
       ],
       "filename" : "coherent-swift/Helpers/IO/FileOutput.swift",
-      "meets_threshold" : false
+      "meets_threshold" : true
     },
     {
       "cohesion" : "86.67%",
@@ -1230,10 +1281,10 @@
       "meets_threshold" : true
     },
     {
-      "cohesion" : "33.33%",
+      "cohesion" : "100.00%",
       "definitions" : [
         {
-          "cohesion" : "33.33",
+          "cohesion" : "100.00",
           "methods" : [
             {
               "cohesion" : "100.00",
@@ -1329,7 +1380,7 @@
         }
       ],
       "filename" : "coherent-swift/Helpers/CSFactory.swift",
-      "meets_threshold" : false
+      "meets_threshold" : true
     }
   ],
   "source" : "./Sources/"

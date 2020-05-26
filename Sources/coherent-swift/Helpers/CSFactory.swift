@@ -7,7 +7,7 @@
 import Foundation
 import SwiftSyntax
 
-typealias FactoryDefinitionResponse = ((_ name: String, _ definition: CSDefinition) -> Void)
+typealias FactoryDefinitionResponse = ((_ name: String, _ definition: inout CSDefinition) -> Void)
 typealias FactoryMethodResponse = ((inout CSMethod) -> Void)
 
 public class CSFactory {
@@ -24,7 +24,7 @@ public class CSFactory {
             reportProperties.append(contentsOf: props)
         }
         localDefinition.properties = reportProperties
-        completion(localDefinition.name, localDefinition)
+        completion(localDefinition.name, &localDefinition)
     }
     
     func process(node: FunctionDeclSyntax, completion: @escaping FactoryMethodResponse) {
