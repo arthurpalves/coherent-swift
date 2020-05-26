@@ -58,7 +58,7 @@ class SwiftSyntaxParser: SyntaxVisitor {
         }
         
         if let body = node.body?.description {
-            method.contentString = node.body!.description
+            method.contentString = body
             let methodCohesion = Measurer.shared.generateCohesion(for: method, withinDefinition: definition)
             method.cohesion = methodCohesion.formattedCohesion()
         } else {
@@ -77,7 +77,7 @@ class SwiftSyntaxParser: SyntaxVisitor {
     }
     
     override func visit(_ node: ExtensionDeclSyntax) -> SyntaxVisitorContinueKind {
-        let name = "\(node.extendedType)"
+        let name = String("\(node.extendedType)".split(separator: ".").first ?? "\(node.extendedType)")
         if let existingDefinition = mainDefinitions[name] {
             currentDefintion = existingDefinition
         } else {

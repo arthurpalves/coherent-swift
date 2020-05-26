@@ -110,14 +110,14 @@ final class Syntaxy: Command, IOOperations {
                         definitions.forEach { (key, value) in
                             self.logger.logDebug("\(value.type): ", item: value.name, indentationLevel: 1, color: .cyan)
                             value.properties.forEach { (property) in
-                                self.logger.logDebug("Property: ", item: "\(property.name), type: \(property.propertyType.rawValue)",
+                                self.logger.logDebug("Property: ", item: "\(property.name), type: \(property.propertyType.rawValue), keyword: \(property.keyword)",
                                     indentationLevel: 2, color: .cyan)
                             }
                             value.methods.forEach { (method) in
                                 self.logger.logDebug("Method: ", item: method.name, indentationLevel: 2, color: .cyan)
                                 
                                 method.properties.forEach { (property) in
-                                    self.logger.logDebug("Property: ", item: "\(property.name), type: \(property.propertyType.rawValue)",
+                                    self.logger.logDebug("Property: ", item: "\(property.name), type: \(property.propertyType.rawValue), keyword: \(property.keyword)",
                                         indentationLevel: 3, color: .cyan)
                                 }
                                 
@@ -127,10 +127,14 @@ final class Syntaxy: Command, IOOperations {
                         }
                         
                         let cohesion = Cohesion.main.generateCohesion(for: definitions.map { $0.value })
-                        let color = self.printColor(for: cohesion, threshold: self.defaultThreshold)
-                        let cohesionString = cohesion.formattedCohesion()
-                        
-                        self.logger.logInfo("Cohesion: ", item: cohesionString+"%%", indentationLevel: 1, color: color)
+                        if cohesion.isNaN {
+                            self.logger.logInfo("Ignored: ", item: "No implementation found in this file", indentationLevel: 1, color: .purple)
+                        } else {
+                            let color = self.printColor(for: cohesion, threshold: self.defaultThreshold)
+                            let cohesionString = cohesion.formattedCohesion()
+                            
+                            self.logger.logInfo("Cohesion: ", item: cohesionString+"%%", indentationLevel: 1, color: color)
+                        }
                     } catch {}
                 }
             }
