@@ -14,7 +14,10 @@
 
 - ✅ Measures the cohesion of your Swift code
 - ✅ Ability to validate cohesion against a minimum threshold
+- ✅ Ability to scan only through files that have been changed
 - ✅ Ability to ignore output for a passive scan
+- ✅ Generates report in JSON or plain text
+- ✅ Generates a shields.io compatible JSON file
 
 ## What is Cohesion?
 
@@ -81,6 +84,7 @@ Usage: coherent-swift <command> [options]
 A command-line tool to analyze and report Swift code cohesion
 
 Commands:
+  init            Generate specs (.yml) file
   report          Generate a report on Swift code cohesion
   help            Prints help information
   version         Prints the current version of this app
@@ -89,13 +93,13 @@ Commands:
 ### Specs | Configuration
 
 Before running the `report` command you must first have a spec/configuration file. This is a YAML file containing the basic configuration for *coherent-swift*.
-This configuration is expected as follows:
+
 ```sh
-source: ./MyProject/Sources/ 
-minimum_threshold: 80
-ignore_output_result: false
-reports_folder: ./coherent-swift-reports/
+coherent-swift init
 ```
+
+This will generate the file `coherent-swift.yml` in your working directory.
+[See the specs template](Templates/coherent-swift-template.yml)
 
 > NOTE: By default, `coherent-swift` expects to find the configuration above in `./coherent-swift.yml`, if you do have this file elsewhere or with a different name, please specify it's path by using the parameter `-s | --spec`.
 
@@ -107,6 +111,7 @@ Usage: coherent-swift report [options]
 Generate a report on Swift code cohesion
 
 Options:
+  -d, --diffs           Only scan modified files
   -h, --help            Show help information
   -s, --spec <value>    Use a yaml configuration file
   -v, --verbose         Log tech details for nerds
