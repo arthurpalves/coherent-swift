@@ -24,7 +24,7 @@ final class Report: Command, IOOperations {
     
     var configurationPath: String = "coherent-swift.yml"
     var defaultThreshold: Double = 100.0
-    var report: ReportOutput = ReportOutput()
+    var report: CSReport = CSReport()
     
     var reports_path: String = "/tmp/coherent-swift/" {
         willSet {}

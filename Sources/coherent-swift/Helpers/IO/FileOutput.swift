@@ -41,7 +41,7 @@ public class FileOutput {
     }
     
     private func writePlain<T>(_ encodableObject: T, toFile file: Path) -> (Bool, Path?) where T : Encodable {
-        guard let report = encodableObject as? ReportOutput else { return (false, nil) }
+        guard let report = encodableObject as? CSReport else { return (false, nil) }
         do {
             try Task.run(bash: "rm -rf \(file.absolute().description)")
             try Task.run(bash: "touch \(file.absolute().description)")
@@ -49,15 +49,17 @@ public class FileOutput {
             let logger = Logger.shared
             try report.result.forEach { (cohesionReport) in
                 
-                try logger.logBack("File: ", item: cohesionReport.file, indentationLevel: 0)
+                try logger.logBack("File: ", item: cohesionReport.filename, indentationLevel: 0)
                     .appendLine(to: file)
                 
-                try cohesionReport.classes?.forEach {
-                    try logger.logBack("Definition: ", item: $0.name, indentationLevel: 1)
+                try cohesionReport.definitions?.forEach {
+                    try logger.logBack("\($0.type): ", item: $0.name, indentationLevel: 1)
                         .appendLine(to: file)
                     
                     try $0.properties.forEach { (property) in
-                        try logger.logBack("Property: ", item: property.name, indentationLevel: 2)
+                        try logger.logBack("Property: ",
+                                           item: "\(property.name), type: \(property.propertyType.rawValue), keyword: \(property.keyword)",
+                            indentationLevel: 2)
                             .appendLine(to: file)
                     }
                     
@@ -66,7 +68,9 @@ public class FileOutput {
                         .appendLine(to: file)
                         
                         try method.properties.forEach { (property) in
-                            try logger.logBack("Property: ", item: property.name, indentationLevel: 3)
+                            try logger.logBack("Property: ",
+                                               item: "\(property.name), type: \(property.propertyType.rawValue), keyword: \(property.keyword)",
+                                indentationLevel: 3)
                                 .appendLine(to: file)
                         }
                         

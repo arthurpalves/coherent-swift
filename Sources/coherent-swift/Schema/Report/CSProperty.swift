@@ -6,12 +6,12 @@
 
 import Foundation
 
-public struct ReportProperty: Codable {
+public struct CSProperty: Codable {
     let keyword: String
     let name: String
-    let propertyType: PropertyType
+    let propertyType: CSPropertyType
     
-    init(keyword: String = "", name: String, propertyType: PropertyType) {
+    init(keyword: String = "", name: String, propertyType: CSPropertyType) {
         self.keyword = keyword
         self.name = name
         self.propertyType = propertyType

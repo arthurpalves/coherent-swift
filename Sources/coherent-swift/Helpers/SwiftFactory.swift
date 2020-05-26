@@ -7,16 +7,16 @@
 import Foundation
 import SwiftSyntax
 
-typealias FactoryDefinitionResponse = ((_ name: String, _ definition: ReportDefinition) -> Void)
-typealias FactoryMethodResponse = ((inout ReportMethod) -> Void)
+typealias FactoryDefinitionResponse = ((_ name: String, _ definition: CSDefinition) -> Void)
+typealias FactoryMethodResponse = ((inout CSMethod) -> Void)
 
-class SwiftFactory {
+public class SwiftFactory {
     
-    func process(definition: ReportDefinition,
+    func process(definition: CSDefinition,
                  withMembers members: MemberDeclListSyntax,
                  completion: @escaping FactoryDefinitionResponse) {
         var localDefinition = definition
-        var reportProperties: [ReportProperty] = []
+        var reportProperties: [CSProperty] = []
         
         let properties = members.filter { $0.decl.is(VariableDeclSyntax.self) }
         properties.forEach { (property) in
@@ -27,10 +27,9 @@ class SwiftFactory {
         completion(localDefinition.name, localDefinition)
     }
     
-    
     func process(node: FunctionDeclSyntax, completion: @escaping FactoryMethodResponse) {
         let name = node.identifier.description+node.signature.description
-        var method = ReportMethod(name: name)
+        var method = CSMethod(name: name)
         
         node.modifiers?.tokens.forEach { (item) in
             switch item.tokenKind {
@@ -60,8 +59,33 @@ class SwiftFactory {
         completion(&method)
     }
     
-    private func processProperties(_ tokens: TokenSequence, defaultType: PropertyType = .Instance) -> [ReportProperty] {
-        var properties: [ReportProperty] = []
+    func mapExtensions(_ extensions: [String: CSDefinition], to highLevelDefinitions: [String: CSDefinition]) -> [String: CSDefinition] {
+        
+        var finalDefinitions: [String: CSDefinition] = highLevelDefinitions
+        extensions.forEach { (key, value) in
+            var definition = value
+            if var existingDefinition = highLevelDefinitions[key] {
+                definition.methods.mutateEach { (method) in
+                    let cohesion = Measurer.shared.generateCohesion(for: method, withinDefinition: existingDefinition)
+                    method.cohesion = cohesion.formattedCohesion()
+                    existingDefinition.methods.append(method)
+                }
+                definition = existingDefinition
+            }
+            finalDefinitions[definition.name] = definition
+        }
+        
+        finalDefinitions.forEach { (key, value) in
+            finalDefinitions[key] = processCohesion(for: value)
+        }
+        
+        return finalDefinitions
+    }
+    
+    // MARK: - Private
+    
+    private func processProperties(_ tokens: TokenSequence, defaultType: CSPropertyType = .Instance) -> [CSProperty] {
+        var properties: [CSProperty] = []
         
         if tokens.contains(where: { (syntax) -> Bool in
             syntax.tokenKind == .letKeyword
@@ -88,11 +112,27 @@ class SwiftFactory {
                 }
             }
             if !keyword.isEmpty, !propertyName.isEmpty {
-                properties.append(ReportProperty(keyword: keyword,
+                properties.append(CSProperty(keyword: keyword,
                                                        name: propertyName,
                                                        propertyType: type))
             }
         }
         return properties
+    }
+    
+    private func processCohesion(for definition: CSDefinition) -> CSDefinition {
+        var cohesion: Double = 0
+        var definition = definition
+        if !definition.methods.isEmpty {
+            cohesion = Measurer.shared.generateCohesion(for: definition)
+        } else {
+            /*
+             * if a definition doesn't contain properties nor methods, its
+             * still considered as highly cohesive
+             */
+            cohesion = 100
+        }
+        definition.cohesion = cohesion.formattedCohesion()
+        return definition
     }
 }

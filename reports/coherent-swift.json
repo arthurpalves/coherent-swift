@@ -146,7 +146,7 @@
           "methods" : [
 
           ],
-          "name" : "ReportMethod: Codable ",
+          "name" : "CSMethod: Codable ",
           "properties" : [
             {
               "name" : "name",
@@ -172,7 +172,7 @@
         }
       ],
       "cohesion" : "100.00%",
-      "file" : "coherent-swift/Schema/Report/ReportMethod.swift",
+      "file" : "coherent-swift/Schema/Report/CSMethod.swift",
       "meets_threshold" : true
     },
     {
@@ -182,7 +182,7 @@
           "methods" : [
 
           ],
-          "name" : "CohesionReport: Codable ",
+          "name" : "CSFileReport: Codable ",
           "properties" : [
             {
               "name" : "file",
@@ -204,7 +204,7 @@
         }
       ],
       "cohesion" : "100.00%",
-      "file" : "coherent-swift/Schema/Report/CohesionReport.swift",
+      "file" : "coherent-swift/Schema/Report/CSFileReport.swift",
       "meets_threshold" : true
     },
     {
@@ -214,7 +214,7 @@
           "methods" : [
 
           ],
-          "name" : "ReportProperty: Codable ",
+          "name" : "CSProperty: Codable ",
           "properties" : [
             {
               "name" : "name",
@@ -228,7 +228,7 @@
         }
       ],
       "cohesion" : "100.00%",
-      "file" : "coherent-swift/Schema/Report/ReportProperty.swift",
+      "file" : "coherent-swift/Schema/Report/CSProperty.swift",
       "meets_threshold" : true
     },
     {
@@ -238,7 +238,7 @@
           "methods" : [
 
           ],
-          "name" : "ReportDefinition: Codable ",
+          "name" : "CSDefinition: Codable ",
           "properties" : [
             {
               "name" : "name",
@@ -264,7 +264,7 @@
         }
       ],
       "cohesion" : "100.00%",
-      "file" : "coherent-swift/Schema/Report/ReportDefinition.swift",
+      "file" : "coherent-swift/Schema/Report/CSDefinition.swift",
       "meets_threshold" : true
     },
     {
@@ -275,13 +275,13 @@
             {
               "cohesion" : "16.67",
               "methodType" : "public",
-              "name" : "appendReport(_ report: CohesionReport)",
+              "name" : "appendReport(_ report: CSFileReport)",
               "properties" : [
 
               ]
             }
           ],
-          "name" : "ReportOutput: Codable ",
+          "name" : "CSReport: Codable ",
           "properties" : [
             {
               "name" : "source",
@@ -311,7 +311,7 @@
         }
       ],
       "cohesion" : "16.67%",
-      "file" : "coherent-swift/Schema/Report/ReportOutput.swift",
+      "file" : "coherent-swift/Schema/Report/CSReport.swift",
       "meets_threshold" : false
     },
     {
@@ -514,7 +514,7 @@
             {
               "cohesion" : "90.00",
               "methodType" : "public",
-              "name" : "parseFile(filename: String, in path: Path, onSucces: (([ReportDefinition]) -> Void)? = nil)",
+              "name" : "parseFile(filename: String, in path: Path, onSucces: (([CSDefinition]) -> Void)? = nil)",
               "properties" : [
                 {
                   "name" : "fileManager",
@@ -572,7 +572,7 @@
             {
               "cohesion" : "33.33",
               "methodType" : "private",
-              "name" : "parseDefinitions(rawDefinitions: [DefinitionTuple]) -> [ReportDefinition]",
+              "name" : "parseDefinitions(rawDefinitions: [DefinitionTuple]) -> [CSDefinition]",
               "properties" : [
 
               ]
@@ -580,7 +580,7 @@
             {
               "cohesion" : "25.00",
               "methodType" : "private",
-              "name" : "parseSwiftProperties(stringContent: String) -> [ReportProperty]",
+              "name" : "parseSwiftProperties(stringContent: String) -> [CSProperty]",
               "properties" : [
                 {
                   "name" : "cohesion",
@@ -591,7 +591,7 @@
             {
               "cohesion" : "50.00",
               "methodType" : "private",
-              "name" : "parseSwiftMethod(stringContent: String, withinDefinition definition: ReportDefinition) -> [ReportMethod]",
+              "name" : "parseSwiftMethod(stringContent: String, withinDefinition definition: CSDefinition) -> [CSMethod]",
               "properties" : [
                 {
                   "name" : "cohesion",
@@ -937,7 +937,7 @@
             {
               "cohesion" : "100.00",
               "methodType" : "public",
-              "name" : "methodType(_ name: String, lineContent: String) -> MethodType",
+              "name" : "methodType(_ name: String, lineContent: String) -> CSMethodType",
               "properties" : [
                 {
                   "name" : "methodsCleanName",
@@ -987,7 +987,7 @@
             {
               "cohesion" : "100.00",
               "methodType" : "public",
-              "name" : "generateCohesion(for definition: ReportDefinition) -> Double",
+              "name" : "generateCohesion(for definition: CSDefinition) -> Double",
               "properties" : [
                 {
                   "name" : "shouldProcessParentProperties",
@@ -1010,7 +1010,7 @@
             {
               "cohesion" : "100.00",
               "methodType" : "public",
-              "name" : "generateCohesion(for definitions: [ReportDefinition]) -> Double",
+              "name" : "generateCohesion(for definitions: [CSDefinition]) -> Double",
               "properties" : [
                 {
                   "name" : "shouldProcessParentProperties",
@@ -1100,7 +1100,7 @@
             {
               "cohesion" : "83.33",
               "methodType" : "public",
-              "name" : "addToReport(file: String, cohesion: String, meetsThreshold: Bool, definitions: [ReportDefinition], to report: ReportOutput) -> ReportOutput",
+              "name" : "addToReport(file: String, cohesion: String, meetsThreshold: Bool, definitions: [CSDefinition], to report: CSReport) -> CSReport",
               "properties" : [
                 {
                   "name" : "cohesionReport",
@@ -1115,7 +1115,7 @@
             {
               "cohesion" : "85.71",
               "methodType" : "public",
-              "name" : "generateReport(_ report: ReportOutput, format: ReportFormat = .json) -> (Bool, Path?)",
+              "name" : "generateReport(_ report: CSReport, format: ReportFormat = .json) -> (Bool, Path?)",
               "properties" : [
                 {
                   "name" : "path",
@@ -1134,7 +1134,7 @@
             {
               "cohesion" : "75.00",
               "methodType" : "public",
-              "name" : "generateBadge(_ report: ReportOutput) -> (Bool, Path?)",
+              "name" : "generateBadge(_ report: CSReport) -> (Bool, Path?)",
               "properties" : [
 
               ]
@@ -1326,7 +1326,7 @@
             {
               "cohesion" : "80.00",
               "methodType" : "private",
-              "name" : "processOverallCohesion(configuration: Configuration, finalCohesion: FinalCohesion, threshold: Double, report: ReportOutput, onSuccess: ((ReportOutput) -> Void)? = nil)",
+              "name" : "processOverallCohesion(configuration: Configuration, finalCohesion: FinalCohesion, threshold: Double, report: CSReport, onSuccess: ((CSReport) -> Void)? = nil)",
               "properties" : [
                 {
                   "name" : "reportsFolder",

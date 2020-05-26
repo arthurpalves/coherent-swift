@@ -6,7 +6,7 @@
 
 import Foundation
 
-public enum PropertyType: String, Codable {
+public enum CSPropertyType: String, Codable {
     case Static = "static"
     case Instance = "instance"
     case Private = "private"

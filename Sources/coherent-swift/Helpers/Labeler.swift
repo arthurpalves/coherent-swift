@@ -9,16 +9,16 @@ import Foundation
 class Labeler {
     static let shared = Labeler()
     
-    func methodType(_ name: String, lineContent: String) -> MethodType {
+    func methodType(_ name: String, lineContent: String) -> CSMethodType {
         let methodsCleanName = Cleaner.shared.cleanMethodName(name)
-        var methodType: MethodType = .publicMethod
+        var methodType: CSMethodType = .Public
         let lineItems = lineContent
             .replacingOccurrences(of: "\t", with: "")
             .split(separator: " ")
         
         for item in lineItems {
             if methodsCleanName.contains(item) { break }
-            if let type = MethodType(rawValue: String(item)) {
+            if let type = CSMethodType(rawValue: String(item)) {
                 methodType = type
                 break
             }

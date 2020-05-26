@@ -17,7 +17,7 @@ public class SwiftParser {
     
     static let shared = SwiftParser()
     
-    func parseFile(filename: String, in path: Path, onSucces: (([ReportDefinition]) -> Void)? = nil) {
+    func parseFile(filename: String, in path: Path, onSucces: (([CSDefinition]) -> Void)? = nil) {
         let fileManager = FileManager.default
         let filePath = Path("\(path)/\(filename)")
         let fileData = fileManager.contents(atPath: filePath.absolute().description)
@@ -29,7 +29,7 @@ public class SwiftParser {
         else { return }
         
         let definitions = inlineParser.parseFileContent(string)
-        let classes: [ReportDefinition] = parseDefinitions(rawDefinitions: definitions)
+        let classes: [CSDefinition] = parseDefinitions(rawDefinitions: definitions)
         
         classes.forEach {
             logger.logDebug("Definition: ", item: $0.name, indentationLevel: 1, color: .cyan)
@@ -60,11 +60,11 @@ public class SwiftParser {
     
     // MARK: - Private methods
     
-    private func parseDefinitions(rawDefinitions: [DefinitionTuple]) -> [ReportDefinition] {
-        var definitions: [ReportDefinition] = []
+    private func parseDefinitions(rawDefinitions: [DefinitionTuple]) -> [CSDefinition] {
+        var definitions: [CSDefinition] = []
     
         rawDefinitions.forEach { (rawDefinition) in
-            var definition: ReportDefinition = ReportDefinition(name: rawDefinition.name)
+            var definition: CSDefinition = CSDefinition(name: rawDefinition.name)
             definition.contentString = rawDefinition.content
             
             definition.properties = parseSwiftProperties(stringContent: rawDefinition.content)
@@ -86,16 +86,16 @@ public class SwiftParser {
         return definitions
     }
     
-    private func parseSwiftProperties(stringContent: String) -> [ReportProperty] {
-        var properties: [ReportProperty] = []
+    private func parseSwiftProperties(stringContent: String) -> [CSProperty] {
+        var properties: [CSProperty] = []
         let rawProperties = parseSwift(stringContent: stringContent, type: .property)
-        properties = rawProperties.map { ReportProperty(name: $0.item,
-                                                        propertyType: PropertyType(rawValue: $0.type) ?? .Instance) }
+        properties = rawProperties.map { CSProperty(name: $0.item,
+                                                        propertyType: CSPropertyType(rawValue: $0.type) ?? .Instance) }
         return properties
     }
     
-    private func parseSwiftMethod(stringContent: String, withinDefinition definition: ReportDefinition) -> [ReportMethod] {
-        var methods: [ReportMethod] = []
+    private func parseSwiftMethod(stringContent: String, withinDefinition definition: CSDefinition) -> [CSMethod] {
+        var methods: [CSMethod] = []
         let rawMethods = parseSwift(stringContent: stringContent, type: .method)
         if rawMethods.isEmpty { return [] }
 
@@ -103,7 +103,7 @@ public class SwiftParser {
             let methodName = rawMethods[iterator].item
             let processedForRegex = cleaner.cleanMethodName(methodName)
             
-            var method: ReportMethod = ReportMethod(name: methodName, methodType: MethodType(rawValue: rawMethods[iterator].type) ?? .publicMethod)
+            var method: CSMethod = CSMethod(name: methodName, methodType: CSMethodType(rawValue: rawMethods[iterator].type) ?? .Public)
             let delimiter = iterator+1 > rawMethods.count-1 ? "\\}" : "\(ParseType.method.regex())"
             let regexPattern = "(?s)(?<=\(processedForRegex)).*(\(delimiter))"
             
@@ -190,9 +190,9 @@ public class SwiftParser {
                     parsedItems.append((item: finalString, range: match.range, type: methodType.rawValue))
                     
                 case .property:
-                    finalType = PropertyType.Instance.rawValue
-                    if contentString.contains(PropertyType.Static.rawValue) {
-                        finalType = PropertyType.Static.rawValue
+                    finalType = CSPropertyType.Instance.rawValue
+                    if contentString.contains(CSPropertyType.Static.rawValue) {
+                        finalType = CSPropertyType.Static.rawValue
                     }
                     
                     var propertiesInLine: [String] = []

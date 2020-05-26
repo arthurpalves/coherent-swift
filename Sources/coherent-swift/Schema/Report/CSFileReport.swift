@@ -6,9 +6,9 @@
 
 import Foundation
 
-public struct CohesionReport: Codable {
-    let file: String
+public struct CSFileReport: Codable {
+    let filename: String
     let cohesion: String
     let meets_threshold: Bool
-    let classes: [ReportDefinition]?
+    let definitions: [CSDefinition]?
 }

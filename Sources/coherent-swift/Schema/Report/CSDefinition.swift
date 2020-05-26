@@ -6,23 +6,23 @@
 
 import Foundation
 
-public enum DefinitionType: String, Codable {
+public enum CSDefinitionType: String, Codable {
     case Class
     case Struct
     case Enum
     case Extension
 }
 
-public struct ReportDefinition: Codable {
+public struct CSDefinition: Codable {
     let name: String
-    let type: DefinitionType
+    let type: CSDefinitionType
     var cohesion: String
-    var properties: [ReportProperty]
-    var methods: [ReportMethod]
+    var properties: [CSProperty]
+    var methods: [CSMethod]
     var contentString: String = ""
     
-    init(name: String, type: DefinitionType = .Class,
-         cohesion: String = "", properties: [ReportProperty] = [], methods: [ReportMethod] = []) {
+    init(name: String, type: CSDefinitionType = .Class,
+         cohesion: String = "", properties: [CSProperty] = [], methods: [CSMethod] = []) {
         self.name = name
         self.type = type
         self.cohesion = cohesion
@@ -31,6 +31,6 @@ public struct ReportDefinition: Codable {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case name, cohesion, properties, methods
+        case name, type, cohesion, properties, methods
     }
 }

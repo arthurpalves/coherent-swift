@@ -9,15 +9,14 @@ import SwiftSyntax
 import PathKit
 
 class SwiftSyntaxParser: SyntaxVisitor {
-    var extensions: [String: ReportDefinition] = [:]
-    var mainDefinitions: [String: ReportDefinition] = [:]
-    var currentDefintion: ReportDefinition?
+    var extensions: [String: CSDefinition] = [:]
+    var mainDefinitions: [String: CSDefinition] = [:]
+    var currentDefintion: CSDefinition?
     
     let factory = SwiftFactory()
     
     override func visit(_ node: ClassDeclSyntax) -> SyntaxVisitorContinueKind {
-        var definition = ReportDefinition(name: node.identifier.text, type: .Class)
-        
+        let definition = CSDefinition(name: node.identifier.text, type: .Class)
         factory.process(definition: definition, withMembers: node.members.members) {
             (name, definition) in
             
@@ -28,8 +27,7 @@ class SwiftSyntaxParser: SyntaxVisitor {
     }
     
     override func visit(_ node: StructDeclSyntax) -> SyntaxVisitorContinueKind {
-        var definition = ReportDefinition(name: node.identifier.text, type: .Struct)
-        
+        let definition = CSDefinition(name: node.identifier.text, type: .Struct)
         factory.process(definition: definition, withMembers: node.members.members) {
             (name, definition) in
             self.mainDefinitions[name] = definition
@@ -63,7 +61,7 @@ class SwiftSyntaxParser: SyntaxVisitor {
         if let existingDefinition = mainDefinitions[name] {
             currentDefintion = existingDefinition
         } else {
-            let definition = ReportDefinition(name: name, type: .Extension)
+            let definition = CSDefinition(name: name, type: .Extension)
             currentDefintion = definition
             extensions[name] = definition
         }
