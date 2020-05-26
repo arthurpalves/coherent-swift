@@ -1,0 +1,304 @@
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Extensions/Double+String.swift
+[2020-05-26 14:37:57]: ▸    Extension: Double 
+[2020-05-26 14:37:57]: ▸       Method: formattedCohesion() -> String 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Extensions/Date+Log.swift
+[2020-05-26 14:37:57]: ▸    Extension: Date 
+[2020-05-26 14:37:57]: ▸       Method: logTimestamp() -> String 
+[2020-05-26 14:37:57]: ▸          Property: formatter, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Extensions/String+File.swift
+[2020-05-26 14:37:57]: ▸    Extension: Data 
+[2020-05-26 14:37:57]: ▸       Method: append(fileURL: URL) throws 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Extension: String 
+[2020-05-26 14:37:57]: ▸       Method: appendLine(to file: Path) throws 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: appendLineToURL(fileURL: URL) throws 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: appendToURL(fileURL: URL) throws 
+[2020-05-26 14:37:57]: ▸          Property: data, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Extensions/Collection+Mutable.swift
+[2020-05-26 14:37:57]: ▸    Extension: MutableCollection 
+[2020-05-26 14:37:57]: ▸       Method: mutateEach(_ body: (inout Element) throws -> Void) rethrows 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Extensions/String+Double.swift
+[2020-05-26 14:37:57]: ▸    Extension: String 
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Schema/CSBadge.swift
+[2020-05-26 14:37:57]: ▸    Struct: CSBadge
+[2020-05-26 14:37:57]: ▸       Property: schemaVersion, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: label, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: message, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: color, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Schema/Report/CSMethod.swift
+[2020-05-26 14:37:57]: ▸    Struct: CSMethod
+[2020-05-26 14:37:57]: ▸       Property: name, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: cohesion, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: contentString, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: methodType, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: properties, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Schema/Report/CSProperty.swift
+[2020-05-26 14:37:57]: ▸    Struct: CSProperty
+[2020-05-26 14:37:57]: ▸       Property: keyword, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: name, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: propertyType, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Schema/Report/CSDefinition.swift
+[2020-05-26 14:37:57]: ▸    Struct: CSDefinition
+[2020-05-26 14:37:57]: ▸       Property: name, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: type, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: cohesion, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: properties, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: methods, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: contentString, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Schema/Report/CSReport.swift
+[2020-05-26 14:37:57]: ▸    Struct: CSReport
+[2020-05-26 14:37:57]: ▸       Property: source, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: minimum_threshold, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: meets_threshold, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: report_date, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: cohesion, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: result, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Schema/Report/CSFileReport.swift
+[2020-05-26 14:37:57]: ▸    Struct: CSFileReport
+[2020-05-26 14:37:57]: ▸       Property: filename, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: cohesion, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: meets_threshold, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: definitions, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Schema/Configuration.swift
+[2020-05-26 14:37:57]: ▸    Struct: Configuration
+[2020-05-26 14:37:57]: ▸       Property: source, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: minimum_threshold, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: reports_folder, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: ignore_output_result, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: report_format, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Commands/Report.swift
+[2020-05-26 14:37:57]: ▸    Class: Report
+[2020-05-26 14:37:57]: ▸       Property: name, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: shortDescription, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: Key, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: configurationPath, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: defaultThreshold, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: report, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: reports_path, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: logger, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Method: execute() throws 
+[2020-05-26 14:37:57]: ▸          Property: specsPath, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 44.44%
+[2020-05-26 14:37:57]: ▸       Method: decode(configuration: Path) throws -> Configuration? 
+[2020-05-26 14:37:57]: ▸          Cohesion: 25.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 17.36%
+[2020-05-26 14:37:57]: ▸    Cohesion: 17.36%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/Parsers/SwiftParser.swift
+[2020-05-26 14:37:57]: ▸    Class: SwiftParser
+[2020-05-26 14:37:57]: ▸       Property: extensions, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: mainDefinitions, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: currentDefintion, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: logger, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: factory, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Method: visit(_ node: ClassDeclSyntax) -> SyntaxVisitorContinueKind 
+[2020-05-26 14:37:57]: ▸          Property: definition, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 66.67%
+[2020-05-26 14:37:57]: ▸       Method: visit(_ node: StructDeclSyntax) -> SyntaxVisitorContinueKind 
+[2020-05-26 14:37:57]: ▸          Property: definition, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 50.00%
+[2020-05-26 14:37:57]: ▸       Method: visit(_ node: FunctionDeclSyntax) -> SyntaxVisitorContinueKind 
+[2020-05-26 14:37:57]: ▸          Cohesion: 80.00%
+[2020-05-26 14:37:57]: ▸       Method: visit(_ node: ExtensionDeclSyntax) -> SyntaxVisitorContinueKind 
+[2020-05-26 14:37:57]: ▸          Property: name, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 66.67%
+[2020-05-26 14:37:57]: ▸       Cohesion: 65.84%
+[2020-05-26 14:37:57]: ▸    Extension: SwiftParser 
+[2020-05-26 14:37:57]: ▸       Method: content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool 
+[2020-05-26 14:37:57]: ▸          Property: range, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: matches, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 82.92%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/Parsers/YamlParser.swift
+[2020-05-26 14:37:57]: ▸    Extension: YamlParser 
+[2020-05-26 14:37:57]: ▸       Method: extractConfiguration(from configurationPath: String) throws -> Configuration 
+[2020-05-26 14:37:57]: ▸          Property: decoder, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: encoder, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: logger, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/Loggers/Logger.swift
+[2020-05-26 14:37:57]: ▸    Class: Logger
+[2020-05-26 14:37:57]: ▸       Property: shared, type: static, keyword: let
+[2020-05-26 14:37:57]: ▸       Method: logError(_ prefix: Any = "", item: Any, color: ShellColor = .red) 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: logInfo(_ prefix: Any = "", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral) 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: logDebug(_ prefix: Any = "", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral) 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: logSection(_ prefix: Any = "", item: Any, color: ShellColor = .neutral) 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/Loggers/VerboseLogger.swift
+[2020-05-26 14:37:57]: ▸    Extension: VerboseLogger 
+[2020-05-26 14:37:57]: ▸       Method: log(_ prefix: Any = "", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral, logLevel: LogLevel = .none) 
+[2020-05-26 14:37:57]: ▸          Property: indentation, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: command, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: arguments, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: logBack(_ prefix: Any = "", item: Any, indentationLevel: Int = 0) -> String 
+[2020-05-26 14:37:57]: ▸          Property: indentation, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: command, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: arguments, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/Labeler.swift
+[2020-05-26 14:37:57]: ▸    Struct: Labeler
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/IO/LocalFileManager.swift
+[2020-05-26 14:37:57]: ▸    Class: LocalFileManager
+[2020-05-26 14:37:57]: ▸       Property: reports_path, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: badge_file, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸       Property: shared, type: static, keyword: let
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/IO/ReportGenerator.swift
+[2020-05-26 14:37:57]: ▸    Extension: ReportGenerator 
+[2020-05-26 14:37:57]: ▸       Method: addToReport(file: String, cohesion: String, meetsThreshold: Bool, definitions: [CSDefinition], to report: CSReport) -> CSReport 
+[2020-05-26 14:37:57]: ▸          Property: fileReport, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: overallReportCopy, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: generateReport(_ report: CSReport, format: ReportFormat = .json) -> (Bool, Path?) 
+[2020-05-26 14:37:57]: ▸          Property: path, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: overallReportCopy, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: generateBadge(_ report: CSReport) -> (Bool, Path?) 
+[2020-05-26 14:37:57]: ▸          Property: path, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: badge, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/IO/IOOperations.swift
+[2020-05-26 14:37:57]: ▸    Extension: IOOperations 
+[2020-05-26 14:37:57]: ▸       Method: readInputFiles(with configuration: Configuration, configurationPath: Path) throws -> FileInputData 
+[2020-05-26 14:37:57]: ▸          Property: path, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: enumaratedString, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: fileManager, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: enumerator, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: parse(with fileInputData: FileInputData, configuration: Configuration, configurationPath: Path, threshold: Double) 
+[2020-05-26 14:37:57]: ▸          Property: accumulativeCohesion, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: fileAmount, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: report, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: processFilePath(filename: String, sourcePath: String) -> String 
+[2020-05-26 14:37:57]: ▸          Property: filepath, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 50.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 50.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/IO/FileOutput.swift
+[2020-05-26 14:37:57]: ▸    Class: FileOutput
+[2020-05-26 14:37:57]: ▸       Method: write(_ encodableObject: T, toFile file: Path, format: ReportFormat = .json) -> (Bool, Path?) 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: writeJSON(_ encodableObject: T, toFile file: Path) -> (Bool, Path?) 
+[2020-05-26 14:37:57]: ▸          Property: encoder, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: writePlain(_ encodableObject: T, toFile file: Path) -> (Bool, Path?) 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 33.33%
+[2020-05-26 14:37:57]: ▸    Cohesion: 33.33%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/Measurer/Measurer.swift
+[2020-05-26 14:37:57]: ▸    Class: Measurer
+[2020-05-26 14:37:57]: ▸       Property: shared, type: static, keyword: let
+[2020-05-26 14:37:57]: ▸       Property: parser, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸       Method: generateCohesion(for method: CSMethod, withinDefinition definition: CSDefinition) -> Double 
+[2020-05-26 14:37:57]: ▸          Property: shouldProcessParentProperties, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: parentProperties, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: containsPropertyCount, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: combinedPropertyCount, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: generateCohesion(for definition: CSDefinition) -> Double 
+[2020-05-26 14:37:57]: ▸          Property: methodsCount, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: accumulatedCohesion, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: accumulatedMethodsCohesion, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: privateMethods, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: privateMethodsCohesion, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: generateCohesion(for definitions: [CSDefinition]) -> Double 
+[2020-05-26 14:37:57]: ▸          Property: definitionsCount, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: accumulatedCohesion, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 66.67%
+[2020-05-26 14:37:57]: ▸       Method: processOverallCohesion(configuration: Configuration, finalCohesion: FinalCohesion, threshold: Double, report: CSReport, onSuccess: ((CSReport, ShellColor) -> Void)? = nil) 
+[2020-05-26 14:37:57]: ▸          Property: finalReport, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: overallCohesion, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: color, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: cohesionString, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 80.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 86.67%
+[2020-05-26 14:37:57]: ▸    Cohesion: 86.67%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/Cleaner.swift
+[2020-05-26 14:37:57]: ▸    Class: Cleaner
+[2020-05-26 14:37:57]: ▸       Property: shared, type: static, keyword: let
+[2020-05-26 14:37:57]: ▸       Method: simpleMethodName(_ name: String) -> String 
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: methodName(_ name: String) -> String 
+[2020-05-26 14:37:57]: ▸          Property: finalName, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: cleanTuple(in contentString: String) -> [String] 
+[2020-05-26 14:37:57]: ▸          Property: cleanString, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Property: allStrings, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: cleanPropertyName(in contentString: String) -> String? 
+[2020-05-26 14:37:57]: ▸          Property: cleanString, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸    Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸ File: coherent-swift/Helpers/CSFactory.swift
+[2020-05-26 14:37:57]: ▸    Class: CSFactory
+[2020-05-26 14:37:57]: ▸       Method: process(definition: CSDefinition, withMembers members: MemberDeclListSyntax, completion: @escaping FactoryDefinitionResponse) 
+[2020-05-26 14:37:57]: ▸          Property: localDefinition, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: reportProperties, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: properties, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: process(node: FunctionDeclSyntax, completion: @escaping FactoryMethodResponse) 
+[2020-05-26 14:37:57]: ▸          Property: name, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: method, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: properties, type: instance, keyword: let
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: mapExtensions(_ extensions: ParsingDefition, to highLevelDefinitions: ParsingDefition) -> ParsingDefition 
+[2020-05-26 14:37:57]: ▸          Property: finalDefinitions, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: processProperties(_ tokens: TokenSequence, defaultType: CSPropertyType = .Instance) -> [CSProperty] 
+[2020-05-26 14:37:57]: ▸          Property: properties, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Method: processCohesion(for definition: CSDefinition) -> CSDefinition 
+[2020-05-26 14:37:57]: ▸          Property: cohesion, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Property: definition, type: instance, keyword: var
+[2020-05-26 14:37:57]: ▸          Cohesion: 100.00%
+[2020-05-26 14:37:57]: ▸       Cohesion: 33.33%
+[2020-05-26 14:37:57]: ▸    Cohesion: 33.33%

@@ -6,15 +6,15 @@
 
 import Foundation
 
-public struct ReportMethod: Codable {
+public struct CSMethod: Codable {
     let name: String
     var cohesion: String
     var contentString: String = ""
-    var methodType: MethodType
-    var properties: [ReportProperty]
+    var methodType: CSMethodType
+    var properties: [CSProperty]
     
     init(name: String, cohesion: String = "", contentString: String = "",
-         methodType: MethodType = .publicMethod, properties: [ReportProperty] = []) {
+         methodType: CSMethodType = .Public, properties: [CSProperty] = []) {
         self.name = name
         self.cohesion = cohesion
         self.contentString = contentString

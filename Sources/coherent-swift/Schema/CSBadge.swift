@@ -6,7 +6,7 @@
 
 import Foundation
 
-public struct CoherentBadge: Codable {
+public struct CSBadge: Codable {
     let schemaVersion: Int
     let label: String
     let message: String

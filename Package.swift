@@ -19,6 +19,10 @@ let package = Package(
         .package(
             url: "https://github.com/jpsim/Yams.git",
             from: "2.0.0"
+        ),
+        .package(
+            url: "https://github.com/apple/swift-syntax.git",
+            .exact("0.50200.0")
         )
     ],
     targets: [
@@ -27,7 +31,8 @@ let package = Package(
             dependencies: [
                 "SwiftCLI",
                 "PathKit",
-                "Yams"
+                "Yams",
+                "SwiftSyntax"
             ]
         ),
         .testTarget(
