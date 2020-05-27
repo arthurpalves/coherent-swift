@@ -1,0 +1,309 @@
+{
+  "cohesion" : "64.12%",
+  "meets_threshold" : false,
+  "minimum_threshold" : "80%",
+  "report_date" : "2020-05-26 15:39:30",
+  "result" : [
+    {
+      "cohesion" : "100.00%",
+      "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "viewDidLoad() ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "ViewController",
+          "properties" : [
+
+          ],
+          "type" : "Class"
+        }
+      ],
+      "filename" : "ViewController.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "50.00%",
+      "definitions" : [
+        {
+          "cohesion" : "0.00",
+          "methods" : [
+            {
+              "cohesion" : "0.00",
+              "methodType" : "Public",
+              "name" : "viewController(for entryPoint: EntryPoint?) -> UIViewController ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "0.00",
+              "methodType" : "Public",
+              "name" : "viewController() -> UIViewController ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "Router",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "defaultEntryProint",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Class"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "EntryPoint",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "name",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Struct"
+        }
+      ],
+      "filename" : "Subfolder/Router.swift",
+      "meets_threshold" : false
+    },
+    {
+      "cohesion" : "18.06%",
+      "definitions" : [
+        {
+          "cohesion" : "18.06",
+          "methods" : [
+            {
+              "cohesion" : "66.67",
+              "methodType" : "Public",
+              "name" : "setupView() ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "vHeightAnchor",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "50.00",
+              "methodType" : "Public",
+              "name" : "loadViewFromNib() -> UIView? ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "bundle",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "nib",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Private",
+              "name" : "returnRandomString() -> String ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "anotherView",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "0.00",
+              "methodType" : "Private",
+              "name" : "returnRandomInt() -> Int ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "BeautifulView",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "application",
+              "propertyType" : "static"
+            },
+            {
+              "keyword" : "var",
+              "name" : "spinningView",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "textField",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Class"
+        }
+      ],
+      "filename" : "ViewImplementation.swift",
+      "meets_threshold" : false
+    },
+    {
+      "cohesion" : "100.00%",
+      "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "startSpinning() ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "stopSpinning() ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "SpinningView",
+          "properties" : [
+
+          ],
+          "type" : "Class"
+        }
+      ],
+      "filename" : "SpinningView.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "100.00%",
+      "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "AppDelegate",
+          "properties" : [
+
+          ],
+          "type" : "Class"
+        }
+      ],
+      "filename" : "AppDelegate.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "16.67%",
+      "definitions" : [
+        {
+          "cohesion" : "16.67",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "0.00",
+              "methodType" : "Public",
+              "name" : "sceneDidDisconnect(_ scene: UIScene) ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "0.00",
+              "methodType" : "Public",
+              "name" : "sceneDidBecomeActive(_ scene: UIScene) ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "0.00",
+              "methodType" : "Public",
+              "name" : "sceneWillResignActive(_ scene: UIScene) ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "0.00",
+              "methodType" : "Public",
+              "name" : "sceneWillEnterForeground(_ scene: UIScene) ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "0.00",
+              "methodType" : "Public",
+              "name" : "sceneDidEnterBackground(_ scene: UIScene) ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "SceneDelegate",
+          "properties" : [
+            {
+              "keyword" : "var",
+              "name" : "window",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Class"
+        }
+      ],
+      "filename" : "SceneDelegate.swift",
+      "meets_threshold" : false
+    }
+  ],
+  "source" : "./CoherentSwiftTestApp/"
+}

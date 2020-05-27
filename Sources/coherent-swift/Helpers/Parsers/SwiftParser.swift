@@ -22,7 +22,8 @@ class SwiftParser: SyntaxVisitor {
         let definition = CSDefinition(name: node.identifier.text, type: .Class)
         factory.process(definition: definition, withMembers: node.members.members) {
             (name, definition) in
-            
+
+            definition.contentString = "\(node._syntaxNode)"
             self.mainDefinitions[name] = definition
             self.currentDefintion = definition
         }
