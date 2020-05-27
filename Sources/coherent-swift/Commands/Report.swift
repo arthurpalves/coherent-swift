@@ -33,7 +33,7 @@ final class Report: Command, IOOperations {
     var logger: Logger = Logger.shared
     
     public func execute() throws {
-        logger.logSection("$ ", item: "coherent-swift syntax", color: .ios)
+        logger.logSection("$ ", item: "coherent-swift report", color: .ios)
     
         if let spec = specs {
             configurationPath = spec

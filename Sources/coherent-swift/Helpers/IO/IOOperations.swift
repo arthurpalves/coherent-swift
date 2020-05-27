@@ -17,7 +17,6 @@ let DiffsFlag = Flag("-d", "--diffs", description: "Only scan modified files")
 
 public protocol IOOperations {
     var logger: Logger { get }
-    var localFileManager: LocalFileManager { get }
     var defaultThreshold: Double { get set }
     var shouldOnlyScanChanges: Bool { get }
     var factory: CSFactory { get }
@@ -32,7 +31,6 @@ public protocol IOOperations {
 
 extension IOOperations {
     var logger: Logger { Logger.shared }
-    var localFileManager: LocalFileManager { LocalFileManager.shared }
     var shouldOnlyScanChanges: Bool { DiffsFlag.value }
     
     var factory: CSFactory { CSFactory() }
@@ -104,7 +102,7 @@ extension IOOperations {
                         let cohesion = cohesion ?? Double(0)
                         let cohesionString = cohesion.formattedCohesion()
                         
-                        report = self.localFileManager.addToReport(file: filename, cohesion: cohesionString+"%", meetsThreshold: cohesionString.double >= threshold, definitions: definitions, to: report)
+                        report = LocalFileManager.shared.addToReport(file: filename, cohesion: cohesionString+"%", meetsThreshold: cohesionString.double >= threshold, definitions: definitions, to: report)
 
                         accumulativeCohesion += cohesion
                         fileAmount += 1
@@ -124,10 +122,10 @@ extension IOOperations {
                 color: color)
                                 
             let reportsFolder = Path("\(configurationPath)/\(configuration.reportsPath().abbreviate())")
-            self.localFileManager.reports_path = reportsFolder.absolute().description
+            LocalFileManager.shared.reports_path = reportsFolder.absolute().description
             
             let reportFormat: ReportFormat = ReportFormat(rawValue: configuration.report_format ?? "json") ?? .json
-            let (success, reportPath) = self.localFileManager.generateReport(finalReport, format: reportFormat)
+            let (success, reportPath) = LocalFileManager.shared.generateReport(finalReport, format: reportFormat)
             if success, let path = reportPath {
                 self.logger.logSection("Report: ", item: "\(path.absolute().description)")
             }

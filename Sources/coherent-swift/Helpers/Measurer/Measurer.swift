@@ -52,7 +52,7 @@ public class Measurer {
         let privateMethods = definition.methods.filter { $0.methodType == .Private }
         guard !privateMethods.isEmpty
         else { return accumulatedMethodsCohesion }
-        
+
         /*
          * If private methods exist within this definition
          * the usage of this method contributes to the overall

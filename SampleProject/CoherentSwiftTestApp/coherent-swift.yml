@@ -8,7 +8,7 @@
 # NOTE: If run with --diffs, it will only scan files in this source folder but which
 # content's have been modified
 
-source: ./Sources/
+source: ./CoherentSwiftTestApp/
 
 # minimum_threshold
 # It will validate the definition's and overall cohesion against this minimum threshold.
