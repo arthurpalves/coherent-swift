@@ -7,7 +7,7 @@
 import Foundation
 import PathKit
 import SwiftCLI
-
+import SwiftSyntax
 
 final class Report: Command, IOOperations {
     
@@ -17,26 +17,23 @@ final class Report: Command, IOOperations {
     let name: String = "report"
     let shortDescription: String = "Generate a report on Swift code cohesion"
     
-    var overallCohesion: Double = 0.0
-    var accumulativeCohesion: Double = 0.0
-    var fileAmount: Int = 0
-    
     // --------------
     // MARK: Configuration Properties
     @Key("-s", "--spec", description: "Use a yaml configuration file")
     var specs: String?
     
-    
     var configurationPath: String = "coherent-swift.yml"
     var defaultThreshold: Double = 100.0
-    var report: ReportOutput = ReportOutput()
+    var report: CSReport = CSReport()
     
     var reports_path: String = "/tmp/coherent-swift/" {
         willSet {}
     }
     
+    var logger: Logger = Logger.shared
+    
     public func execute() throws {
-        logger.logSection("$ ", item: "coherent-swift report", color: .ios)
+        logger.logSection("$ ", item: "coherent-swift syntax", color: .ios)
     
         if let spec = specs {
             configurationPath = spec
@@ -45,7 +42,12 @@ final class Report: Command, IOOperations {
         
         do {
             guard let configuration = try decode(configuration: specsPath) else { return }
-            try readSpecs(configuration: configuration, configurationPath: Path(configurationPath).parent(), threshold: defaultThreshold)
+            let fileInputData = try readInputFiles(with: configuration,
+                                                   configurationPath: Path(configurationPath).parent())
+            parse(with: fileInputData,
+                  configuration: configuration,
+                  configurationPath: Path(configurationPath).parent(),
+                  threshold: defaultThreshold)
         } catch {
             guard
                 let cliError = error as? CLI.Error,
@@ -56,7 +58,6 @@ final class Report: Command, IOOperations {
         }
     }
 }
-
 
 extension Report: YamlParser {
     private func decode(configuration: Path) throws -> Configuration? {

@@ -1,230 +1,136 @@
 //
 //  coherent-swift
 //
-//  Created by Arthur Alves on 08/05/2020.
+//  Created by Arthur Alves on 25/05/2020.
 //
 
 import Foundation
+import SwiftSyntax
 import PathKit
-import SwiftCLI
 
-typealias ParsedItem = (item: String, range: NSRange, type: String)
+typealias ParsingDefition = [String: CSDefinition]
 
-public class SwiftParser {
+class SwiftParser: SyntaxVisitor {
+    var extensions: ParsingDefition = [:]
+    var mainDefinitions: ParsingDefition = [:]
+    var currentDefintion: CSDefinition?
+    
     let logger = Logger.shared
-    let inlineParser = InlineParser.shared
-    let cleaner = Cleaner.shared
+    let factory = CSFactory()
     
-    static let shared = SwiftParser()
-    
-    func parseFile(filename: String, in path: Path, onSucces: (([ReportDefinition]) -> Void)? = nil) {
-        let fileManager = FileManager.default
-        let filePath = Path("\(path)/\(filename)")
-        let fileData = fileManager.contents(atPath: filePath.absolute().description)
-        
-        guard
-            let data = fileData,
-            let string = String(data: data, encoding: .utf8),
-            !string.isEmpty
-        else { return }
-        
-        let definitions = inlineParser.parseFileContent(string)
-        let classes: [ReportDefinition] = parseDefinitions(rawDefinitions: definitions)
-        
-        classes.forEach {
-            logger.logDebug("Definition: ", item: $0.name, indentationLevel: 1, color: .cyan)
-            $0.properties.forEach { (property) in
-                logger.logDebug("Property: ", item: property.name, indentationLevel: 2, color: .cyan)
-            }
-            $0.methods.forEach { (method) in
-                logger.logDebug("Method: ", item: method.name, indentationLevel: 2, color: .cyan)
-                
-                method.properties.forEach { (property) in
-                    logger.logDebug("Property: ", item: property.name, indentationLevel: 3, color: .cyan)
-                }
-                
-                logger.logDebug("Cohesion: ", item: method.cohesion+"%%", indentationLevel: 3, color: .cyan)
-            }
-            logger.logDebug("Cohesion: ", item: $0.cohesion+"%%", indentationLevel: 2, color: .cyan)
+    override func visit(_ node: ClassDeclSyntax) -> SyntaxVisitorContinueKind {
+        let definition = CSDefinition(name: node.identifier.text, type: .Class)
+        factory.process(definition: definition, withMembers: node.members.members) {
+            (name, definition) in
+            
+            self.mainDefinitions[name] = definition
+            self.currentDefintion = definition
         }
-        
-        onSucces?(classes)
+        return .visitChildren
     }
     
-    func method(_ method: ReportMethod, containsProperty property: ReportProperty, numberOfOccasions: Int = 1) -> Bool {
-        let range = NSRange(location: 0, length: method.contentString.utf16.count)
-        guard let regex = try? NSRegularExpression(pattern: property.name) else { return false }
-        let matches = regex.matches(in: method.contentString, range: range)
-        return matches.count >= numberOfOccasions
-    }
-    
-    // MARK: - Private methods
-    
-    private func parseDefinitions(rawDefinitions: [DefinitionTuple]) -> [ReportDefinition] {
-        var definitions: [ReportDefinition] = []
-    
-        rawDefinitions.forEach { (rawDefinition) in
-            var definition: ReportDefinition = ReportDefinition(name: rawDefinition.name)
-            
-            definition.properties = parseSwiftProperties(stringContent: rawDefinition.content)
-            definition.methods = parseSwiftMethod(stringContent: rawDefinition.content, withinDefinition: definition)
-            
-            var cohesion: Double = 0
-            if !definition.methods.isEmpty {
-                cohesion = Cohesion.main.generateCohesion(for: definition)
-            } else {
-                /*
-                 * if a definition doesn't contain properties nor methods, its
-                 * still considered as highly cohesive
-                 */
-                cohesion = 100
-            }
-            definition.cohesion = cohesion.formattedCohesion()
-            definitions.append(definition)
+    override func visit(_ node: StructDeclSyntax) -> SyntaxVisitorContinueKind {
+        let definition = CSDefinition(name: node.identifier.text, type: .Struct)
+        factory.process(definition: definition, withMembers: node.members.members) {
+            (name, definition) in
+            self.mainDefinitions[name] = definition
         }
-        return definitions
+        return .visitChildren
     }
     
-    private func parseSwiftProperties(stringContent: String) -> [ReportProperty] {
-        var properties: [ReportProperty] = []
-        let rawProperties = parseSwift(stringContent: stringContent, type: .property)
-        properties = rawProperties.map { ReportProperty(name: $0.item,
-                                                        propertyType: PropertyType(rawValue: $0.type) ?? .instanceProperty) }
-        return properties
-    }
-    
-    private func parseSwiftMethod(stringContent: String, withinDefinition definition: ReportDefinition) -> [ReportMethod] {
-        var methods: [ReportMethod] = []
-        let rawMethods = parseSwift(stringContent: stringContent, type: .method)
-        
-        if rawMethods.isEmpty { return [] }
-        
-        for iterator in 0...rawMethods.count-1 {
-            let methodName = rawMethods[iterator].item
-            let processedForRegex = cleaner.cleanMethodName(methodName)
-            
-            var method: ReportMethod = ReportMethod(name: methodName)
-            let delimiter = iterator+1 > rawMethods.count-1 ? "\\}" : "\(ParseType.method.regex())"
-            let regexPattern = "(?s)(?<=\(processedForRegex)).*(\(delimiter))"
-            
-            if let range = stringContent.range(of: regexPattern, options: .regularExpression) {
-                let methodContent = String(stringContent[range])
-                method.contentString = methodContent
-                method.properties = parseSwiftProperties(stringContent: methodContent)
-                
-                let methodCohesion = Cohesion.main.generateCohesion(for: method, withinDefinition: definition)
+    override func visit(_ node: FunctionDeclSyntax) -> SyntaxVisitorContinueKind {
+        guard var definition = currentDefintion else { return .skipChildren }
+        factory.process(node: node) { (method) in
+            if !method.contentString.isEmpty {
+                let methodCohesion = Measurer.shared.generateCohesion(for: method, withinDefinition: definition)
                 method.cohesion = methodCohesion.formattedCohesion()
             }
-            methods.append(method)
-        }
-        return methods
-    }
-    
-    private func parseSwift(stringContent: String, type: ParseType) -> [ParsedItem] {
-        let range = NSRange(location: 0, length: stringContent.utf16.count)
-        let pattern = "(?<=\(type.regex()) )(.*)(\(type.delimiter()))"
-        guard let regex = try? NSRegularExpression(pattern: pattern)
-        else {
-            logger.logError("Couldn't create NSRegularExpression with: ", item: pattern)
-            return []
-        }
-        var parsedItems: [ParsedItem] = []
         
-        switch type {
-        case .property:
-            propertyLineParsing(stringContent: stringContent).forEach {
-                parsedItems.append($0)
-            }
-        default:
-            let matches = regex.matches(in: stringContent, range: range)
-            processParsedItems(with: matches, in: stringContent, type: type).forEach {
-                parsedItems.append($0)
+            definition.methods.append(method)
+            self.currentDefintion = definition
+            
+            switch definition.type {
+            case .Extension:
+                self.extensions[definition.name] = definition
+            default:
+                self.mainDefinitions[definition.name] = definition
             }
         }
-        return parsedItems
+        return .skipChildren
     }
     
-    private func propertyLineParsing(stringContent: String) -> [ParsedItem] {
-        var parsedItems: [ParsedItem] = []
-        let type = ParseType.property
-        let pattern = "(?<=\(type.regex()) )(.*)(\(type.delimiter()))"
-        guard let regex = try? NSRegularExpression(pattern: pattern)
-        else {
-            logger.logError("Couldn't create NSRegularExpression with: ", item: pattern)
-            return parsedItems
+    override func visit(_ node: ExtensionDeclSyntax) -> SyntaxVisitorContinueKind {
+        let name = String("\(node.extendedType)".split(separator: ".").first ?? "\(node.extendedType)")
+        if let existingDefinition = mainDefinitions[name] {
+            currentDefintion = existingDefinition
+        } else {
+            let definition = CSDefinition(name: name, type: .Extension)
+            currentDefintion = definition
+            extensions[name] = definition
         }
-        
-        var dictionaryContent: [String] = []
-        
-        stringContent.enumerateLines { (line, _) in
-            dictionaryContent.append(line)
-        }
-        
-        let methodType = ParseType.method
-        let methodPattern = "(?<=\(methodType.regex()) )(.*)(\(methodType.delimiter()))"
-        guard let methodRegex = try? NSRegularExpression(pattern: methodPattern)
-        else {
-            logger.logError("Couldn't create NSRegularExpression with: ", item: methodPattern)
-            return parsedItems
-        }
-        
-        for lineCount in 0...dictionaryContent.count-1 {
-            let lineContent = dictionaryContent[lineCount]
-            let range = NSRange(location: 0, length: lineContent.utf16.count)
+        return .visitChildren
+    }
+}
 
-            let methodMatches = methodRegex.matches(in: lineContent, range: range)
-            if !methodMatches.isEmpty { break }
-            
-            let matches = regex.matches(in: lineContent, range: range)
-            
-            processParsedItems(with: matches, in: lineContent, type: .property).forEach {
-                parsedItems.append($0)
-            }
-        }
+extension SwiftParser {
+    func parse(filename: String, in path: Path, threshold: Double, onSuccess: StepCohesionHandler) {
+        logger.logInfo("File: ", item: filename, color: .purple)
+        var finalDefinitions: [CSDefinition] = []
+        var cohesion: Double = 0
         
-        return parsedItems
-    }
-    
-    private func processParsedItems(with regexMatches: [NSTextCheckingResult], in contentString: String, type: ParseType) -> [ParsedItem] {
-        var parsedItems: [ParsedItem] = []
-        regexMatches.forEach { match in
-            if let range = Range(match.range, in: contentString) {
-                var finalType = ""
-                switch type {
-                case .method:
-                    guard
-                        let methodSubstring = String(contentString[range]).split(separator: "{").first
-                        else { return }
-                    let finalString = String(methodSubstring).trimmingCharacters(in: [" "])
-                    parsedItems.append((item: finalString, range: match.range, type: type.rawValue))
-                    
-                case .property:
-                    finalType = PropertyType.instanceProperty.rawValue
-                    if contentString.contains(PropertyType.classProperty.rawValue) {
-                        finalType = PropertyType.classProperty.rawValue
-                    }
-                    
-                    var propertiesInLine: [String] = []
-                    if contentString.contains("let (") || contentString.contains("var (") {
-                        propertiesInLine = cleaner.cleanTuple(in: String(contentString[range]))
-                    } else if let processedPropertyName = cleaner.cleanPropertyName(in: String(contentString[range])) {
-                        propertiesInLine.append(processedPropertyName)
-                    }
-                    
-                    propertiesInLine.forEach { property in
-                        parsedItems.append((item: property, range: match.range, type: finalType))
-                    }
-                    
-                default:
-                    finalType = type.rawValue
-                    guard
-                        let substringNoColons = String(contentString[range]).split(separator: ":").first,
-                        let finalString = String(substringNoColons).split(separator: " ").first
-                    else { return }
-                    parsedItems.append((item: String(finalString), range: match.range, type: finalType))
+        let filePath = Path("\(path.absolute())/\(filename)")
+        let url = filePath.absolute().url
+        do {
+            let sourceFile = try SyntaxParser.parse(url)
+            walk(sourceFile)
+            
+            let definitions = self.factory.mapExtensions(self.extensions, to: self.mainDefinitions)
+            finalDefinitions = definitions.map { $0.value }
+            
+            definitions.forEach { (key, value) in
+                self.logger.logDebug("\(value.type): ", item: value.name, indentationLevel: 1, color: .cyan)
+                value.properties.forEach { (property) in
+                    self.logger.logDebug("Property: ", item: "\(property.name), type: \(property.propertyType.rawValue), keyword: \(property.keyword)",
+                        indentationLevel: 2, color: .cyan)
                 }
+                value.methods.forEach { (method) in
+                    self.logger.logDebug("Method: ", item: method.name, indentationLevel: 2, color: .cyan)
+                    
+                    method.properties.forEach { (property) in
+                        self.logger.logDebug("Property: ", item: "\(property.name), type: \(property.propertyType.rawValue), keyword: \(property.keyword)",
+                            indentationLevel: 3, color: .cyan)
+                    }
+                    
+                    self.logger.logDebug("Cohesion: ", item: method.cohesion+"%%", indentationLevel: 3, color: .cyan)
+                }
+                self.logger.logDebug("Cohesion: ", item: value.cohesion+"%%", indentationLevel: 2, color: .cyan)
             }
+            
+            cohesion = Measurer.shared.generateCohesion(for: definitions.map { $0.value })
+            if cohesion.isNaN {
+                self.logger.logInfo("Ignored: ", item: "No implementation found in this file", indentationLevel: 1, color: .purple)
+                onSuccess(filename, nil, [], false)
+                return
+            } else {
+                let color = Labeler.printColor(for: cohesion, threshold: threshold)
+                let cohesionString = cohesion.formattedCohesion()
+                
+                self.logger.logInfo("Cohesion: ", item: cohesionString+"%%", indentationLevel: 1, color: color)
+            }
+            onSuccess(filename, cohesion, finalDefinitions, true)
+            
+        } catch {
+            onSuccess(filename, nil, finalDefinitions, false)
+            return
         }
-        return parsedItems
+    }
+}
+
+extension SwiftParser {
+    func content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool {
+        let range = NSRange(location: 0, length: contentString.utf16.count)
+        guard let regex = try? NSRegularExpression(pattern: name) else { return false }
+        let matches = regex.matches(in: contentString, range: range)
+        return matches.count >= numberOfOccasions
     }
 }
