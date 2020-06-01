@@ -108,6 +108,10 @@ extension IOOperations {
                         fileAmount += 1
                     }
                 }
+            } else {
+                self.logger.logDebug("⚠️  Ignoring: ",
+                                item: "\(filename) - Not a .swift file format",
+                                color: .purple)
             }
         }
         
