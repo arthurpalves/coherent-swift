@@ -144,7 +144,7 @@ extension IOOperations {
     
     private func processFilePath(filename: String, sourcePath: String) -> String {
         var filepath = filename
-        if filepath.contains(sourcePath) {
+        if sourcePath.count > 2, filepath.contains(sourcePath) {
             filepath = filepath.replacingOccurrences(of: sourcePath, with: "")
             filepath = filepath.starts(with: "/") ? String(filepath.dropFirst()) : filepath
         }
