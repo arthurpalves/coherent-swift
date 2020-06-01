@@ -73,6 +73,9 @@ extension IOOperations {
             enumaratedString.append("\n")
         })
         
+        logger.logDebug("⚠️ Source folder: ", item: path.absolute().description, color: .purple)
+        logger.logDebug("⚠️ Enumarated count: ", item: enumerator?.allObjects.count, color: .purple)
+        
         return (enumaratedString: enumaratedString, folderPath: path)
     }
     
@@ -89,6 +92,7 @@ extension IOOperations {
         fileInputData.enumaratedString.enumerateLines { (line, _) in
             let filename = self.processFilePath(filename: line, sourcePath: configuration.sourcePath().lastComponent)
             if filename.hasSuffix(".swift") {
+                self.logger.logDebug("⚠️ Attempting to parse: ", item: filename, color: .purple)
                 
                 let parser = SwiftParser()
                 parser.parse(filename: filename,
@@ -97,6 +101,7 @@ extension IOOperations {
                                 (filename, cohesion, definitions, validFile) in
                     switch validFile {
                     case false:
+                        self.logger.logDebug("⚠️ Failed to parse: ", item: filename, color: .purple)
                         break
                     case true:
                         let cohesion = cohesion ?? Double(0)
