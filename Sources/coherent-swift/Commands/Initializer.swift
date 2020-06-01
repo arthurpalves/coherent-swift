@@ -8,9 +8,11 @@ import Foundation
 import PathKit
 import SwiftCLI
 
+typealias DoesFileExist = (exists: Bool, path: Path?)
+
 final class Initializer: Command, VerboseLogger {
     // --------------
-    // MARK: Command information
+    // MARK: - Command information
     
     let name: String = "init"
     let shortDescription: String = "Generate specs (.yml) file"
@@ -19,14 +21,42 @@ final class Initializer: Command, VerboseLogger {
     
     public func execute() throws {
         logger.logSection("$ ", item: "coherent-swift init", color: .ios)
-        let templateFolder = "/usr/local/lib/coherent-swift/templates"
-        do {
-            logger.logInfo("Generating specs file in: ", item: "./coherent-swift.yml")
-            try generateConfig(path: Path(templateFolder))
-        } catch {
-            logger.logError("Error: ", item: "", color: .red)
-            throw CLI.Error(message: "Couldn't generate YAML specs")
+        
+        let result = doesTemplateExist()
+        guard result.exists, let path = result.path
+        else {
+            self.logger.logError("Error: ", item: "Templates folder not found on '/usr/local/lib/coherent-swift/templates' or './Templates'", color: .red)
+            exit(1)
         }
+        
+        do {
+            self.logger.logInfo("Generating specs file in: ", item: "./coherent-swift.yml")
+            
+            try self.generateConfig(path: path)
+        } catch {
+            logger.logError("Error: ", item: "Couldn't generate YAML specs", color: .red)
+            throw CLI.Error(message: "")
+        }
+    }
+    
+    // MARK: - Private
+    
+    private func doesTemplateExist() -> DoesFileExist {
+        var path: Path?
+        var exists = true
+        
+        let libTemplates = Path("/usr/local/lib/coherent-swift/templates")
+        let localTemplates = Path("./Templates")
+        
+        if libTemplates.exists {
+            path = libTemplates
+        } else if localTemplates.exists {
+            path = localTemplates
+        } else {
+            exists = false
+        }
+        
+        return (exists: exists, path: path)
     }
     
     private func generateConfig(path: Path) throws {
