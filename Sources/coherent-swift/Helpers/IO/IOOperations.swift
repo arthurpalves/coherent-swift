@@ -108,6 +108,10 @@ extension IOOperations {
                         fileAmount += 1
                     }
                 }
+            } else {
+                self.logger.logDebug("⚠️  Ignoring: ",
+                                item: "\(filename) - Not a .swift file format",
+                                color: .purple)
             }
         }
         
@@ -140,7 +144,7 @@ extension IOOperations {
     
     private func processFilePath(filename: String, sourcePath: String) -> String {
         var filepath = filename
-        if filepath.contains(sourcePath) {
+        if sourcePath.count > 2, filepath.contains(sourcePath) {
             filepath = filepath.replacingOccurrences(of: sourcePath, with: "")
             filepath = filepath.starts(with: "/") ? String(filepath.dropFirst()) : filepath
         }
