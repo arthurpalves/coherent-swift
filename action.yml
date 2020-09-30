@@ -1,6 +1,9 @@
 name: 'coherent-swift'
 description: 'Measures cohesion in your Swift codebase'
 author: 'Arthur Alves <arthuralves.p@gmail.com>'
+branding:
+  icon: "code"
+  color: "green"
 
 inputs:
   source:
