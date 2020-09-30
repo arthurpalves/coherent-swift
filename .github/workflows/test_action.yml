@@ -1,4 +1,4 @@
-name: action
+name: test_action
 
 on:
   push:
@@ -14,13 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Swift Package Resolve
-      run: swift package resolve
-
-    - uses: arthurpalves/coherent-swift@0.5.4.6
+    - uses: arthurpalves/coherent-swift@0.5.4.7
       with:
         source: Sources
         minimum_threshold: 60
         ignore_output_result: true
+        only_changes: true
         report_format: plain
 

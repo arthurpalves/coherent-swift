@@ -33,18 +33,18 @@ runs:
     - name: Prepare spec
       shell: bash
       run: |
-        echo -e "source: ${{ inputs.source }}\n" > coherent-swift.yml
-        echo -e "minimum_threshold: ${{ inputs.minimum_threshold }}\n" >> coherent-swift.yml
-        echo -e "reports_folder: ${{ inputs.reports_folder }}\n" >> coherent-swift.yml
-        echo -e "ignore_output_result: ${{ inputs.ignore_output_result }}\n" >> coherent-swift.yml
-        echo -e "report_format: ${{ inputs.report_format }}\n" >> coherent-swift.yml
+        echo -e "source: ${{ inputs.source }}\n" > ${{ github.action_path }}/_coherent-swift.yml
+        echo -e "minimum_threshold: ${{ inputs.minimum_threshold }}\n" >> ${{ github.action_path }}/_coherent-swift.yml
+        echo -e "reports_folder: ${{ inputs.reports_folder }}\n" >> ${{ github.action_path }}/_coherent-swift.yml
+        echo -e "ignore_output_result: ${{ inputs.ignore_output_result }}\n" >> ${{ github.action_path }}/_coherent-swift.yml
+        echo -e "report_format: ${{ inputs.report_format }}\n" >> ${{ github.action_path }}/_coherent-swift.yml
   
     - name: Measure cohesion
       shell: bash
       run: |
         cd ${{ github.action_path }}
-        if [[ ${{ inputs.only_changes}} == 'true' ]]; then
-            swift run coherent-swift report -d -s coherent-swift.yml
+        if [[ ${{ inputs.only_changes }} == 'true' ]]; then
+            swift run coherent-swift report -d -s _coherent-swift.yml
         else
-            swift run coherent-swift report -s coherent-swift.yml
+            swift run coherent-swift report -s _coherent-swift.yml
         fi
