@@ -17,7 +17,7 @@ jobs:
     - name: Swift Package Resolve
       run: swift package resolve
 
-    - uses: arthurpalves/coherent-swift@v0.1.0
+    - uses: arthurpalves/coherent-swift@0.5.3
       with:
         source: Sources/
         minimum_threshold: 60
