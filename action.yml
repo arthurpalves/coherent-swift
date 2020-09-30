@@ -42,4 +42,5 @@ runs:
     - name: Measure cohesion
       shell: bash
       run: |
-        swift run ${{ github.action_path }}/coherent-swift report -s coherent-swift.yml
+        cd ${{ github.action_path }}
+        swift run coherent-swift report -s coherent-swift.yml
