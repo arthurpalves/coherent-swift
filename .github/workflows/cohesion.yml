@@ -1,4 +1,4 @@
-name: test_action
+name: action
 
 on:
   push:
@@ -17,9 +17,9 @@ jobs:
     - name: Swift Package Resolve
       run: swift package resolve
 
-    - uses: arthurpalves/coherent-swift@0.5.3
+    - uses: arthurpalves/coherent-swift@0.5.3
       with:
-        source: Sources/
+        source: Sources
         minimum_threshold: 60
         ignore_output_result: true
         report_format: plain
