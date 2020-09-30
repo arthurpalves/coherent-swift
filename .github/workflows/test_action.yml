@@ -1,0 +1,24 @@
+name: test_action
+
+on:
+  push:
+    branches: [ action ]
+env:
+  DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+  GITHUB_TOKEN: ${{ secrets.PAT }}
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: arthurpalves/coherent-swift@0.5.5
+      with:
+        source: Sources/
+        minimum_threshold: 60
+        ignore_output_result: true
+        only_changes: true
+        report_format: plain
+
