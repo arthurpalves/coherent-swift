@@ -40,5 +40,6 @@ runs:
         echo -e "report_format: ${{ inputs.report_format }}\n" >> coherent-swift.yml
   
     - name: Measure cohesion
+      shell: bash
       run: |
         swift run ${{ github.action_path }}/coherent-swift report -s coherent-swift.yml
