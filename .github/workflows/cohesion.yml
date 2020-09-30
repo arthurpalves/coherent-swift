@@ -1,0 +1,26 @@
+name: action
+
+on:
+  push:
+    branches: [ action ]
+env:
+  DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+  GITHUB_TOKEN: ${{ secrets.PAT }}
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Swift Package Resolve
+      run: swift package resolve
+
+    - uses: arthurpalves/coherent-swift@v0.1.0
+      with:
+        source: Sources/
+        minimum_threshold: 60
+        ignore_output_result: true
+        report_format: plain
+
