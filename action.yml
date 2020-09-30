@@ -39,14 +39,11 @@ runs:
         echo -e "ignore_output_result: ${{ inputs.ignore_output_result }}\n" >> coherent-swift.yml
         echo -e "report_format: ${{ inputs.report_format }}\n" >> coherent-swift.yml
   
-    - name: Measure cohesion on changes only
-      if: inputs.only_changes == 'true'
+    - name: Measure cohesion changes only
       shell: bash
       run: |
-        swift run ${{ github.action_path }}/coherent-swift report -d -s coherent-swift.yml
-        
-    - name: Measure cohesion
-      if: inputs.only_changes != 'true'
-      shell: bash
-      run: |
-        swift run ${{ github.action_path }}/coherent-swift report -s coherent-swift.yml
+        if [ ${{ inputs.only_changes }} == 'true' ]; then
+            swift run ${{ github.action_path }}/coherent-swift report -d -s coherent-swift.yml
+        else
+            swift run ${{ github.action_path }}/coherent-swift report -s coherent-swift.yml
+        fi
