@@ -43,4 +43,8 @@ runs:
       shell: bash
       run: |
         cd ${{ github.action_path }}
-        swift run coherent-swift report -s coherent-swift.yml
+        if [[ ${{ inputs.only_changes}} == 'true' ]]; then
+            swift run coherent-swift report -d -s coherent-swift.yml
+        else
+            swift run coherent-swift report -s coherent-swift.yml
+        fi
