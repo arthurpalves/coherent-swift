@@ -16,6 +16,10 @@ let package = Package(
             from: "6.0.2"
         ),
         .package(
+            url: "https://github.com/apple/swift-argument-parser.git",
+            from: "0.3.0"
+        ),
+        .package(
             url: "https://github.com/kylef/PathKit",
             from: "1.0.0"
         ),
@@ -42,6 +46,7 @@ let package = Package(
         .target(
             name: "CoherentSwift",
             dependencies: [
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 "CoherentSwiftCore"
             ]
         ),
