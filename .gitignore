@@ -1,3 +1,4 @@
+coherent-swift.xcodeproj/project.xcworkspace/xcshareddata/
 
 # OS X temporary files
 .DS_Store
@@ -43,7 +44,6 @@ playground.xcworkspace
 Packages/
 Package.pins
 Package.resolved
-*.xcodeproj
 .swiftpm
 
 .build/
