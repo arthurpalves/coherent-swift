@@ -96,65 +96,11 @@
 		8EE2408F2563C4BB00F66F61 /* CoherentSwiftCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoherentSwiftCoreTests.swift; sourceTree = "<group>"; };
 		8EE240912563C4BB00F66F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		OBJ_10 /* Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
-		OBJ_100 /* atomic-counter.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "atomic-counter.c"; sourceTree = "<group>"; };
-		OBJ_102 /* atomic-counter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "atomic-counter.h"; sourceTree = "<group>"; };
-		OBJ_103 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = "/Users/arthura/Projects/SELF/coherent-swift/coherent-swift.xcodeproj/GeneratedModuleMap/_CSwiftSyntax/module.modulemap"; sourceTree = "<group>"; };
-		OBJ_104 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/arthura/Projects/SELF/coherent-swift/.build/checkouts/swift-syntax/Package.swift"; sourceTree = "<group>"; };
-		OBJ_108 /* api.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = api.c; sourceTree = "<group>"; };
-		OBJ_109 /* emitter.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = emitter.c; sourceTree = "<group>"; };
 		OBJ_11 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
-		OBJ_110 /* parser.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = parser.c; sourceTree = "<group>"; };
-		OBJ_111 /* reader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = reader.c; sourceTree = "<group>"; };
-		OBJ_112 /* scanner.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = scanner.c; sourceTree = "<group>"; };
-		OBJ_113 /* writer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = writer.c; sourceTree = "<group>"; };
-		OBJ_115 /* CYaml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYaml.h; sourceTree = "<group>"; };
-		OBJ_116 /* yaml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = yaml.h; sourceTree = "<group>"; };
-		OBJ_117 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = "/Users/arthura/Projects/SELF/coherent-swift/.build/checkouts/Yams/Sources/CYaml/include/module.modulemap"; sourceTree = "<group>"; };
-		OBJ_119 /* Constructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
-		OBJ_120 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
-		OBJ_121 /* Emitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emitter.swift; sourceTree = "<group>"; };
-		OBJ_122 /* Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
-		OBJ_123 /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
-		OBJ_124 /* Node.Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.Mapping.swift; sourceTree = "<group>"; };
-		OBJ_125 /* Node.Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.Scalar.swift; sourceTree = "<group>"; };
-		OBJ_126 /* Node.Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.Sequence.swift; sourceTree = "<group>"; };
-		OBJ_127 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
-		OBJ_128 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		OBJ_129 /* Representer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Representer.swift; sourceTree = "<group>"; };
 		OBJ_13 /* Collection+Mutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Mutable.swift"; sourceTree = "<group>"; };
-		OBJ_130 /* Resolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
-		OBJ_131 /* String+Yams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Yams.swift"; sourceTree = "<group>"; };
-		OBJ_132 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
-		OBJ_133 /* YamlError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YamlError.swift; sourceTree = "<group>"; };
-		OBJ_134 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/arthura/Projects/SELF/coherent-swift/.build/checkouts/Yams/Package.swift"; sourceTree = "<group>"; };
-		OBJ_136 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/arthura/Projects/SELF/coherent-swift/.build/checkouts/PathKit/Package.swift"; sourceTree = "<group>"; };
-		OBJ_137 /* PathKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathKit.swift; sourceTree = "<group>"; };
 		OBJ_14 /* Date+Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Log.swift"; sourceTree = "<group>"; };
-		OBJ_140 /* ArgumentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentList.swift; sourceTree = "<group>"; };
-		OBJ_141 /* ArgumentListManipulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentListManipulator.swift; sourceTree = "<group>"; };
-		OBJ_142 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
-		OBJ_143 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
-		OBJ_144 /* Compatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compatibility.swift; sourceTree = "<group>"; };
-		OBJ_145 /* CompletionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionGenerator.swift; sourceTree = "<group>"; };
-		OBJ_146 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
-		OBJ_147 /* HelpCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCommand.swift; sourceTree = "<group>"; };
-		OBJ_148 /* HelpMessageGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpMessageGenerator.swift; sourceTree = "<group>"; };
-		OBJ_149 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		OBJ_15 /* Double+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+String.swift"; sourceTree = "<group>"; };
-		OBJ_150 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
-		OBJ_151 /* OptionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionGroup.swift; sourceTree = "<group>"; };
-		OBJ_152 /* OptionRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionRegistry.swift; sourceTree = "<group>"; };
-		OBJ_153 /* Parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
-		OBJ_154 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		OBJ_155 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
-		OBJ_156 /* Stream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
-		OBJ_157 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		OBJ_158 /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
-		OBJ_159 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		OBJ_16 /* String+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Double.swift"; sourceTree = "<group>"; };
-		OBJ_160 /* ValueBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueBox.swift; sourceTree = "<group>"; };
-		OBJ_161 /* VersionCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCommand.swift; sourceTree = "<group>"; };
-		OBJ_162 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/arthura/Projects/SELF/coherent-swift/.build/checkouts/SwiftCLI/Package.swift"; sourceTree = "<group>"; };
 		OBJ_17 /* String+File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+File.swift"; sourceTree = "<group>"; };
 		OBJ_172 /* SampleProject */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SampleProject; sourceTree = SOURCE_ROOT; };
 		OBJ_173 /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Templates; sourceTree = SOURCE_ROOT; };
@@ -192,47 +138,7 @@
 		OBJ_47 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		OBJ_50 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_51 /* CLITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLITests.swift; sourceTree = "<group>"; };
-		OBJ_55 /* AbsolutePosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsolutePosition.swift; sourceTree = "<group>"; };
-		OBJ_56 /* AtomicCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicCounter.swift; sourceTree = "<group>"; };
-		OBJ_57 /* Diagnostic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diagnostic.swift; sourceTree = "<group>"; };
-		OBJ_58 /* DiagnosticConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticConsumer.swift; sourceTree = "<group>"; };
-		OBJ_59 /* DiagnosticEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticEngine.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_60 /* IncrementalParseTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementalParseTransition.swift; sourceTree = "<group>"; };
-		OBJ_61 /* JSONDiagnosticConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDiagnosticConsumer.swift; sourceTree = "<group>"; };
-		OBJ_62 /* PrintingDiagnosticConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintingDiagnosticConsumer.swift; sourceTree = "<group>"; };
-		OBJ_63 /* RawSyntax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawSyntax.swift; sourceTree = "<group>"; };
-		OBJ_64 /* SourceLength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceLength.swift; sourceTree = "<group>"; };
-		OBJ_65 /* SourceLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceLocation.swift; sourceTree = "<group>"; };
-		OBJ_66 /* SourcePresence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePresence.swift; sourceTree = "<group>"; };
-		OBJ_67 /* Syntax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syntax.swift; sourceTree = "<group>"; };
-		OBJ_68 /* SyntaxChildren.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxChildren.swift; sourceTree = "<group>"; };
-		OBJ_69 /* SyntaxClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxClassifier.swift; sourceTree = "<group>"; };
-		OBJ_70 /* SyntaxData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxData.swift; sourceTree = "<group>"; };
-		OBJ_71 /* SyntaxOtherNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxOtherNodes.swift; sourceTree = "<group>"; };
-		OBJ_72 /* SyntaxParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxParser.swift; sourceTree = "<group>"; };
-		OBJ_73 /* SyntaxVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxVerifier.swift; sourceTree = "<group>"; };
-		OBJ_74 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		OBJ_76 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
-		OBJ_77 /* SyntaxAnyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxAnyVisitor.swift; sourceTree = "<group>"; };
-		OBJ_78 /* SyntaxBaseNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxBaseNodes.swift; sourceTree = "<group>"; };
-		OBJ_79 /* SyntaxBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxBuilders.swift; sourceTree = "<group>"; };
-		OBJ_80 /* SyntaxClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxClassification.swift; sourceTree = "<group>"; };
-		OBJ_81 /* SyntaxCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxCollections.swift; sourceTree = "<group>"; };
-		OBJ_82 /* SyntaxEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxEnum.swift; sourceTree = "<group>"; };
-		OBJ_83 /* SyntaxFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxFactory.swift; sourceTree = "<group>"; };
-		OBJ_84 /* SyntaxKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxKind.swift; sourceTree = "<group>"; };
-		OBJ_85 /* SyntaxRewriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxRewriter.swift; sourceTree = "<group>"; };
-		OBJ_86 /* SyntaxTraits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxTraits.swift; sourceTree = "<group>"; };
-		OBJ_87 /* SyntaxVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxVisitor.swift; sourceTree = "<group>"; };
-		OBJ_88 /* TokenKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenKind.swift; sourceTree = "<group>"; };
-		OBJ_89 /* Trivia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trivia.swift; sourceTree = "<group>"; };
-		OBJ_91 /* SyntaxDeclNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxDeclNodes.swift; sourceTree = "<group>"; };
-		OBJ_92 /* SyntaxExprNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxExprNodes.swift; sourceTree = "<group>"; };
-		OBJ_93 /* SyntaxNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxNodes.swift; sourceTree = "<group>"; };
-		OBJ_94 /* SyntaxPatternNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxPatternNodes.swift; sourceTree = "<group>"; };
-		OBJ_95 /* SyntaxStmtNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxStmtNodes.swift; sourceTree = "<group>"; };
-		OBJ_96 /* SyntaxTypeNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxTypeNodes.swift; sourceTree = "<group>"; };
 		"coherent-swift::coherent-swift::Product" /* CoherentSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = CoherentSwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		"coherent-swift::coherent-swiftTests::Product" /* CLITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = CLITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -306,81 +212,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		OBJ_101 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_102 /* atomic-counter.h */,
-				OBJ_103 /* module.modulemap */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		OBJ_105 /* Yams 4.0.1 */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_106 /* CYaml */,
-				OBJ_118 /* Yams */,
-				OBJ_134 /* Package.swift */,
-			);
-			name = "Yams 4.0.1";
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_106 /* CYaml */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_107 /* src */,
-				OBJ_114 /* include */,
-			);
-			name = CYaml;
-			path = .build/checkouts/Yams/Sources/CYaml;
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_107 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_108 /* api.c */,
-				OBJ_109 /* emitter.c */,
-				OBJ_110 /* parser.c */,
-				OBJ_111 /* reader.c */,
-				OBJ_112 /* scanner.c */,
-				OBJ_113 /* writer.c */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		OBJ_114 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_115 /* CYaml.h */,
-				OBJ_116 /* yaml.h */,
-				OBJ_117 /* module.modulemap */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		OBJ_118 /* Yams */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_119 /* Constructor.swift */,
-				OBJ_120 /* Decoder.swift */,
-				OBJ_121 /* Emitter.swift */,
-				OBJ_122 /* Encoder.swift */,
-				OBJ_123 /* Mark.swift */,
-				OBJ_124 /* Node.Mapping.swift */,
-				OBJ_125 /* Node.Scalar.swift */,
-				OBJ_126 /* Node.Sequence.swift */,
-				OBJ_127 /* Node.swift */,
-				OBJ_128 /* Parser.swift */,
-				OBJ_129 /* Representer.swift */,
-				OBJ_130 /* Resolver.swift */,
-				OBJ_131 /* String+Yams.swift */,
-				OBJ_132 /* Tag.swift */,
-				OBJ_133 /* YamlError.swift */,
-			);
-			name = Yams;
-			path = .build/checkouts/Yams/Sources/Yams;
-			sourceTree = SOURCE_ROOT;
-		};
 		OBJ_12 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,55 +223,6 @@
 			);
 			path = Extensions;
 			sourceTree = "<group>";
-		};
-		OBJ_135 /* PathKit 1.0.0 */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_136 /* Package.swift */,
-				OBJ_137 /* PathKit.swift */,
-			);
-			name = "PathKit 1.0.0";
-			path = .build/checkouts/PathKit/Sources;
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_138 /* SwiftCLI 6.0.1 */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_139 /* SwiftCLI */,
-				OBJ_162 /* Package.swift */,
-			);
-			name = "SwiftCLI 6.0.1";
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_139 /* SwiftCLI */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_140 /* ArgumentList.swift */,
-				OBJ_141 /* ArgumentListManipulator.swift */,
-				OBJ_142 /* CLI.swift */,
-				OBJ_143 /* Command.swift */,
-				OBJ_144 /* Compatibility.swift */,
-				OBJ_145 /* CompletionGenerator.swift */,
-				OBJ_146 /* Error.swift */,
-				OBJ_147 /* HelpCommand.swift */,
-				OBJ_148 /* HelpMessageGenerator.swift */,
-				OBJ_149 /* Input.swift */,
-				OBJ_150 /* Option.swift */,
-				OBJ_151 /* OptionGroup.swift */,
-				OBJ_152 /* OptionRegistry.swift */,
-				OBJ_153 /* Parameter.swift */,
-				OBJ_154 /* Parser.swift */,
-				OBJ_155 /* Path.swift */,
-				OBJ_156 /* Stream.swift */,
-				OBJ_157 /* Task.swift */,
-				OBJ_158 /* Term.swift */,
-				OBJ_159 /* Validation.swift */,
-				OBJ_160 /* ValueBox.swift */,
-				OBJ_161 /* VersionCommand.swift */,
-			);
-			name = SwiftCLI;
-			path = .build/checkouts/SwiftCLI/Sources/SwiftCLI;
-			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_163 /* Products */ = {
 			isa = PBXGroup;
@@ -561,7 +343,6 @@
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_48 /* Tests */,
-				OBJ_52 /* Dependencies */,
 				OBJ_163 /* Products */,
 				OBJ_172 /* SampleProject */,
 				OBJ_173 /* Templates */,
@@ -579,57 +360,6 @@
 			);
 			sourceTree = "<group>";
 		};
-		OBJ_52 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_53 /* SwiftSyntax 0.50300.0 */,
-				OBJ_105 /* Yams 4.0.1 */,
-				OBJ_135 /* PathKit 1.0.0 */,
-				OBJ_138 /* SwiftCLI 6.0.1 */,
-			);
-			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		OBJ_53 /* SwiftSyntax 0.50300.0 */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_54 /* SwiftSyntax */,
-				OBJ_97 /* SwiftSyntaxBuilder */,
-				OBJ_98 /* _CSwiftSyntax */,
-				OBJ_104 /* Package.swift */,
-			);
-			name = "SwiftSyntax 0.50300.0";
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_54 /* SwiftSyntax */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_55 /* AbsolutePosition.swift */,
-				OBJ_56 /* AtomicCounter.swift */,
-				OBJ_57 /* Diagnostic.swift */,
-				OBJ_58 /* DiagnosticConsumer.swift */,
-				OBJ_59 /* DiagnosticEngine.swift */,
-				OBJ_60 /* IncrementalParseTransition.swift */,
-				OBJ_61 /* JSONDiagnosticConsumer.swift */,
-				OBJ_62 /* PrintingDiagnosticConsumer.swift */,
-				OBJ_63 /* RawSyntax.swift */,
-				OBJ_64 /* SourceLength.swift */,
-				OBJ_65 /* SourceLocation.swift */,
-				OBJ_66 /* SourcePresence.swift */,
-				OBJ_67 /* Syntax.swift */,
-				OBJ_68 /* SyntaxChildren.swift */,
-				OBJ_69 /* SyntaxClassifier.swift */,
-				OBJ_70 /* SyntaxData.swift */,
-				OBJ_71 /* SyntaxOtherNodes.swift */,
-				OBJ_72 /* SyntaxParser.swift */,
-				OBJ_73 /* SyntaxVerifier.swift */,
-				OBJ_74 /* Utils.swift */,
-				OBJ_75 /* gyb_generated */,
-			);
-			name = SwiftSyntax;
-			path = ".build/checkouts/swift-syntax/Sources/SwiftSyntax";
-			sourceTree = SOURCE_ROOT;
-		};
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -638,28 +368,6 @@
 			);
 			name = Sources;
 			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_75 /* gyb_generated */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_76 /* Misc.swift */,
-				OBJ_77 /* SyntaxAnyVisitor.swift */,
-				OBJ_78 /* SyntaxBaseNodes.swift */,
-				OBJ_79 /* SyntaxBuilders.swift */,
-				OBJ_80 /* SyntaxClassification.swift */,
-				OBJ_81 /* SyntaxCollections.swift */,
-				OBJ_82 /* SyntaxEnum.swift */,
-				OBJ_83 /* SyntaxFactory.swift */,
-				OBJ_84 /* SyntaxKind.swift */,
-				OBJ_85 /* SyntaxRewriter.swift */,
-				OBJ_86 /* SyntaxTraits.swift */,
-				OBJ_87 /* SyntaxVisitor.swift */,
-				OBJ_88 /* TokenKind.swift */,
-				OBJ_89 /* Trivia.swift */,
-				OBJ_90 /* syntax_nodes */,
-			);
-			path = gyb_generated;
-			sourceTree = "<group>";
 		};
 		OBJ_8 /* CoherentSwift */ = {
 			isa = PBXGroup;
@@ -678,45 +386,6 @@
 				OBJ_11 /* Report.swift */,
 			);
 			path = Commands;
-			sourceTree = "<group>";
-		};
-		OBJ_90 /* syntax_nodes */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_91 /* SyntaxDeclNodes.swift */,
-				OBJ_92 /* SyntaxExprNodes.swift */,
-				OBJ_93 /* SyntaxNodes.swift */,
-				OBJ_94 /* SyntaxPatternNodes.swift */,
-				OBJ_95 /* SyntaxStmtNodes.swift */,
-				OBJ_96 /* SyntaxTypeNodes.swift */,
-			);
-			path = syntax_nodes;
-			sourceTree = "<group>";
-		};
-		OBJ_97 /* SwiftSyntaxBuilder */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = SwiftSyntaxBuilder;
-			path = ".build/checkouts/swift-syntax/Sources/SwiftSyntaxBuilder";
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_98 /* _CSwiftSyntax */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_99 /* src */,
-				OBJ_101 /* include */,
-			);
-			name = _CSwiftSyntax;
-			path = ".build/checkouts/swift-syntax/Sources/_CSwiftSyntax";
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_99 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_100 /* atomic-counter.c */,
-			);
-			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
