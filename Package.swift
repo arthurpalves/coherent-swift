@@ -1,9 +1,12 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.3
 
 import PackageDescription
 
 let package = Package(
     name: "coherent-swift",
+	platforms: [
+		.macOS(.v10_12)
+	],
     products: [
         .executable(name: "coherent-swift", targets: ["coherent-swift"])
     ],
@@ -18,11 +21,12 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/jpsim/Yams.git",
-            from: "2.0.0"
+            from: "4.0.0"
         ),
         .package(
+			name: "SwiftSyntax",
             url: "https://github.com/apple/swift-syntax.git",
-            .exact("0.50200.0")
+            .exact("0.50300.0")
         )
     ],
     targets: [
