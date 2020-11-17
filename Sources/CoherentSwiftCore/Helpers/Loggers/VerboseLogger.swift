@@ -1,23 +1,20 @@
 //
-//  coherent-swift
-//
-//  Created by Arthur Alves on 05/05/2020.
+//  CoherentSwift
 //
 
 import SwiftCLI
 import Foundation
 
-let VerboseFlag = Flag("-v", "--verbose", description: "Log tech details for nerds")
-
 public enum ShellColor: String {
-    case blue = "\\033[0;34m"
-    case red = "\\033[0;31m"
-    case green = "\\033[0;32m"
-    case cyan = "\\033[0;36m"
-    case purple = "\\033[0;35m"
-    case ios = "\\033[0;49;36m"
-    case android = "\\033[0;49;33m"
-    case neutral = "\\033[0m"
+    case blue = "\u{001B}[0;34m"
+    case red = "\u{001B}[0;31m"
+    case green = "\u{001B}[0;32m"
+    case cyan = "\u{001B}[0;36m"
+    case purple = "\u{001B}[0;35m"
+    case yellow = "\u{001B}[0;33m"
+    case ios = "\u{001B}[0;49;36m"
+    case android = "\u{001B}[0;49;33m"
+    case neutral = "\u{001B}[0m"
     
     func bold() -> String {
         return self.rawValue.replacingOccurrences(of: "[0", with: "[1")
@@ -32,29 +29,34 @@ public enum LogLevel: String {
     case none = "     "
 }
 
-public protocol VerboseLogger {
+protocol VerboseLogger {
     var verbose: Bool { get }
+    var showTimestamp: Bool { get }
     func log(_ prefix: Any, item: Any, indentationLevel: Int, color: ShellColor, logLevel: LogLevel)
 }
 
 extension VerboseLogger {
-    // Verbose is temporarily set to always true
-    // TODO: Implement this as an option when migrating to ArgumentParser
-    public var verbose: Bool { true }
-    
     public func log(_ prefix: Any = "", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral, logLevel: LogLevel = .none) {
         if logLevel == .verbose {
             guard verbose else { return }
         }
         let indentation = String(repeating: "   ", count: indentationLevel)
         var command = ""
-        let arguments =  [
-            "\(logLevel.rawValue)",
-            "[\(Date().logTimestamp())]: ▸ ",
+        var arguments: [String] = []
+        
+        if showTimestamp {
+            arguments.append(contentsOf: [
+                "\(logLevel.rawValue)",
+                "[\(Date().logTimestamp())]: ▸ "
+            ])
+        }
+        
+        arguments.append(contentsOf: [
             "\(indentation)",
             "\(color.bold())\(prefix)",
             "\(color.rawValue)\(item)\(ShellColor.neutral.rawValue)"
-        ]
+        ])
+        
         arguments.forEach { command.append($0) }
         try? Task.run("printf", command+"\n")
     }

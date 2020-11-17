@@ -1,7 +1,5 @@
 //
-//  coherent-swift
-//
-//  Created by Arthur Alves on 06/05/2020.
+//  CoherentSwift
 //
 
 import Foundation
@@ -10,10 +8,22 @@ import SwiftCLI
 public class Logger: VerboseLogger {
     public static let shared = Logger()
     
+    public init(verbose: Bool = false, showTimestamp: Bool = false) {
+        self.isVerbose = verbose
+        self.shouldShowTimestamp = showTimestamp
+    }
+    
+    var verbose: Bool { return isVerbose }
+    var showTimestamp: Bool { return shouldShowTimestamp }
+    
     public func logError(_ prefix: Any = "", item: Any, color: ShellColor = .red) {
-        log(item: "--------------------------------------------------------------------------------------", logLevel: .error)
+        divider(logLevel: .error)
         log(prefix, item: item, color: color, logLevel: .error)
-        log(item: "--------------------------------------------------------------------------------------", logLevel: .error)
+        divider(logLevel: .error)
+    }
+    
+    func logWarning(_ prefix: Any = "⚠️  ", item: Any, indentationLevel: Int = 0, color: ShellColor = .yellow) {
+        log(prefix, item: item, indentationLevel: indentationLevel, color: color, logLevel: .warning)
     }
     
     public func logInfo(_ prefix: Any = "", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral) {
@@ -25,8 +35,18 @@ public class Logger: VerboseLogger {
     }
     
     public func logSection(_ prefix: Any = "", item: Any, color: ShellColor = .neutral) {
-        log(item: "--------------------------------------------------------------------------------------", logLevel: .info)
+        divider(logLevel: .info)
         log(prefix, item: item, color: color, logLevel: .info)
-        log(item: "--------------------------------------------------------------------------------------", logLevel: .info)
+        divider(logLevel: .info)
     }
+    
+    // MARK: - Private
+    
+    private func divider(logLevel: LogLevel) {
+        log(item: " ", logLevel: logLevel)
+//        log(item: "--------------------------------------------------------------------------------------", logLevel: logLevel)
+    }
+    
+    private let isVerbose: Bool
+    private let shouldShowTimestamp: Bool
 }
