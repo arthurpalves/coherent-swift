@@ -29,7 +29,7 @@ public protocol IOOperations {
     
 }
 
-extension IOOperations {
+public extension IOOperations {
     var logger: Logger { Logger.shared }
     var shouldOnlyScanChanges: Bool { DiffsFlag.value }
     

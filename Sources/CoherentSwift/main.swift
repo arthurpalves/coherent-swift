@@ -12,7 +12,7 @@ cli.commands = [
     Report()
 ]
 
-cli.globalOptions.append(VerboseFlag)
-cli.globalOptions.append(DiffsFlag)
+//cli.globalOptions.append(VerboseFlag)
+//cli.globalOptions.append(DiffsFlag)
 
 _ = cli.go()

@@ -5,12 +5,13 @@
 //
 
 import Foundation
+import CoherentSwiftCore
 import PathKit
 import SwiftCLI
 import SwiftSyntax
 
 final class Report: Command, IOOperations {
-    
+
     // --------------
     // MARK: Command information
     
@@ -24,7 +25,6 @@ final class Report: Command, IOOperations {
     
     var configurationPath: String = "coherent-swift.yml"
     var defaultThreshold: Double = 100.0
-    var report: CSReport = CSReport()
     
     var reports_path: String = "/tmp/coherent-swift/" {
         willSet {}

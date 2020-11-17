@@ -1,8 +1,8 @@
 {
-  "cohesion" : "92.71%",
+  "cohesion" : "93.13%",
   "meets_threshold" : true,
   "minimum_threshold" : "80%",
-  "report_date" : "2020-05-26 15:18:53",
+  "report_date" : "2020-11-17 11:24:39",
   "result" : [
     {
       "cohesion" : "100.00%",
@@ -26,7 +26,7 @@
           "type" : "Extension"
         }
       ],
-      "filename" : "coherent-swift/Extensions/Double+String.swift",
+      "filename" : "CoherentSwiftCore/Extensions/Double+String.swift",
       "meets_threshold" : true
     },
     {
@@ -55,12 +55,30 @@
           "type" : "Extension"
         }
       ],
-      "filename" : "coherent-swift/Extensions/Date+Log.swift",
+      "filename" : "CoherentSwiftCore/Extensions/Date+Log.swift",
       "meets_threshold" : true
     },
     {
       "cohesion" : "100.00%",
       "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "append(fileURL: URL) throws ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "Data ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
+        },
         {
           "cohesion" : "100.00",
           "methods" : [
@@ -98,27 +116,9 @@
 
           ],
           "type" : "Extension"
-        },
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-            {
-              "cohesion" : "100.00",
-              "methodType" : "Public",
-              "name" : "append(fileURL: URL) throws ",
-              "properties" : [
-
-              ]
-            }
-          ],
-          "name" : "Data ",
-          "properties" : [
-
-          ],
-          "type" : "Extension"
         }
       ],
-      "filename" : "coherent-swift/Extensions/String+File.swift",
+      "filename" : "CoherentSwiftCore/Extensions/String+File.swift",
       "meets_threshold" : true
     },
     {
@@ -143,7 +143,7 @@
           "type" : "Extension"
         }
       ],
-      "filename" : "coherent-swift/Extensions/Collection+Mutable.swift",
+      "filename" : "CoherentSwiftCore/Extensions/Collection+Mutable.swift",
       "meets_threshold" : true
     },
     {
@@ -161,7 +161,7 @@
           "type" : "Extension"
         }
       ],
-      "filename" : "coherent-swift/Extensions/String+Double.swift",
+      "filename" : "CoherentSwiftCore/Extensions/String+Double.swift",
       "meets_threshold" : true
     },
     {
@@ -198,7 +198,7 @@
           "type" : "Struct"
         }
       ],
-      "filename" : "coherent-swift/Schema/CSBadge.swift",
+      "filename" : "CoherentSwiftCore/Schema/CSBadge.swift",
       "meets_threshold" : true
     },
     {
@@ -240,7 +240,7 @@
           "type" : "Struct"
         }
       ],
-      "filename" : "coherent-swift/Schema/Report/CSMethod.swift",
+      "filename" : "CoherentSwiftCore/Schema/Report/CSMethod.swift",
       "meets_threshold" : true
     },
     {
@@ -272,7 +272,7 @@
           "type" : "Struct"
         }
       ],
-      "filename" : "coherent-swift/Schema/Report/CSProperty.swift",
+      "filename" : "CoherentSwiftCore/Schema/Report/CSProperty.swift",
       "meets_threshold" : true
     },
     {
@@ -319,7 +319,7 @@
           "type" : "Struct"
         }
       ],
-      "filename" : "coherent-swift/Schema/Report/CSDefinition.swift",
+      "filename" : "CoherentSwiftCore/Schema/Report/CSDefinition.swift",
       "meets_threshold" : true
     },
     {
@@ -366,7 +366,7 @@
           "type" : "Struct"
         }
       ],
-      "filename" : "coherent-swift/Schema/Report/CSReport.swift",
+      "filename" : "CoherentSwiftCore/Schema/Report/CSReport.swift",
       "meets_threshold" : true
     },
     {
@@ -403,7 +403,7 @@
           "type" : "Struct"
         }
       ],
-      "filename" : "coherent-swift/Schema/Report/CSFileReport.swift",
+      "filename" : "CoherentSwiftCore/Schema/Report/CSFileReport.swift",
       "meets_threshold" : true
     },
     {
@@ -445,166 +445,12 @@
           "type" : "Struct"
         }
       ],
-      "filename" : "coherent-swift/Schema/Configuration.swift",
+      "filename" : "CoherentSwiftCore/Schema/Configuration.swift",
       "meets_threshold" : true
-    },
-    {
-      "cohesion" : "20.14%",
-      "definitions" : [
-        {
-          "cohesion" : "20.14",
-          "methods" : [
-            {
-              "cohesion" : "55.56",
-              "methodType" : "Public",
-              "name" : "execute() throws ",
-              "properties" : [
-                {
-                  "keyword" : "let",
-                  "name" : "specsPath",
-                  "propertyType" : "instance"
-                }
-              ]
-            },
-            {
-              "cohesion" : "25.00",
-              "methodType" : "Private",
-              "name" : "decode(configuration: Path) throws -> Configuration? ",
-              "properties" : [
-
-              ]
-            }
-          ],
-          "name" : "Report",
-          "properties" : [
-            {
-              "keyword" : "let",
-              "name" : "name",
-              "propertyType" : "instance"
-            },
-            {
-              "keyword" : "let",
-              "name" : "shortDescription",
-              "propertyType" : "instance"
-            },
-            {
-              "keyword" : "var",
-              "name" : "Key",
-              "propertyType" : "instance"
-            },
-            {
-              "keyword" : "var",
-              "name" : "configurationPath",
-              "propertyType" : "instance"
-            },
-            {
-              "keyword" : "var",
-              "name" : "defaultThreshold",
-              "propertyType" : "instance"
-            },
-            {
-              "keyword" : "var",
-              "name" : "report",
-              "propertyType" : "instance"
-            },
-            {
-              "keyword" : "var",
-              "name" : "reports_path",
-              "propertyType" : "instance"
-            },
-            {
-              "keyword" : "var",
-              "name" : "logger",
-              "propertyType" : "instance"
-            }
-          ],
-          "type" : "Class"
-        }
-      ],
-      "filename" : "coherent-swift/Commands/Report.swift",
-      "meets_threshold" : false
-    },
-    {
-      "cohesion" : "70.83%",
-      "definitions" : [
-        {
-          "cohesion" : "70.83",
-          "methods" : [
-            {
-              "cohesion" : "50.00",
-              "methodType" : "Public",
-              "name" : "execute() throws ",
-              "properties" : [
-                {
-                  "keyword" : "let",
-                  "name" : "templateFolder",
-                  "propertyType" : "instance"
-                }
-              ]
-            },
-            {
-              "cohesion" : "33.33",
-              "methodType" : "Private",
-              "name" : "generateConfig(path: Path) throws ",
-              "properties" : [
-
-              ]
-            }
-          ],
-          "name" : "Initializer",
-          "properties" : [
-            {
-              "keyword" : "let",
-              "name" : "name",
-              "propertyType" : "instance"
-            },
-            {
-              "keyword" : "let",
-              "name" : "shortDescription",
-              "propertyType" : "instance"
-            },
-            {
-              "keyword" : "let",
-              "name" : "logger",
-              "propertyType" : "instance"
-            }
-          ],
-          "type" : "Class"
-        }
-      ],
-      "filename" : "coherent-swift/Commands/Initializer.swift",
-      "meets_threshold" : false
     },
     {
       "cohesion" : "82.92%",
       "definitions" : [
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-            {
-              "cohesion" : "100.00",
-              "methodType" : "Public",
-              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool ",
-              "properties" : [
-                {
-                  "keyword" : "let",
-                  "name" : "range",
-                  "propertyType" : "instance"
-                },
-                {
-                  "keyword" : "let",
-                  "name" : "matches",
-                  "propertyType" : "instance"
-                }
-              ]
-            }
-          ],
-          "name" : "SwiftParser ",
-          "properties" : [
-
-          ],
-          "type" : "Extension"
-        },
         {
           "cohesion" : "65.84",
           "methods" : [
@@ -682,9 +528,36 @@
             }
           ],
           "type" : "Class"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "range",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "matches",
+                  "propertyType" : "instance"
+                }
+              ]
+            }
+          ],
+          "name" : "SwiftParser ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
         }
       ],
-      "filename" : "coherent-swift/Helpers/Parsers/SwiftParser.swift",
+      "filename" : "CoherentSwiftCore/Helpers/Parsers/SwiftParser.swift",
       "meets_threshold" : true
     },
     {
@@ -723,7 +596,7 @@
           "type" : "Extension"
         }
       ],
-      "filename" : "coherent-swift/Helpers/Parsers/YamlParser.swift",
+      "filename" : "CoherentSwiftCore/Helpers/Parsers/YamlParser.swift",
       "meets_threshold" : true
     },
     {
@@ -776,7 +649,7 @@
           "type" : "Class"
         }
       ],
-      "filename" : "coherent-swift/Helpers/Loggers/Logger.swift",
+      "filename" : "CoherentSwiftCore/Helpers/Loggers/Logger.swift",
       "meets_threshold" : true
     },
     {
@@ -837,7 +710,7 @@
           "type" : "Extension"
         }
       ],
-      "filename" : "coherent-swift/Helpers/Loggers/VerboseLogger.swift",
+      "filename" : "CoherentSwiftCore/Helpers/Loggers/VerboseLogger.swift",
       "meets_threshold" : true
     },
     {
@@ -855,7 +728,7 @@
           "type" : "Struct"
         }
       ],
-      "filename" : "coherent-swift/Helpers/Labeler.swift",
+      "filename" : "CoherentSwiftCore/Helpers/Labeler.swift",
       "meets_threshold" : true
     },
     {
@@ -887,7 +760,7 @@
           "type" : "Class"
         }
       ],
-      "filename" : "coherent-swift/Helpers/IO/LocalFileManager.swift",
+      "filename" : "CoherentSwiftCore/Helpers/IO/LocalFileManager.swift",
       "meets_threshold" : true
     },
     {
@@ -955,7 +828,7 @@
           "type" : "Extension"
         }
       ],
-      "filename" : "coherent-swift/Helpers/IO/ReportGenerator.swift",
+      "filename" : "CoherentSwiftCore/Helpers/IO/ReportGenerator.swift",
       "meets_threshold" : true
     },
     {
@@ -1033,7 +906,7 @@
           "type" : "Extension"
         }
       ],
-      "filename" : "coherent-swift/Helpers/IO/IOOperations.swift",
+      "filename" : "CoherentSwiftCore/Helpers/IO/IOOperations.swift",
       "meets_threshold" : false
     },
     {
@@ -1078,7 +951,7 @@
           "type" : "Class"
         }
       ],
-      "filename" : "coherent-swift/Helpers/IO/FileOutput.swift",
+      "filename" : "CoherentSwiftCore/Helpers/IO/FileOutput.swift",
       "meets_threshold" : true
     },
     {
@@ -1207,7 +1080,7 @@
           "type" : "Class"
         }
       ],
-      "filename" : "coherent-swift/Helpers/Measurer/Measurer.swift",
+      "filename" : "CoherentSwiftCore/Helpers/Measurer/Measurer.swift",
       "meets_threshold" : true
     },
     {
@@ -1277,7 +1150,7 @@
           "type" : "Class"
         }
       ],
-      "filename" : "coherent-swift/Helpers/Cleaner.swift",
+      "filename" : "CoherentSwiftCore/Helpers/Cleaner.swift",
       "meets_threshold" : true
     },
     {
@@ -1379,7 +1252,156 @@
           "type" : "Class"
         }
       ],
-      "filename" : "coherent-swift/Helpers/CSFactory.swift",
+      "filename" : "CoherentSwiftCore/Helpers/CSFactory.swift",
+      "meets_threshold" : true
+    },
+    {
+      "cohesion" : "19.64%",
+      "definitions" : [
+        {
+          "cohesion" : "19.64",
+          "methods" : [
+            {
+              "cohesion" : "50.00",
+              "methodType" : "Public",
+              "name" : "execute() throws ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "specsPath",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "28.57",
+              "methodType" : "Private",
+              "name" : "decode(configuration: Path) throws -> Configuration? ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "Report",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "name",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "shortDescription",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "Key",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "configurationPath",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "defaultThreshold",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "reports_path",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "logger",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Class"
+        }
+      ],
+      "filename" : "CoherentSwift/Commands/Report.swift",
+      "meets_threshold" : false
+    },
+    {
+      "cohesion" : "82.27%",
+      "definitions" : [
+        {
+          "cohesion" : "82.27",
+          "methods" : [
+            {
+              "cohesion" : "50.00",
+              "methodType" : "Public",
+              "name" : "execute() throws ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "result",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "57.14",
+              "methodType" : "Private",
+              "name" : "doesTemplateExist() -> DoesFileExist ",
+              "properties" : [
+                {
+                  "keyword" : "var",
+                  "name" : "path",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "var",
+                  "name" : "exists",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "libTemplates",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "localTemplates",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "33.33",
+              "methodType" : "Private",
+              "name" : "generateConfig(path: Path) throws ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "Initializer",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "name",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "shortDescription",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "logger",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Class"
+        }
+      ],
+      "filename" : "CoherentSwift/Commands/Initializer.swift",
       "meets_threshold" : true
     }
   ],
