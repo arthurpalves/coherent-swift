@@ -1,70 +1,30 @@
 //
-//  coherent-swift
-//
-//  Created by Arthur Alves on 26/05/2020.
+//  CoherenSwift
 //
 
 import Foundation
 import CoherentSwiftCore
-import PathKit
-import SwiftCLI
+import ArgumentParser
 
-typealias DoesFileExist = (exists: Bool, path: Path?)
-
-final class Initializer: Command, VerboseLogger {
-    // --------------
-    // MARK: - Command information
+struct Initializer: ParsableCommand {
+    static var configuration = CommandConfiguration(
+        commandName: "init",
+        abstract: "Generate spec file 'coherent-swift.yml'"
+    )
     
-    let name: String = "init"
-    let shortDescription: String = "Generate specs (.yml) file"
+    @Flag(name: .shortAndLong, help: "Log tech details for nerds.")
+    var verbose = false
     
-    let logger = Logger.shared
+    @Flag(name: [.long, .customShort("t")], help: "Show timestamps.")
+    var showTimestamp = false
     
-    public func execute() throws {
-        logger.logSection("$ ", item: "coherent-swift init", color: .ios)
+    func run() throws {
+        let logger = Logger(verbose: verbose, showTimestamp: showTimestamp)
+        logger.logSection("$ ", item: "coherent-swift init", color: .purple)
         
-        let result = doesTemplateExist()
-        guard result.exists, let path = result.path
-        else {
-            self.logger.logError("Error: ", item: "Templates folder not found on '/usr/local/lib/coherent-swift/templates' or './Templates'", color: .red)
-            exit(1)
-        }
-        
-        do {
-            self.logger.logInfo("Generating specs file in: ", item: "./coherent-swift.yml")
-            
-            try self.generateConfig(path: path)
-        } catch {
-            logger.logError("Error: ", item: "Couldn't generate YAML specs", color: .red)
-            throw CLI.Error(message: "")
-        }
-    }
-    
-    // MARK: - Private
-    
-    private func doesTemplateExist() -> DoesFileExist {
-        var path: Path?
-        var exists = true
-        
-        let libTemplates = Path("/usr/local/lib/coherent-swift/templates")
-        let localTemplates = Path("./Templates")
-        
-        if libTemplates.exists {
-            path = libTemplates
-        } else if localTemplates.exists {
-            path = localTemplates
-        } else {
-            exists = false
-        }
-        
-        return (exists: exists, path: path)
-    }
-    
-    private func generateConfig(path: Path) throws {
-        guard path.absolute().exists else {
-            throw CLI.Error(message: "Couldn't find template path")
-        }
-        try Task.run(bash: "cp \(path.absolute())/coherent-swift-template.yml ./coherent-swift.yml", directory: nil)
-        logger.logSection("Specs file generated successfully!", item: "")
+        let path = try TemplateDirectory().path
+        let specHelper = SpecHelper(logger: logger)
+        try specHelper.generate(from: path)
+        logger.logInfo(item: " ")
     }
 }
