@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import CoherentSwiftCore
 import PathKit
 import SwiftCLI
 

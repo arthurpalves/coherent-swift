@@ -3,17 +3,17 @@
 import PackageDescription
 
 let package = Package(
-    name: "coherent-swift",
+    name: "CoherentSwift",
 	platforms: [
-		.macOS(.v10_12)
+		.macOS(.v10_15)
 	],
     products: [
-        .executable(name: "coherent-swift", targets: ["coherent-swift"])
+        .executable(name: "coherent-swift", targets: ["CoherentSwift"])
     ],
     dependencies: [
         .package(
             url: "https://github.com/jakeheis/SwiftCLI",
-            from: "6.0.0"
+            from: "6.0.2"
         ),
         .package(
             url: "https://github.com/kylef/PathKit",
@@ -21,7 +21,7 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/jpsim/Yams.git",
-            from: "4.0.0"
+            from: "4.0.1"
         ),
         .package(
 			name: "SwiftSyntax",
@@ -31,7 +31,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "coherent-swift",
+            name: "CoherentSwiftCore",
             dependencies: [
                 "SwiftCLI",
                 "PathKit",
@@ -39,9 +39,15 @@ let package = Package(
                 "SwiftSyntax"
             ]
         ),
+        .target(
+            name: "CoherentSwift",
+            dependencies: [
+                "CoherentSwiftCore"
+            ]
+        ),
         .testTarget(
-            name: "coherent-swiftTests",
-            dependencies: ["coherent-swift"]
+            name: "CLITests",
+            dependencies: ["CoherentSwift"]
         ),
     ]
 )

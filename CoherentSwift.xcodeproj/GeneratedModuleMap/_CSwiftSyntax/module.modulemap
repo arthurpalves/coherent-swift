@@ -1,0 +1,4 @@
+module _CSwiftSyntax {
+    umbrella "/Users/arthura/Projects/SELF/coherent-swift/.build/checkouts/swift-syntax/Sources/_CSwiftSyntax/include"
+    export *
+}

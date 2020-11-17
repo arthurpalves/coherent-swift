@@ -38,7 +38,9 @@ public protocol VerboseLogger {
 }
 
 extension VerboseLogger {
-    public var verbose: Bool { VerboseFlag.value }
+    // Verbose is temporarily set to always true
+    // TODO: Implement this as an option when migrating to ArgumentParser
+    public var verbose: Bool { true }
     
     public func log(_ prefix: Any = "", item: Any, indentationLevel: Int = 0, color: ShellColor = .neutral, logLevel: LogLevel = .none) {
         if logLevel == .verbose {
