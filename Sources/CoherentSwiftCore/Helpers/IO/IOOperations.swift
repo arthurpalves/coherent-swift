@@ -86,12 +86,15 @@ public extension IOOperations {
         var fileAmount: Int = 0
         var report: CSReport = CSReport()
         
-        fileInputData.enumaratedString.enumerateLines { (line, _) in
-            let filename = self.processFilePath(filename: line, sourcePath: configuration.sourcePath().lastComponent)
-            if filename.hasSuffix(".swift") {
+        fileInputData.enumaratedString.enumerateLines { (fileName, _) in
+            let filePath = self.processFilePath(filename: fileName, sourcePath: configuration.sourcePath())
+            
+            if filePath.exists,
+               filePath.isFile,
+               filePath.extension == "swift" {
                 
                 let parser = SwiftParser()
-                parser.parse(filename: filename,
+                parser.parse(filename: fileName,
                              in: fileInputData.folderPath,
                              threshold: self.defaultThreshold) {
                                 (filename, cohesion, definitions, validFile) in
@@ -108,10 +111,10 @@ public extension IOOperations {
                         fileAmount += 1
                     }
                 }
-            } else {
+            } else if !filePath.isDirectory {
                 self.logger.logDebug("⚠️  Ignoring: ",
-                                item: "\(filename) - Not a .swift file format",
-                                color: .purple)
+                                     item: "\(filePath) - Not a .swift file",
+                                    color: .purple)
             }
         }
         
@@ -142,12 +145,37 @@ public extension IOOperations {
     
     // MARK: - Private
     
-    private func processFilePath(filename: String, sourcePath: String) -> String {
-        var filepath = filename
-        if sourcePath.count > 2, filepath.contains(sourcePath) {
-            filepath = filepath.replacingOccurrences(of: sourcePath, with: "")
-            filepath = filepath.starts(with: "/") ? String(filepath.dropFirst()) : filepath
+    private func processFilePath(filename: String, sourcePath: Path) -> Path {
+        guard let filePath = try? sourcePath.safeJoin(path: Path(filename)) else {
+            return Path(filename)
         }
-        return filepath
+        return filePath
     }
+}
+
+
+extension Path {
+  func safeJoin(path: Path) throws -> Path {
+    let newPath = self + path
+
+    if !newPath.absolute().description.hasPrefix(absolute().description) {
+      throw SuspiciousFileOperation(basePath: self, path: newPath)
+    }
+
+    return newPath
+  }
+}
+
+class SuspiciousFileOperation: Error {
+  let basePath: Path
+  let path: Path
+
+  init(basePath: Path, path: Path) {
+    self.basePath = basePath
+    self.path = path
+  }
+
+  var description: String {
+    return "Path `\(path)` is located outside of base path `\(basePath)`"
+  }
 }
