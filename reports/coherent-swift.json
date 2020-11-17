@@ -1,8 +1,8 @@
 {
-  "cohesion" : "93.13%",
+  "cohesion" : "94.42%",
   "meets_threshold" : true,
   "minimum_threshold" : "80%",
-  "report_date" : "2020-11-17 11:24:39",
+  "report_date" : "2020-11-17 12:19:28",
   "result" : [
     {
       "cohesion" : "100.00%",
@@ -452,6 +452,33 @@
       "cohesion" : "82.92%",
       "definitions" : [
         {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "range",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "matches",
+                  "propertyType" : "instance"
+                }
+              ]
+            }
+          ],
+          "name" : "SwiftParser ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
+        },
+        {
           "cohesion" : "65.84",
           "methods" : [
             {
@@ -528,33 +555,6 @@
             }
           ],
           "type" : "Class"
-        },
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-            {
-              "cohesion" : "100.00",
-              "methodType" : "Public",
-              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool ",
-              "properties" : [
-                {
-                  "keyword" : "let",
-                  "name" : "range",
-                  "propertyType" : "instance"
-                },
-                {
-                  "keyword" : "let",
-                  "name" : "matches",
-                  "propertyType" : "instance"
-                }
-              ]
-            }
-          ],
-          "name" : "SwiftParser ",
-          "properties" : [
-
-          ],
-          "type" : "Extension"
         }
       ],
       "filename" : "CoherentSwiftCore/Helpers/Parsers/SwiftParser.swift",
@@ -832,8 +832,30 @@
       "meets_threshold" : true
     },
     {
-      "cohesion" : "50.00%",
+      "cohesion" : "83.33%",
       "definitions" : [
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "safeJoin(path: Path) throws -> Path ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "newPath",
+                  "propertyType" : "instance"
+                }
+              ]
+            }
+          ],
+          "name" : "Path ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
+        },
         {
           "cohesion" : "50.00",
           "methods" : [
@@ -889,13 +911,9 @@
             {
               "cohesion" : "100.00",
               "methodType" : "Private",
-              "name" : "processFilePath(filename: String, sourcePath: String) -> String ",
+              "name" : "processFilePath(filename: String, sourcePath: Path) -> Path ",
               "properties" : [
-                {
-                  "keyword" : "var",
-                  "name" : "filepath",
-                  "propertyType" : "instance"
-                }
+
               ]
             }
           ],
@@ -904,10 +922,35 @@
 
           ],
           "type" : "Extension"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "SuspiciousFileOperation",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "basePath",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "let",
+              "name" : "path",
+              "propertyType" : "instance"
+            },
+            {
+              "keyword" : "var",
+              "name" : "description",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Class"
         }
       ],
       "filename" : "CoherentSwiftCore/Helpers/IO/IOOperations.swift",
-      "meets_threshold" : false
+      "meets_threshold" : true
     },
     {
       "cohesion" : "100.00%",
