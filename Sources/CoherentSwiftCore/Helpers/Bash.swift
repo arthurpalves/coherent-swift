@@ -54,10 +54,12 @@ public struct Bash {
 
 public extension Bash.Command {
     @discardableResult
-    func pipe(_ bashCommand: Bash.Command) throws -> Pipe {
-        return try Bash()
-            .pipe(self.command, arguments: self.arguments)
-            .pipe(bashCommand)
+    func pipe(_ bashCommands: Bash.Command...) throws -> Pipe {
+        var stdOut = try Bash().pipe(self.command, arguments: self.arguments)
+        try bashCommands.forEach {
+            stdOut = try stdOut.pipe($0)
+        }
+        return stdOut
     }
 
     @discardableResult
