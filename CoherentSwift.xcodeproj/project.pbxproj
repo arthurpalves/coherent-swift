@@ -270,15 +270,15 @@
 		OBJ_18 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_27 /* Loggers */,
+				OBJ_30 /* Measurer */,
+				OBJ_32 /* Parsers */,
 				8EE241F62565361000F66F61 /* FileScanner.swift */,
 				8EE241CE25641B5800F66F61 /* TemplateDirectory.swift */,
 				8EE241DC25641C4D00F66F61 /* SpecHelper.swift */,
 				8EE241EA2565212500F66F61 /* UserInputHelper.swift */,
 				OBJ_20 /* Cleaner.swift */,
 				OBJ_26 /* Labeler.swift */,
-				OBJ_27 /* Loggers */,
-				OBJ_30 /* Measurer */,
-				OBJ_32 /* Parsers */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
