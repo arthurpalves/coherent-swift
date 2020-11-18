@@ -50,6 +50,7 @@
 		8EE241EB2565212500F66F61 /* UserInputHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241EA2565212500F66F61 /* UserInputHelper.swift */; };
 		8EE241F72565361000F66F61 /* FileScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241F62565361000F66F61 /* FileScanner.swift */; };
 		8EE2420225653D3000F66F61 /* PathKit+SafeJoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2420125653D3000F66F61 /* PathKit+SafeJoin.swift */; };
+		8EE242072565405100F66F61 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE242062565405100F66F61 /* Bash.swift */; };
 		OBJ_339 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Report.swift */; };
 		OBJ_366 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* main.swift */; };
 		OBJ_396 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* XCTestManifests.swift */; };
@@ -108,6 +109,7 @@
 		8EE241EA2565212500F66F61 /* UserInputHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputHelper.swift; sourceTree = "<group>"; };
 		8EE241F62565361000F66F61 /* FileScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileScanner.swift; sourceTree = "<group>"; };
 		8EE2420125653D3000F66F61 /* PathKit+SafeJoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PathKit+SafeJoin.swift"; sourceTree = "<group>"; };
+		8EE242062565405100F66F61 /* Bash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bash.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		OBJ_13 /* Collection+Mutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Mutable.swift"; sourceTree = "<group>"; };
 		OBJ_14 /* Date+Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Log.swift"; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				8EE241EA2565212500F66F61 /* UserInputHelper.swift */,
 				OBJ_20 /* Cleaner.swift */,
 				OBJ_26 /* Labeler.swift */,
+				8EE242062565405100F66F61 /* Bash.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				8EE2411F2563C77700F66F61 /* FileOutput.swift in Sources */,
 				8EE241552563C8E000F66F61 /* CSMethodType.swift in Sources */,
 				8EE241562563C8E000F66F61 /* CSPropertyType.swift in Sources */,
+				8EE242072565405100F66F61 /* Bash.swift in Sources */,
 				8EE241192563C77700F66F61 /* LocalFileManager.swift in Sources */,
 				8EE241272563C77700F66F61 /* CSFactory.swift in Sources */,
 				8EE241212563C77700F66F61 /* Measurer.swift in Sources */,

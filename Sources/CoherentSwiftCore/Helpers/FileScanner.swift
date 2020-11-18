@@ -47,18 +47,15 @@ public class FileScanner {
              */
             logger.logInfo("Only scanning modified files", item: "")
             do {
-                let result = try Task.capture("git",
-                                              arguments: [
-                                                "diff", "--name-only", "--",
-                                                "\(sourcePath.absolute().string)",
-                                                "HEAD", "origin"])
-                enumaratedString = result.stdout
-                return (enumaratedString: enumaratedString, folderPath: sourcePath)
-            } catch {
-                logger.logError("Error: ",
-                                item: "Failed to capture differences path. 'Source' is probably outside of this repository.")
-                logger.logInfo("", item: "Proceed with entire source scan")
-            }
+                if let result = try Bash("git", arguments: "diff", "--name-only", "--",
+                                         "\(sourcePath.absolute().description)", "HEAD", "origin").capture() {
+                    enumaratedString = result
+                    return (enumaratedString: enumaratedString, folderPath: sourcePath)
+                }
+            } catch {}
+            logger.logError("Error: ",
+                            item: "Failed to capture differences path. 'Source' is probably outside of this repository.")
+            logger.logInfo("", item: "Proceed with entire source scan")
         }
         
         /*
@@ -70,7 +67,6 @@ public class FileScanner {
             enumaratedString.append(item)
             enumaratedString.append("\n")
         })
-        
         return (enumaratedString: enumaratedString, folderPath: sourcePath)
     }
     
@@ -92,12 +88,12 @@ public class FileScanner {
                filePath.extension == "swift" {
                 
                 let parser = SwiftParser(logger: self.logger, factory: self.factory)
-                parser.parse(filename: fileName,
-                             in: fileInputData.folderPath,
+                parser.parse(file: filePath,
                              threshold: self.defaultThreshold) {
                                 (filename, cohesion, definitions, validFile) in
                     switch validFile {
                     case false:
+                        self.logger.logDebug("Oops! ", item: "Invalid file")
                         break
                     case true:
                         let cohesion = cohesion ?? Double(0)
@@ -127,8 +123,8 @@ public class FileScanner {
                                report: report) { [weak self] (finalReport, color) in
                      
             self?.logger.logError(
-                "Analyzed \(finalReport.result.count) files with \(finalReport.cohesion)% overall cohesion. ",
-                item: "Threshold is \(configuration.minimum_threshold)%%",
+                "Analyzed \(finalReport.result.count) files with \(finalReport.cohesion) overall cohesion. ",
+                item: "Threshold is \(configuration.minimum_threshold)%",
                 color: color)
             
             LocalFileManager.shared.reportsPath = configuration.reportsPath()
@@ -148,10 +144,11 @@ public class FileScanner {
     // MARK: - Private
     
     private func processFilePath(filename: String, sourcePath: Path) -> Path {
-        guard let filePath = try? sourcePath.safeJoin(path: Path(filename)) else {
-            return Path(filename)
+        let filePath = Path(filename)
+        guard let processedFilePath = try? sourcePath.safeJoin(path: filePath) else {
+            return filePath
         }
-        return filePath
+        return processedFilePath
     }
     
     private let factory: CSFactory
