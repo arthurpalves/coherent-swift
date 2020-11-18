@@ -81,7 +81,7 @@ class SwiftParser: SyntaxVisitor {
 
 extension SwiftParser {
     func parse(file path: Path, threshold: Double, onSuccess: StepCohesionHandler) {
-        logger.logInfo("File: ", item: path.description, color: .purple)
+        logger.logInfo("File: ", item: path.description)
         var finalDefinitions: [CSDefinition] = []
         var cohesion: Double = 0
         
@@ -114,7 +114,7 @@ extension SwiftParser {
             
             cohesion = Measurer.shared.generateCohesion(for: definitions.map { $0.value })
             if cohesion.isNaN {
-                self.logger.logInfo("Ignored: ", item: "No implementation found in this file", indentationLevel: 1, color: .purple)
+                self.logger.logInfo("Ignored: ", item: "No implementation found in this file", indentationLevel: 1)
                 onSuccess(path.description, nil, [], false)
                 return
             } else {

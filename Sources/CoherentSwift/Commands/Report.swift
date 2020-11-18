@@ -16,6 +16,9 @@ struct Report: ParsableCommand {
     @Option(name: .shortAndLong, help: "Use a different yaml configuration spec")
     var spec: String = "coherent-swift.yml"
     
+    @Option(name: .long, help: "Force threshold")
+    var threshold: Double?
+    
     @Flag(name: .shortAndLong, help: "Only scan modified files.")
     var diffs = false
     
@@ -35,7 +38,7 @@ struct Report: ParsableCommand {
             throw RuntimeError("Couldn't load configuration")
         }
         
-        let fileScanner = FileScanner(logger: logger, shouldOnlyScanChanges: diffs, defaultThreshold: configuration.threshold() ?? 100)
+        let fileScanner = FileScanner(logger: logger, shouldOnlyScanChanges: diffs, defaultThreshold: threshold ?? (configuration.threshold() ?? 100))
         try fileScanner.parse(with: configuration, parentPath: specsPath.parent())
         logger.logInfo(item: " ")
     }

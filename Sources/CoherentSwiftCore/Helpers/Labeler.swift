@@ -9,7 +9,7 @@ import Foundation
 struct Labeler {
     static func printColor(for cohesion: Double,
                            threshold: Double,
-                           fallback: ShellColor = .purple) -> ShellColor {
+                           fallback: ShellColor = .neutral) -> ShellColor {
         guard cohesion < threshold else { return fallback }
         return .red
     }

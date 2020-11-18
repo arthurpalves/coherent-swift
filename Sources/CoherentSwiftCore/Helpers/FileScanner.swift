@@ -44,7 +44,7 @@ public class FileScanner {
              * Scan only files whose contents have been modified
              * from the origin
              */
-            logger.logInfo("Only scanning modified files", item: "")
+            logger.logInfo("*  ", item: "Only scanning modified files")
             do {
                 if let result = try Bash("git", arguments: "diff", "--name-only", "--",
                                          "\(sourcePath.absolute().description)", "HEAD", "origin").capture() {
@@ -74,7 +74,11 @@ public class FileScanner {
                sourcePath: Path,
                threshold: Double) {
         
-        logger.logSection("Running Analysis", item: "")
+        logger.logInfo("*  ", item:
+                        """
+                        Running Analysis
+
+                        """)
         var accumulativeCohesion: Double = 0.0
         var fileAmount: Int = 0
         var report: CSReport = CSReport()
@@ -110,9 +114,7 @@ public class FileScanner {
                     }
                 }
             } else if !filePath.isDirectory {
-                self.logger.logDebug("⚠️  Ignoring: ",
-                                     item: "\(filePath) - Not a .swift file",
-                                     color: .purple)
+                self.logger.logDebug("⚠️  Ignoring: ", item: "\(filePath) - Not a .swift file")
             }
         }
         
@@ -123,7 +125,7 @@ public class FileScanner {
                      
             self?.logger.logError(
                 "Analyzed \(finalReport.result.count) files with \(finalReport.cohesion) overall cohesion. ",
-                item: "Threshold is \(configuration.minimum_threshold)%",
+                item: "Threshold is \(self?.defaultThreshold ?? configuration.minimum_threshold.double)%",
                 color: color)
             
             LocalFileManager.shared.reportsPath = configuration.reportsPath()
