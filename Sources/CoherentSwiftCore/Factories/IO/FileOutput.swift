@@ -1,7 +1,5 @@
 //
-//  coherent-swift
-//
-//  Created by Arthur Alves on 22/05/2020.
+//  CoherentSwift
 //
 
 import Foundation
@@ -27,7 +25,7 @@ public class FileOutput {
         }
         
         do {
-            try Task.run(bash: "touch \(file.absolute().description)")
+            try createFile(file)
             
             let encoded = try encoder.encode(encodableObject)
             guard let encodedJSONString = String(data: encoded, encoding: .utf8) else { return (false, nil) }
@@ -43,8 +41,8 @@ public class FileOutput {
     private func writePlain<T>(_ encodableObject: T, toFile file: Path) -> (Bool, Path?) where T : Encodable {
         guard let report = encodableObject as? CSReport else { return (false, nil) }
         do {
-            try Task.run(bash: "rm -rf \(file.absolute().description)")
-            try Task.run(bash: "touch \(file.absolute().description)")
+            
+            try createFile(file)
             
             let logger = Logger.shared
             try report.result.forEach { (cohesionReport) in
@@ -89,5 +87,12 @@ public class FileOutput {
         } catch {
             return (false, nil)
         }
+    }
+    
+    private func createFile(_ path: Path) throws {
+        if path.exists && path.isFile {
+            try path.delete()
+        }
+        try path.write("")
     }
 }
