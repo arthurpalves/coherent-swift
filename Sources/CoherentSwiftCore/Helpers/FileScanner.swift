@@ -7,6 +7,10 @@ import PathKit
 import SwiftCLI
 import SwiftSyntax
 
+typealias FinalCohesion = (overall: Double, accumulative: Double, fileCount: Int)
+typealias StepCohesionHandler = (String, Double?, [CSDefinition], Bool) -> Void
+typealias FileInputData = (enumaratedString: String, folderPath: Path)
+
 public class FileScanner {
     public init(
         factory: CSFactory = CSFactory(),
@@ -87,7 +91,7 @@ public class FileScanner {
             if filePath.exists, filePath.isFile,
                filePath.extension == "swift" {
                 
-                let parser = SwiftParser()
+                let parser = SwiftParser(logger: self.logger, factory: self.factory)
                 parser.parse(filename: fileName,
                              in: fileInputData.folderPath,
                              threshold: self.defaultThreshold) {

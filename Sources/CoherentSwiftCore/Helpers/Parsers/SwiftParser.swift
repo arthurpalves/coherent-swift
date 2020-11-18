@@ -1,7 +1,5 @@
 //
-//  coherent-swift
-//
-//  Created by Arthur Alves on 25/05/2020.
+//  CoherentSwift
 //
 
 import Foundation
@@ -15,8 +13,13 @@ class SwiftParser: SyntaxVisitor {
     var mainDefinitions: ParsingDefition = [:]
     var currentDefintion: CSDefinition?
     
-    let logger = Logger.shared
-    let factory = CSFactory()
+    init(
+        logger: Logger = .shared,
+        factory: CSFactory = CSFactory()
+    ) {
+        self.logger = logger
+        self.factory = factory
+    }
     
     override func visit(_ node: ClassDeclSyntax) -> SyntaxVisitorContinueKind {
         let definition = CSDefinition(name: node.identifier.text, type: .Class)
@@ -71,6 +74,9 @@ class SwiftParser: SyntaxVisitor {
         }
         return .visitChildren
     }
+    
+    let logger: Logger
+    let factory: CSFactory
 }
 
 extension SwiftParser {
