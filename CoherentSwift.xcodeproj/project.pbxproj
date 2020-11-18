@@ -49,6 +49,7 @@
 		8EE241DD25641C4D00F66F61 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241DC25641C4D00F66F61 /* SpecHelper.swift */; };
 		8EE241EB2565212500F66F61 /* UserInputHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241EA2565212500F66F61 /* UserInputHelper.swift */; };
 		8EE241F72565361000F66F61 /* FileScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241F62565361000F66F61 /* FileScanner.swift */; };
+		8EE2420225653D3000F66F61 /* PathKit+SafeJoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2420125653D3000F66F61 /* PathKit+SafeJoin.swift */; };
 		OBJ_339 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Report.swift */; };
 		OBJ_366 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* main.swift */; };
 		OBJ_396 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* XCTestManifests.swift */; };
@@ -106,6 +107,7 @@
 		8EE241DC25641C4D00F66F61 /* SpecHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
 		8EE241EA2565212500F66F61 /* UserInputHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputHelper.swift; sourceTree = "<group>"; };
 		8EE241F62565361000F66F61 /* FileScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileScanner.swift; sourceTree = "<group>"; };
+		8EE2420125653D3000F66F61 /* PathKit+SafeJoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PathKit+SafeJoin.swift"; sourceTree = "<group>"; };
 		OBJ_11 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		OBJ_13 /* Collection+Mutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Mutable.swift"; sourceTree = "<group>"; };
 		OBJ_14 /* Date+Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Log.swift"; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				OBJ_15 /* Double+String.swift */,
 				OBJ_16 /* String+Double.swift */,
 				OBJ_17 /* String+File.swift */,
+				8EE2420125653D3000F66F61 /* PathKit+SafeJoin.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				8EE241282563C77700F66F61 /* YamlParser.swift in Sources */,
 				8EE241EB2565212500F66F61 /* UserInputHelper.swift in Sources */,
 				8EE241DD25641C4D00F66F61 /* SpecHelper.swift in Sources */,
+				8EE2420225653D3000F66F61 /* PathKit+SafeJoin.swift in Sources */,
 				8EE241482563C8D600F66F61 /* Configuration.swift in Sources */,
 				8EE241CF25641B5800F66F61 /* TemplateDirectory.swift in Sources */,
 				8EE241262563C77700F66F61 /* String+File.swift in Sources */,
