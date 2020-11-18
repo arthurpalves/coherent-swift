@@ -2,7 +2,6 @@
 //  CoherentSwift
 //
 
-import SwiftCLI
 import Foundation
 
 public enum ShellColor: String {
@@ -58,7 +57,8 @@ extension VerboseLogger {
         ])
         
         arguments.forEach { command.append($0) }
-        try? Task.run("printf", command+"\n")
+        var outputStream = StandardErrorOutputStream()
+        Swift.print(command, to: &outputStream)
     }
     
     public func logBack(_ prefix: Any = "", item: Any, indentationLevel: Int = 0) -> String {
@@ -72,6 +72,18 @@ extension VerboseLogger {
         ]
         arguments.forEach { command.append($0) }
         return command
+    }
+}
+
+
+private struct StandardErrorOutputStream: TextOutputStream {
+    let stderr = FileHandle.standardError
+
+    func write(_ string: String) {
+        guard let data = string.data(using: .utf8) else {
+            return
+        }
+        stderr.write(data)
     }
 }
 
