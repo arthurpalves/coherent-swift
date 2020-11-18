@@ -44,7 +44,7 @@ public class Measurer {
     func generateCohesion(for definition: CSDefinition) -> Double {
         let methodsCount = definition.methods.count
         let accumulatedCohesion = definition.methods
-            .compactMap { Double(input: $0.cohesion) }
+            .compactMap { Double($0.cohesion) }
             .reduce(0) { $0 + $1 }
         
         let accumulatedMethodsCohesion = accumulatedCohesion / Double(methodsCount)
@@ -75,7 +75,9 @@ public class Measurer {
     func generateCohesion(for definitions: [CSDefinition]) -> Double {
         let definitionsCount = definitions.count
         let accumulatedCohesion = definitions
-            .compactMap { Double(input: $0.cohesion) }
+            .compactMap {
+                Double($0.cohesion)
+            }
             .reduce(0) { $0 + $1 }
         return accumulatedCohesion / Double(definitionsCount)
     }

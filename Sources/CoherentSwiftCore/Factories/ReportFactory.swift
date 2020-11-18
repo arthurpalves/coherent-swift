@@ -3,7 +3,6 @@
 //
 
 import Foundation
-import SwiftCLI
 import PathKit
 
 public protocol ReportFactory {

@@ -12,10 +12,6 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/jakeheis/SwiftCLI",
-            from: "6.0.2"
-        ),
-        .package(
             url: "https://github.com/apple/swift-argument-parser.git",
             from: "0.3.0"
         ),
@@ -37,7 +33,6 @@ let package = Package(
         .target(
             name: "CoherentSwiftCore",
             dependencies: [
-                "SwiftCLI",
                 "PathKit",
                 "Yams",
                 "SwiftSyntax"

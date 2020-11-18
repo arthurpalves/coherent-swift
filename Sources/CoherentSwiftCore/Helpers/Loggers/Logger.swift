@@ -3,7 +3,6 @@
 //
 
 import Foundation
-import SwiftCLI
 
 public class Logger: VerboseLogger {
     public static let shared = Logger()
@@ -44,7 +43,6 @@ public class Logger: VerboseLogger {
     
     private func divider(logLevel: LogLevel) {
         log(item: " ", logLevel: logLevel)
-//        log(item: "--------------------------------------------------------------------------------------", logLevel: logLevel)
     }
     
     private let isVerbose: Bool

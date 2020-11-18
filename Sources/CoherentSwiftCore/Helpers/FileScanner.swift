@@ -4,7 +4,6 @@
 
 import Foundation
 import PathKit
-import SwiftCLI
 import SwiftSyntax
 
 typealias FinalCohesion = (overall: Double, accumulative: Double, fileCount: Int)
