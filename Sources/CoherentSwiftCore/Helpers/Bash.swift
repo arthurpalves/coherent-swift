@@ -4,38 +4,42 @@
 
 import Foundation
 
-struct Bash {
-    var command: String
-    var arguments: [String]
-    
-    init(_ command: String, arguments: String...) {
-        self.command = command
-        self.arguments = arguments
+public struct Bash {
+    public struct Command {
+        let command: String
+        let arguments: [String]
+        
+        public init(command: String, arguments: [String]) {
+            self.command = command
+            self.arguments = arguments
+        }
     }
     
-    func run() throws {
-        _ = try capture()
-    }
-    
-    func capture() throws -> String? {
-        guard var bashCommand = try execute(command: "/bin/bash", arguments: ["-l", "-c", "which \(command)"]) else {
+    func pipe(_ command: String, arguments: [String], inputPipe: Pipe? = nil) throws -> Pipe {
+        guard var bashCommand = try execute(command: "/bin/bash",
+                                            arguments: ["-l", "-c", "which \(command)"])
+        else {
             throw RuntimeError("\(command) not found")
         }
-        bashCommand = bashCommand.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-        if let output = try execute(command: bashCommand, arguments: arguments) {
-            // `dropLast()` is required as the output always contains a new line (`\n`) at the end.
-            return String(output.dropLast())
-        }
-        return nil
+        bashCommand = bashCommand.trimmingCharacters(in: .whitespacesAndNewlines)
+        return try getPipe(for: bashCommand, arguments: arguments, inputPipe: inputPipe)
     }
     
     // MARK: - Private
     
     private func execute(command: String, arguments: [String] = []) throws -> String? {
+        let pipe = try getPipe(for: command, arguments: arguments)
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = String(data: data, encoding: .utf8)
+        return output
+    }
+    
+    private func getPipe(for command: String, arguments: [String] = [], inputPipe: Pipe? = nil) throws -> Pipe {
         let process = Process()
-        let pipe = Pipe()
+        let outputPipe = Pipe()
         process.arguments = arguments
-        process.standardOutput = pipe
+        process.standardInput = inputPipe
+        process.standardOutput = outputPipe
         
         if #available(OSX 10.13, *) {
             process.executableURL = URL(fileURLWithPath: command)
@@ -44,9 +48,36 @@ struct Bash {
             process.launchPath = command
             process.launch()
         }
-        
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        let output = String(data: data, encoding: .utf8)
-        return output
+        return outputPipe
+    }
+}
+
+public extension Bash.Command {
+    @discardableResult
+    func pipe(_ bashCommand: Bash.Command) throws -> Pipe {
+        return try Bash()
+            .pipe(self.command, arguments: self.arguments)
+            .pipe(bashCommand)
+    }
+
+    @discardableResult
+    func run() throws -> String? {
+        return try Bash().pipe(self.command,
+                               arguments: self.arguments).run()
+    }
+}
+
+public extension Pipe {
+    @discardableResult
+    func pipe(_ bashCommand: Bash.Command) throws -> Pipe {
+        return try Bash().pipe(bashCommand.command,
+                               arguments: bashCommand.arguments,
+                               inputPipe: self)
+    }
+    
+    @discardableResult
+    func run() throws -> String? {
+        let data = self.fileHandleForReading.readDataToEndOfFile()
+        return String(data: data, encoding: .utf8)
     }
 }
