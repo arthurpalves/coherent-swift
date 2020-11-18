@@ -6,6 +6,10 @@ import PathKit
 
 extension Path {
   func safeJoin(path: Path) throws -> Path {
+    guard !path.normalize().description
+            .hasPrefix(self.normalize().description) else {
+        return path
+    }
     let newPath = self + path
 
     if !newPath.absolute().description.hasPrefix(absolute().description) {
