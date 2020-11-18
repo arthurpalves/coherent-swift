@@ -80,13 +80,12 @@ class SwiftParser: SyntaxVisitor {
 }
 
 extension SwiftParser {
-    func parse(filename: String, in path: Path, threshold: Double, onSuccess: StepCohesionHandler) {
-        logger.logInfo("File: ", item: filename, color: .purple)
+    func parse(file path: Path, threshold: Double, onSuccess: StepCohesionHandler) {
+        logger.logInfo("File: ", item: path.description, color: .purple)
         var finalDefinitions: [CSDefinition] = []
         var cohesion: Double = 0
         
-        let filePath = Path("\(path.absolute())/\(filename)")
-        let url = filePath.absolute().url
+        let url = path.absolute().url
         do {
             let sourceFile = try SyntaxParser.parse(url)
             walk(sourceFile)
@@ -108,26 +107,27 @@ extension SwiftParser {
                             indentationLevel: 3, color: .cyan)
                     }
                     
-                    self.logger.logDebug("Cohesion: ", item: method.cohesion+"%%", indentationLevel: 3, color: .cyan)
+                    self.logger.logDebug("Cohesion: ", item: method.cohesion+"%", indentationLevel: 3, color: .cyan)
                 }
-                self.logger.logDebug("Cohesion: ", item: value.cohesion+"%%", indentationLevel: 2, color: .cyan)
+                self.logger.logDebug("Cohesion: ", item: value.cohesion+"%", indentationLevel: 2, color: .cyan)
             }
             
             cohesion = Measurer.shared.generateCohesion(for: definitions.map { $0.value })
             if cohesion.isNaN {
                 self.logger.logInfo("Ignored: ", item: "No implementation found in this file", indentationLevel: 1, color: .purple)
-                onSuccess(filename, nil, [], false)
+                onSuccess(path.description, nil, [], false)
                 return
             } else {
                 let color = Labeler.printColor(for: cohesion, threshold: threshold)
                 let cohesionString = cohesion.formattedCohesion()
                 
-                self.logger.logInfo("Cohesion: ", item: cohesionString+"%%", indentationLevel: 1, color: color)
+                self.logger.logInfo("Cohesion: ", item: cohesionString+"%", indentationLevel: 1, color: color)
             }
-            onSuccess(filename, cohesion, finalDefinitions, true)
+            onSuccess(path.description, cohesion, finalDefinitions, true)
             
         } catch {
-            onSuccess(filename, nil, finalDefinitions, false)
+            self.logger.logError(item: error.localizedDescription)
+            onSuccess(path.description, nil, finalDefinitions, false)
             return
         }
     }
