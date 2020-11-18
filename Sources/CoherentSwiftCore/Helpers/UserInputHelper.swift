@@ -61,7 +61,7 @@ public class UserInputHelper {
             return 1...2 ~= number
         }
         
-        var format: ReportFormat = .json
+        var format: Configuration.ReportFormat = .json
         switch reportsFormat {
         case "2":
             format = .plain
