@@ -1,15 +1,19 @@
+//
+//  CoherenSwift
+//
 
-import SwiftCLI
+import ArgumentParser
 
-let cli = CLI(
-    name: "coherent-swift",
-    version: "0.5.2",
-    description: "A command-line tool to analyze and report Swift code cohesion"
-)
+struct CoherentSwift: ParsableCommand {
+    static var configuration = CommandConfiguration(
+        commandName: "coherent-swift",
+        abstract: "A command-line tool to analyze and report Swift code cohesion",
+        version: "0.5.9",
+        subcommands: [
+            Initializer.self,
+            Report.self
+        ]
+    )
+}
 
-cli.commands = [
-    Initializer(),
-    Report()
-]
-
-_ = cli.go()
+CoherentSwift.main()

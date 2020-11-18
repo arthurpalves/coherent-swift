@@ -1,7 +1,5 @@
 //
-//  coherent-swift
-//
-//  Created by Arthur Alves on 25/05/2020.
+//  CoherentSwift
 //
 
 import Foundation
@@ -15,8 +13,13 @@ class SwiftParser: SyntaxVisitor {
     var mainDefinitions: ParsingDefition = [:]
     var currentDefintion: CSDefinition?
     
-    let logger = Logger.shared
-    let factory = CSFactory()
+    init(
+        logger: Logger = .shared,
+        factory: CSFactory = CSFactory()
+    ) {
+        self.logger = logger
+        self.factory = factory
+    }
     
     override func visit(_ node: ClassDeclSyntax) -> SyntaxVisitorContinueKind {
         let definition = CSDefinition(name: node.identifier.text, type: .Class)
@@ -71,16 +74,18 @@ class SwiftParser: SyntaxVisitor {
         }
         return .visitChildren
     }
+    
+    let logger: Logger
+    let factory: CSFactory
 }
 
 extension SwiftParser {
-    func parse(filename: String, in path: Path, threshold: Double, onSuccess: StepCohesionHandler) {
-        logger.logInfo("File: ", item: filename, color: .purple)
+    func parse(file path: Path, threshold: Double, onSuccess: StepCohesionHandler) {
+        logger.logInfo("File: ", item: path.description)
         var finalDefinitions: [CSDefinition] = []
         var cohesion: Double = 0
         
-        let filePath = Path("\(path.absolute())/\(filename)")
-        let url = filePath.absolute().url
+        let url = path.absolute().url
         do {
             let sourceFile = try SyntaxParser.parse(url)
             walk(sourceFile)
@@ -102,26 +107,27 @@ extension SwiftParser {
                             indentationLevel: 3, color: .cyan)
                     }
                     
-                    self.logger.logDebug("Cohesion: ", item: method.cohesion+"%%", indentationLevel: 3, color: .cyan)
+                    self.logger.logDebug("Cohesion: ", item: method.cohesion+"%", indentationLevel: 3, color: .cyan)
                 }
-                self.logger.logDebug("Cohesion: ", item: value.cohesion+"%%", indentationLevel: 2, color: .cyan)
+                self.logger.logDebug("Cohesion: ", item: value.cohesion+"%", indentationLevel: 2, color: .cyan)
             }
             
             cohesion = Measurer.shared.generateCohesion(for: definitions.map { $0.value })
             if cohesion.isNaN {
-                self.logger.logInfo("Ignored: ", item: "No implementation found in this file", indentationLevel: 1, color: .purple)
-                onSuccess(filename, nil, [], false)
+                self.logger.logInfo("Ignored: ", item: "No implementation found in this file", indentationLevel: 1)
+                onSuccess(path.description, nil, [], false)
                 return
             } else {
                 let color = Labeler.printColor(for: cohesion, threshold: threshold)
                 let cohesionString = cohesion.formattedCohesion()
                 
-                self.logger.logInfo("Cohesion: ", item: cohesionString+"%%", indentationLevel: 1, color: color)
+                self.logger.logInfo("Cohesion: ", item: cohesionString+"%", indentationLevel: 1, color: color)
             }
-            onSuccess(filename, cohesion, finalDefinitions, true)
+            onSuccess(path.description, cohesion, finalDefinitions, true)
             
         } catch {
-            onSuccess(filename, nil, finalDefinitions, false)
+            self.logger.logError(item: error.localizedDescription)
+            onSuccess(path.description, nil, finalDefinitions, false)
             return
         }
     }

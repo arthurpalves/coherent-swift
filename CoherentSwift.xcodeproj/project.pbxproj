@@ -15,12 +15,11 @@
 		8EE2411B2563C77700F66F61 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* Logger.swift */; };
 		8EE2411C2563C77700F66F61 /* Double+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Double+String.swift */; };
 		8EE2411D2563C77700F66F61 /* String+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* String+Double.swift */; };
-		8EE2411E2563C77700F66F61 /* ReportGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ReportGenerator.swift */; };
+		8EE2411E2563C77700F66F61 /* ReportFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ReportFactory.swift */; };
 		8EE2411F2563C77700F66F61 /* FileOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* FileOutput.swift */; };
 		8EE241202563C77700F66F61 /* Cleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Cleaner.swift */; };
 		8EE241212563C77700F66F61 /* Measurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Measurer.swift */; };
 		8EE241222563C77700F66F61 /* VerboseLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* VerboseLogger.swift */; };
-		8EE241232563C77700F66F61 /* IOOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* IOOperations.swift */; };
 		8EE241242563C77700F66F61 /* Date+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Date+Log.swift */; };
 		8EE241252563C77700F66F61 /* Collection+Mutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Collection+Mutable.swift */; };
 		8EE241262563C77700F66F61 /* String+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* String+File.swift */; };
@@ -38,12 +37,19 @@
 		8EE241512563C8DD00F66F61 /* CSDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* CSDefinition.swift */; };
 		8EE241552563C8E000F66F61 /* CSMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* CSMethodType.swift */; };
 		8EE241562563C8E000F66F61 /* CSPropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* CSPropertyType.swift */; };
-		8EE2419C2563D38000F66F61 /* SwiftCLI in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE2419B2563D38000F66F61 /* SwiftCLI */; };
 		8EE2419E2563D38000F66F61 /* PathKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE2419D2563D38000F66F61 /* PathKit */; };
 		8EE241A02563D38000F66F61 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE2419F2563D38000F66F61 /* Yams */; };
 		8EE241A22563D38000F66F61 /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE241A12563D38000F66F61 /* SwiftSyntax */; };
 		8EE241A42563D38000F66F61 /* SwiftSyntaxBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE241A32563D38000F66F61 /* SwiftSyntaxBuilder */; };
-		OBJ_338 /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Initializer.swift */; };
+		8EE241C5256411D500F66F61 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE241C4256411D500F66F61 /* ArgumentParser */; };
+		8EE241CA2564120400F66F61 /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241C92564120400F66F61 /* Initializer.swift */; };
+		8EE241CF25641B5800F66F61 /* TemplateDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241CE25641B5800F66F61 /* TemplateDirectory.swift */; };
+		8EE241D825641BEA00F66F61 /* RuntimeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241D725641BEA00F66F61 /* RuntimeError.swift */; };
+		8EE241DD25641C4D00F66F61 /* SpecHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241DC25641C4D00F66F61 /* SpecHelper.swift */; };
+		8EE241EB2565212500F66F61 /* UserInputHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241EA2565212500F66F61 /* UserInputHelper.swift */; };
+		8EE241F72565361000F66F61 /* FileScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241F62565361000F66F61 /* FileScanner.swift */; };
+		8EE2420225653D3000F66F61 /* PathKit+SafeJoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2420125653D3000F66F61 /* PathKit+SafeJoin.swift */; };
+		8EE242072565405100F66F61 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE242062565405100F66F61 /* Bash.swift */; };
 		OBJ_339 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Report.swift */; };
 		OBJ_366 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* main.swift */; };
 		OBJ_396 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* XCTestManifests.swift */; };
@@ -95,7 +101,14 @@
 		8EE2408A2563C4BA00F66F61 /* CoherentSwiftCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoherentSwiftCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE2408F2563C4BB00F66F61 /* CoherentSwiftCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoherentSwiftCoreTests.swift; sourceTree = "<group>"; };
 		8EE240912563C4BB00F66F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		OBJ_10 /* Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
+		8EE241C92564120400F66F61 /* Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
+		8EE241CE25641B5800F66F61 /* TemplateDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateDirectory.swift; sourceTree = "<group>"; };
+		8EE241D725641BEA00F66F61 /* RuntimeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeError.swift; sourceTree = "<group>"; };
+		8EE241DC25641C4D00F66F61 /* SpecHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecHelper.swift; sourceTree = "<group>"; };
+		8EE241EA2565212500F66F61 /* UserInputHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputHelper.swift; sourceTree = "<group>"; };
+		8EE241F62565361000F66F61 /* FileScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileScanner.swift; sourceTree = "<group>"; };
+		8EE2420125653D3000F66F61 /* PathKit+SafeJoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PathKit+SafeJoin.swift"; sourceTree = "<group>"; };
+		8EE242062565405100F66F61 /* Bash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bash.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		OBJ_13 /* Collection+Mutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Mutable.swift"; sourceTree = "<group>"; };
 		OBJ_14 /* Date+Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Log.swift"; sourceTree = "<group>"; };
@@ -117,9 +130,8 @@
 		OBJ_19 /* CSFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSFactory.swift; sourceTree = "<group>"; };
 		OBJ_20 /* Cleaner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cleaner.swift; sourceTree = "<group>"; };
 		OBJ_22 /* FileOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileOutput.swift; sourceTree = "<group>"; };
-		OBJ_23 /* IOOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOOperations.swift; sourceTree = "<group>"; };
 		OBJ_24 /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
-		OBJ_25 /* ReportGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportGenerator.swift; sourceTree = "<group>"; };
+		OBJ_25 /* ReportFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFactory.swift; sourceTree = "<group>"; };
 		OBJ_26 /* Labeler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labeler.swift; sourceTree = "<group>"; };
 		OBJ_28 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		OBJ_29 /* VerboseLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerboseLogger.swift; sourceTree = "<group>"; };
@@ -151,7 +163,6 @@
 				8EE2419E2563D38000F66F61 /* PathKit in Frameworks */,
 				8EE241A42563D38000F66F61 /* SwiftSyntaxBuilder in Frameworks */,
 				8EE241A02563D38000F66F61 /* Yams in Frameworks */,
-				8EE2419C2563D38000F66F61 /* SwiftCLI in Frameworks */,
 				8EE241A22563D38000F66F61 /* SwiftSyntax in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
+				8EE241C5256411D500F66F61 /* ArgumentParser in Frameworks */,
 				8EE241372563C7D100F66F61 /* CoherentSwiftCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_12 /* Extensions */,
+				8EE241EF25652DF700F66F61 /* Factories */,
 				OBJ_18 /* Helpers */,
 				OBJ_35 /* Schema */,
 				8EE240842563C4BA00F66F61 /* CoherentSwiftCore.h */,
@@ -212,6 +225,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8EE241D625641BDE00F66F61 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				8EE241D725641BEA00F66F61 /* RuntimeError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		8EE241EF25652DF700F66F61 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_21 /* IO */,
+				OBJ_19 /* CSFactory.swift */,
+				OBJ_25 /* ReportFactory.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
 		OBJ_12 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +251,7 @@
 				OBJ_15 /* Double+String.swift */,
 				OBJ_16 /* String+Double.swift */,
 				OBJ_17 /* String+File.swift */,
+				8EE2420125653D3000F66F61 /* PathKit+SafeJoin.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -238,13 +270,16 @@
 		OBJ_18 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_19 /* CSFactory.swift */,
-				OBJ_20 /* Cleaner.swift */,
-				OBJ_21 /* IO */,
-				OBJ_26 /* Labeler.swift */,
 				OBJ_27 /* Loggers */,
 				OBJ_30 /* Measurer */,
 				OBJ_32 /* Parsers */,
+				8EE241F62565361000F66F61 /* FileScanner.swift */,
+				8EE241CE25641B5800F66F61 /* TemplateDirectory.swift */,
+				8EE241DC25641C4D00F66F61 /* SpecHelper.swift */,
+				8EE241EA2565212500F66F61 /* UserInputHelper.swift */,
+				OBJ_20 /* Cleaner.swift */,
+				OBJ_26 /* Labeler.swift */,
+				8EE242062565405100F66F61 /* Bash.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -253,9 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_22 /* FileOutput.swift */,
-				OBJ_23 /* IOOperations.swift */,
 				OBJ_24 /* LocalFileManager.swift */,
-				OBJ_25 /* ReportGenerator.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -289,6 +322,7 @@
 		OBJ_35 /* Schema */ = {
 			isa = PBXGroup;
 			children = (
+				8EE241D625641BDE00F66F61 /* Errors */,
 				OBJ_36 /* CSBadge.swift */,
 				OBJ_37 /* Configuration.swift */,
 				OBJ_38 /* Report */,
@@ -382,8 +416,8 @@
 		OBJ_9 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_10 /* Initializer.swift */,
 				OBJ_11 /* Report.swift */,
+				8EE241C92564120400F66F61 /* Initializer.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -417,7 +451,6 @@
 			);
 			name = CoherentSwiftCore;
 			packageProductDependencies = (
-				8EE2419B2563D38000F66F61 /* SwiftCLI */,
 				8EE2419D2563D38000F66F61 /* PathKit */,
 				8EE2419F2563D38000F66F61 /* Yams */,
 				8EE241A12563D38000F66F61 /* SwiftSyntax */,
@@ -459,6 +492,9 @@
 				8EE2413A2563C7D100F66F61 /* PBXTargetDependency */,
 			);
 			name = CoherenSwift;
+			packageProductDependencies = (
+				8EE241C4256411D500F66F61 /* ArgumentParser */,
+			);
 			productName = coherent_swift;
 			productReference = "coherent-swift::coherent-swift::Product" /* CoherentSwift */;
 			productType = "com.apple.product-type.tool";
@@ -507,10 +543,10 @@
 			);
 			mainGroup = OBJ_5;
 			packageReferences = (
-				8EE240B72563C4F400F66F61 /* XCRemoteSwiftPackageReference "SwiftCLI" */,
 				8EE240C82563C51700F66F61 /* XCRemoteSwiftPackageReference "PathKit" */,
 				8EE240D92563C53500F66F61 /* XCRemoteSwiftPackageReference "Yams" */,
 				8EE240EA2563C56300F66F61 /* XCRemoteSwiftPackageReference "swift-syntax" */,
+				8EE241C3256411D500F66F61 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 			);
 			productRefGroup = OBJ_163 /* Products */;
 			projectDirPath = "";
@@ -549,6 +585,7 @@
 				8EE2411F2563C77700F66F61 /* FileOutput.swift in Sources */,
 				8EE241552563C8E000F66F61 /* CSMethodType.swift in Sources */,
 				8EE241562563C8E000F66F61 /* CSPropertyType.swift in Sources */,
+				8EE242072565405100F66F61 /* Bash.swift in Sources */,
 				8EE241192563C77700F66F61 /* LocalFileManager.swift in Sources */,
 				8EE241272563C77700F66F61 /* CSFactory.swift in Sources */,
 				8EE241212563C77700F66F61 /* Measurer.swift in Sources */,
@@ -558,17 +595,22 @@
 				8EE2411D2563C77700F66F61 /* String+Double.swift in Sources */,
 				8EE2411B2563C77700F66F61 /* Logger.swift in Sources */,
 				8EE2414D2563C8DD00F66F61 /* CSMethod.swift in Sources */,
-				8EE241232563C77700F66F61 /* IOOperations.swift in Sources */,
 				8EE241242563C77700F66F61 /* Date+Log.swift in Sources */,
 				8EE2414F2563C8DD00F66F61 /* CSReport.swift in Sources */,
 				8EE241252563C77700F66F61 /* Collection+Mutable.swift in Sources */,
 				8EE241282563C77700F66F61 /* YamlParser.swift in Sources */,
+				8EE241EB2565212500F66F61 /* UserInputHelper.swift in Sources */,
+				8EE241DD25641C4D00F66F61 /* SpecHelper.swift in Sources */,
+				8EE2420225653D3000F66F61 /* PathKit+SafeJoin.swift in Sources */,
 				8EE241482563C8D600F66F61 /* Configuration.swift in Sources */,
+				8EE241CF25641B5800F66F61 /* TemplateDirectory.swift in Sources */,
 				8EE241262563C77700F66F61 /* String+File.swift in Sources */,
 				8EE2411A2563C77700F66F61 /* Labeler.swift in Sources */,
 				8EE241502563C8DD00F66F61 /* CSFileReport.swift in Sources */,
 				8EE2411C2563C77700F66F61 /* Double+String.swift in Sources */,
-				8EE2411E2563C77700F66F61 /* ReportGenerator.swift in Sources */,
+				8EE241F72565361000F66F61 /* FileScanner.swift in Sources */,
+				8EE241D825641BEA00F66F61 /* RuntimeError.swift in Sources */,
+				8EE2411E2563C77700F66F61 /* ReportFactory.swift in Sources */,
 				8EE2414E2563C8DD00F66F61 /* CSProperty.swift in Sources */,
 				8EE241292563C77700F66F61 /* SwiftParser.swift in Sources */,
 				8EE241492563C8D600F66F61 /* CSBadge.swift in Sources */,
@@ -587,9 +629,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_338 /* Initializer.swift in Sources */,
 				OBJ_339 /* Report.swift in Sources */,
 				OBJ_366 /* main.swift in Sources */,
+				8EE241CA2564120400F66F61 /* Initializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1124,14 +1166,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8EE240B72563C4F400F66F61 /* XCRemoteSwiftPackageReference "SwiftCLI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/jakeheis/SwiftCLI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.2;
-			};
-		};
 		8EE240C82563C51700F66F61 /* XCRemoteSwiftPackageReference "PathKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kylef/PathKit.git";
@@ -1156,14 +1190,17 @@
 				minimumVersion = 0.50300.0;
 			};
 		};
+		8EE241C3256411D500F66F61 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8EE2419B2563D38000F66F61 /* SwiftCLI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8EE240B72563C4F400F66F61 /* XCRemoteSwiftPackageReference "SwiftCLI" */;
-			productName = SwiftCLI;
-		};
 		8EE2419D2563D38000F66F61 /* PathKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8EE240C82563C51700F66F61 /* XCRemoteSwiftPackageReference "PathKit" */;
@@ -1183,6 +1220,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8EE240EA2563C56300F66F61 /* XCRemoteSwiftPackageReference "swift-syntax" */;
 			productName = SwiftSyntaxBuilder;
+		};
+		8EE241C4256411D500F66F61 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EE241C3256411D500F66F61 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

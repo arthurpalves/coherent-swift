@@ -1,34 +1,26 @@
 //
-//  coherent-swift
-//
-//  Created by Arthur Alves on 06/05/2020.
+//  CoherentSwift
 //
 
 import Foundation
-import SwiftCLI
 import PathKit
 
-public enum ReportFormat: String {
-    case json = "json"
-    case plain = "plain"
-}
-
-public protocol ReportGenerator {
+public protocol ReportFactory {
     var fileOutput: FileOutput { get }
-    var reports_file: String { get }
-    var badge_file: String { get set }
-    var reports_path: String { get set }
+    var reportsFileName: String { get }
+    var badgeFilePath: Path { get set }
+    var reportsPath: Path { get set }
     
     func addToReport(file: String, cohesion: String, meetsThreshold: Bool, definitions: [CSDefinition], to report: CSReport) -> CSReport
-    func generateReport(_ report: CSReport, format: ReportFormat) -> (Bool, Path?)
+    func generateReport(_ report: CSReport, format: Configuration.ReportFormat) -> (Bool, Path?)
     func generateBadge(_ report: CSReport) -> (Bool, Path?)
 }
 
-extension ReportGenerator {
+extension ReportFactory {
     public var fileOutput: FileOutput { FileOutput() }
-    public var reports_file: String { "coherent-swift" }
-    var badge_file: String { "coherent-badge.json" }
-    var reports_path: String { "/tmp/coherent-swift/" }
+    public var reportsFileName: String { "coherent-swift" }
+    var badgeFilePath: Path { Path("coherent-badge.json") }
+    var reportsPath: Path { Path("/tmp/coherent-swift/") }
     
     public func addToReport(file: String, cohesion: String, meetsThreshold: Bool, definitions: [CSDefinition], to report: CSReport) -> CSReport {
         let fileReport = CSFileReport(filename: file, cohesion: cohesion, meets_threshold: meetsThreshold, definitions: definitions)
@@ -37,15 +29,18 @@ extension ReportGenerator {
         return overallReportCopy
     }
     
-    public func generateReport(_ report: CSReport, format: ReportFormat = .json) -> (Bool, Path?) {
-        let path = Path("\(reports_path)/\(reports_file).\(format.rawValue)")
-        
-        var overallReportCopy = report
-        overallReportCopy.report_date = Date().logTimestamp()
-        
+    public func generateReport(_ report: CSReport, format: Configuration.ReportFormat = .json) -> (Bool, Path?) {
         do {
-            try Task.run(bash: "mkdir -p \(reports_path)")
+            if !reportsPath.isDirectory {
+                try reportsPath.mkpath()
+            }
+            
+            let path = try reportsPath.safeJoin(path: Path("\(reportsFileName).\(format.rawValue)"))
+            
+            var overallReportCopy = report
+            overallReportCopy.report_date = Date().logTimestamp()
             let _ = generateBadge(overallReportCopy)
+            
             return fileOutput.write(overallReportCopy, toFile: path, format: format)
         } catch {
             return (false, nil)
@@ -53,7 +48,7 @@ extension ReportGenerator {
     }
     
     public func generateBadge(_ report: CSReport) -> (Bool, Path?) {
-        let path = Path("\(reports_path)/\(badge_file)")
+        guard let path = try? reportsPath.safeJoin(path: badgeFilePath) else { return (false, nil) }
         let badge = CSBadge(schemaVersion: 1, label: "cohesion", message: report.cohesion, color: "blue")
         return fileOutput.write(badge, toFile: path)
     }

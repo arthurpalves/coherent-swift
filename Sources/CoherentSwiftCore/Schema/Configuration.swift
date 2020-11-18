@@ -1,7 +1,5 @@
 //
-//  coherent-swift
-//
-//  Created by Arthur Alves on 05/05/2020.
+//  CoherentSwift
 //
 
 import Foundation
@@ -12,10 +10,10 @@ public struct Configuration: Codable {
     let minimum_threshold: String
     let reports_folder: String
     let ignore_output_result: Bool
-    let report_format: String?
+    let report_format: ReportFormat?
     
     public func threshold() -> Double? {
-        return Double(input: minimum_threshold)
+        return Double(minimum_threshold)
     }
     
     func sourcePath() -> Path {
@@ -24,5 +22,10 @@ public struct Configuration: Codable {
     
     func reportsPath() -> Path {
         return Path(reports_folder)
+    }
+    
+    public enum ReportFormat: String, Codable {
+        case json
+        case plain
     }
 }

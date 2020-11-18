@@ -11,6 +11,7 @@ typealias FactoryDefinitionResponse = ((_ name: String, _ definition: inout CSDe
 typealias FactoryMethodResponse = ((inout CSMethod) -> Void)
 
 public class CSFactory {
+    public init() {}
     
     func process(definition: CSDefinition,
                  withMembers members: MemberDeclListSyntax,
