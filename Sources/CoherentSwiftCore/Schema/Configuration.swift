@@ -12,7 +12,7 @@ public struct Configuration: Codable {
     let minimum_threshold: String
     let reports_folder: String
     let ignore_output_result: Bool
-    let report_format: String?
+    let report_format: ReportFormat?
     
     public func threshold() -> Double? {
         return Double(input: minimum_threshold)
@@ -24,5 +24,10 @@ public struct Configuration: Codable {
     
     func reportsPath() -> Path {
         return Path(reports_folder)
+    }
+    
+    public enum ReportFormat: String, Codable {
+        case json
+        case plain
     }
 }

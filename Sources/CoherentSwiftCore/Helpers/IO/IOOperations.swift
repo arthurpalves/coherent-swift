@@ -131,7 +131,7 @@ public extension IOOperations {
             let reportsFolder = Path("\(configurationPath)/\(configuration.reportsPath().abbreviate())")
             LocalFileManager.shared.reports_path = reportsFolder.absolute().description
             
-            let reportFormat: ReportFormat = ReportFormat(rawValue: configuration.report_format ?? "json") ?? .json
+            let reportFormat: Configuration.ReportFormat = configuration.report_format ?? .json
             let (success, reportPath) = LocalFileManager.shared.generateReport(finalReport, format: reportFormat)
             if success, let path = reportPath {
                 self.logger.logSection("Report: ", item: "\(path.absolute().description)")

@@ -9,7 +9,7 @@ import SwiftCLI
 import PathKit
 
 public class FileOutput {
-    func write<T>(_ encodableObject: T, toFile file: Path, format: ReportFormat = .json) -> (Bool, Path?) where T : Encodable {
+    func write<T>(_ encodableObject: T, toFile file: Path, format: Configuration.ReportFormat = .json) -> (Bool, Path?) where T : Encodable {
         switch format {
         case .json:
             return writeJSON(encodableObject, toFile: file)

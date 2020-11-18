@@ -1,17 +1,10 @@
 //
-//  coherent-swift
-//
-//  Created by Arthur Alves on 06/05/2020.
+//  CoherentSwift
 //
 
 import Foundation
 import SwiftCLI
 import PathKit
-
-public enum ReportFormat: String {
-    case json = "json"
-    case plain = "plain"
-}
 
 public protocol ReportGenerator {
     var fileOutput: FileOutput { get }
@@ -20,7 +13,7 @@ public protocol ReportGenerator {
     var reports_path: String { get set }
     
     func addToReport(file: String, cohesion: String, meetsThreshold: Bool, definitions: [CSDefinition], to report: CSReport) -> CSReport
-    func generateReport(_ report: CSReport, format: ReportFormat) -> (Bool, Path?)
+    func generateReport(_ report: CSReport, format: Configuration.ReportFormat) -> (Bool, Path?)
     func generateBadge(_ report: CSReport) -> (Bool, Path?)
 }
 
@@ -37,7 +30,7 @@ extension ReportGenerator {
         return overallReportCopy
     }
     
-    public func generateReport(_ report: CSReport, format: ReportFormat = .json) -> (Bool, Path?) {
+    public func generateReport(_ report: CSReport, format: Configuration.ReportFormat = .json) -> (Bool, Path?) {
         let path = Path("\(reports_path)/\(reports_file).\(format.rawValue)")
         
         var overallReportCopy = report
