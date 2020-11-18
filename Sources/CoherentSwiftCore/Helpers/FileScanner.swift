@@ -46,10 +46,21 @@ public class FileScanner {
              */
             logger.logInfo("*  ", item: "Only scanning modified files")
             do {
-                if let result = try Bash("git", arguments: "diff", "--name-only", "--",
-                                         "\(sourcePath.absolute().description)", "HEAD", "origin").capture() {
-                    enumaratedString = result
-                    return (enumaratedString: enumaratedString, folderPath: sourcePath)
+                
+                if let originHEAD = try Bash.Command(command: "git", arguments: ["remote", "show", "origin"])
+                    .pipe(Bash.Command(command: "grep", arguments: ["HEAD branch"]))
+                    .pipe(Bash.Command(command: "cut", arguments: ["-d", ":", "-f", "2"]))
+                    .run() {
+                    
+                    let defaultBranch = originHEAD.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+                    if let changes = try Bash.Command(command: "git",
+                                                      arguments: ["diff",
+                                                                  "HEAD..origin/\(defaultBranch)",
+                                                                  "--name-only", "--",
+                                                                  "\(sourcePath.absolute().description)"]).run() {
+                        return (enumaratedString: changes, folderPath: sourcePath)
+                    }
+                    
                 }
             } catch {}
             logger.logError("Error: ",
