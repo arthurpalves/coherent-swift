@@ -1,77 +1,42 @@
 //
-//  coherent-swift
-//
-//  Created by Arthur Alves on 05/05/2020.
+//  CoherentSwift
 //
 
 import Foundation
 import CoherentSwiftCore
+import ArgumentParser
 import PathKit
-import SwiftCLI
-import SwiftSyntax
 
-final class Report: Command, IOOperations {
-
-    // --------------
-    // MARK: Command information
+struct Report: ParsableCommand {
+    static var configuration = CommandConfiguration(
+        commandName: "report",
+        abstract: "Generate a report on Swift code cohesion"
+    )
     
-    let name: String = "report"
-    let shortDescription: String = "Generate a report on Swift code cohesion"
+    @Option(name: .shortAndLong, help: "Use a different yaml configuration spec")
+    var spec: String = "coherent-swift.yml"
     
-    // --------------
-    // MARK: Configuration Properties
-    @Key("-s", "--spec", description: "Use a yaml configuration file")
-    var specs: String?
+    @Flag(name: .shortAndLong, help: "Only scan modified files.")
+    var diffs = false
     
-    var configurationPath: String = "coherent-swift.yml"
-    var defaultThreshold: Double = 100.0
+    @Flag(name: [.long, .customShort("t")], help: "Show timestamps.")
+    var showTimestamps = false
     
-    var reports_path: String = "/tmp/coherent-swift/" {
-        willSet {}
-    }
+    @Flag(name: .shortAndLong, help: "Log tech details for nerds.")
+    var verbose = false
     
-    var logger: Logger = Logger.shared
-    
-    public func execute() throws {
-        logger.logSection("$ ", item: "coherent-swift report", color: .ios)
-    
-        if let spec = specs {
-            configurationPath = spec
-        }
-        let specsPath = Path(configurationPath)
+    func run() throws {
+        let logger = Logger(verbose: verbose, showTimestamp: showTimestamps)
+        logger.logSection("$ coherent-swift report", item: "", color: .purple)
         
-        do {
-            guard let configuration = try decode(configuration: specsPath) else { return }
-            let fileInputData = try readInputFiles(with: configuration,
-                                                   configurationPath: Path(configurationPath).parent())
-            parse(with: fileInputData,
-                  configuration: configuration,
-                  configurationPath: Path(configurationPath).parent(),
-                  threshold: defaultThreshold)
-        } catch {
-            guard
-                let cliError = error as? CLI.Error,
-                let message = cliError.message
-            else { return }
-            logger.logError(item: message)
-            throw cliError
-        }
-    }
-}
-
-extension Report: YamlParser {
-    private func decode(configuration: Path) throws -> Configuration? {
-        logger.logInfo("Configuration path: ", item: configuration.absolute().description)
-        guard configuration.absolute().exists else {
-            throw CLI.Error(message: "Couldn't find specs path. Specify with parameter -s | --spec or use default at ./coherent-swift.yml")
+        let specsPath = Path(spec)
+        let specHelper = SpecHelper(logger: logger, userInputHelper: UserInputHelper(logger: logger))
+        guard let configuration = try specHelper.parseSpec(from: specsPath) else {
+            throw RuntimeError("Couldn't load configuration")
         }
         
-        do {
-            let configuration = try extractConfiguration(from: configuration.absolute().description)
-            defaultThreshold = configuration.threshold() ?? 100.0
-            return configuration
-        } catch {
-            throw CLI.Error(message: error.localizedDescription)
-        }
+        let fileScanner = FileScanner(logger: logger, shouldOnlyScanChanges: diffs, defaultThreshold: configuration.threshold() ?? 100)
+        try fileScanner.parse(with: configuration, parentPath: specsPath.parent())
+        logger.logInfo(item: " ")
     }
 }

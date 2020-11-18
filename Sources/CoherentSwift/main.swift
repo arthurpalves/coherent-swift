@@ -10,7 +10,8 @@ struct CoherentSwift: ParsableCommand {
         abstract: "A command-line tool to analyze and report Swift code cohesion",
         version: "0.5.9",
         subcommands: [
-            Initializer.self
+            Initializer.self,
+            Report.self
         ]
     )
 }
