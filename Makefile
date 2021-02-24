@@ -26,7 +26,7 @@ coherent-swift: $(SOURCES)
 install: coherent-swift
 	@install -d "$(bindir)" "$(libdir)"
 	@install "$(BUILDDIR)/release/coherent-swift" "$(bindir)"
-	@mkdir -p "$(libdir)/coherent-swift/templates"
+	@mkdir -p "$(libdir)/coherent-swift/templates/"
 	@cp "$(TEMPLATES)" "$(libdir)/coherent-swift/templates/"
 
 .PHONY: uninstall
