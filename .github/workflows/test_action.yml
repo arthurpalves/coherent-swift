@@ -19,6 +19,6 @@ jobs:
         source: Sources/
         minimum_threshold: 60
         ignore_output_result: true
-        only_changes: true
+        only_changes: false
         report_format: plain
 
