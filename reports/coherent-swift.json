@@ -2,7 +2,7 @@
   "cohesion" : "95.21%",
   "meets_threshold" : true,
   "minimum_threshold" : "80%",
-  "report_date" : "2020-11-18 13:49:24",
+  "report_date" : "2021-02-24 21:53:20",
   "result" : [
     {
       "cohesion" : "100.00%",
@@ -67,24 +67,6 @@
             {
               "cohesion" : "100.00",
               "methodType" : "Public",
-              "name" : "append(fileURL: URL) throws ",
-              "properties" : [
-
-              ]
-            }
-          ],
-          "name" : "Data ",
-          "properties" : [
-
-          ],
-          "type" : "Extension"
-        },
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-            {
-              "cohesion" : "100.00",
-              "methodType" : "Public",
               "name" : "appendLine(to file: Path) throws ",
               "properties" : [
 
@@ -112,6 +94,24 @@
             }
           ],
           "name" : "String ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "append(fileURL: URL) throws ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "Data ",
           "properties" : [
 
           ],
@@ -773,20 +773,80 @@
           "methods" : [
 
           ],
-          "name" : "Bash",
+          "name" : "Command",
           "properties" : [
             {
-              "keyword" : "var",
+              "keyword" : "let",
               "name" : "command",
               "propertyType" : "instance"
             },
             {
-              "keyword" : "var",
+              "keyword" : "let",
               "name" : "arguments",
               "propertyType" : "instance"
             }
           ],
           "type" : "Struct"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "pipe(_ bashCommands: Bash.Command...) throws -> Pipe ",
+              "properties" : [
+                {
+                  "keyword" : "var",
+                  "name" : "stdOut",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "run() throws -> String? ",
+              "properties" : [
+
+              ]
+            }
+          ],
+          "name" : "Bash",
+          "properties" : [
+
+          ],
+          "type" : "Struct"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "pipe(_ bashCommand: Bash.Command) throws -> Pipe ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "run() throws -> String? ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "data",
+                  "propertyType" : "instance"
+                }
+              ]
+            }
+          ],
+          "name" : "Pipe ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
         }
       ],
       "filename" : "Sources/CoherentSwiftCore/Helpers/Bash.swift",
@@ -879,6 +939,33 @@
       "cohesion" : "82.92%",
       "definitions" : [
         {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "range",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "matches",
+                  "propertyType" : "instance"
+                }
+              ]
+            }
+          ],
+          "name" : "SwiftParser ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
+        },
+        {
           "cohesion" : "65.84",
           "methods" : [
             {
@@ -955,33 +1042,6 @@
             }
           ],
           "type" : "Class"
-        },
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-            {
-              "cohesion" : "100.00",
-              "methodType" : "Public",
-              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool ",
-              "properties" : [
-                {
-                  "keyword" : "let",
-                  "name" : "range",
-                  "propertyType" : "instance"
-                },
-                {
-                  "keyword" : "let",
-                  "name" : "matches",
-                  "propertyType" : "instance"
-                }
-              ]
-            }
-          ],
-          "name" : "SwiftParser ",
-          "properties" : [
-
-          ],
-          "type" : "Extension"
         }
       ],
       "filename" : "Sources/CoherentSwiftCore/Helpers/Parsers/SwiftParser.swift",
@@ -1121,21 +1181,6 @@
         {
           "cohesion" : "100.00",
           "methods" : [
-
-          ],
-          "name" : "StandardErrorOutputStream",
-          "properties" : [
-            {
-              "keyword" : "let",
-              "name" : "stderr",
-              "propertyType" : "instance"
-            }
-          ],
-          "type" : "Struct"
-        },
-        {
-          "cohesion" : "100.00",
-          "methods" : [
             {
               "cohesion" : "100.00",
               "methodType" : "Public",
@@ -1199,6 +1244,21 @@
 
           ],
           "type" : "Extension"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "StandardErrorOutputStream",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "stderr",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Struct"
         }
       ],
       "filename" : "Sources/CoherentSwiftCore/Helpers/Loggers/VerboseLogger.swift",
