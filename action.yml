@@ -46,6 +46,7 @@ runs:
       shell: bash
       run: |
         cd ${{ github.action_path }}
+	make githubci-install 
         if [[ ${{ inputs.only_changes }} == 'true' ]]; then
             swift run coherent-swift report -d -s _coherent-swift.yml
         else

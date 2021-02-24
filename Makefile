@@ -8,6 +8,7 @@ templatesdir = Templates
 
 REPODIR = $(shell pwd)
 BUILDDIR = $(REPODIR)/.build
+GITHUBCIBUILDDIR = $(REPODIR)/.githubci-build
 SOURCES = $(wildcard $(srcdir)/**/*.swift)
 TEMPLATES = $(wildcard $(templatesdir)/*)
 
@@ -26,8 +27,19 @@ coherent-swift: $(SOURCES)
 install: coherent-swift
 	@install -d "$(bindir)" "$(libdir)"
 	@install "$(BUILDDIR)/release/coherent-swift" "$(bindir)"
-	@mkdir -p "$(libdir)/coherent-swift/templates"
+	@mkdir -p "$(libdir)/coherent-swift/templates/"
 	@cp "$(TEMPLATES)" "$(libdir)/coherent-swift/templates/"
+
+.PHONY: githubci-install
+githubci-install:
+	@install -d "$(bindir)" "$(libdir)"
+	@install "$(GITHUBCIBUILDDIR)/release/coherent-swift" "$(bindir)"
+	@mkdir -p "$(libdir)/coherent-swift/templates/"
+	@cp "$(TEMPLATES)" "$(libdir)/coherent-swift/templates/"
+
+.PHONY: prepare-githubci-build
+prepare-githubci-build: coherent-swift
+	@cp "$(BUILDDIR)/release/coherent-swift" "$(GITHUBCIBUILDDIR)/release/coherent-swift"
 
 .PHONY: uninstall
 uninstall:
