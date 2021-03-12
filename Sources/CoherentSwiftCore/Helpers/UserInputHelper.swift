@@ -68,7 +68,7 @@ public class UserInputHelper {
         default: break
         }
         
-        let configuration = Configuration(source: sourceFolder,
+        let configuration = Configuration(sources: [sourceFolder],
                                       minimum_threshold: minimumThreshold,
                                       reports_folder: reportsFolder,
                                       ignore_output_result: Bool(ignoreOutputResults) ?? false,

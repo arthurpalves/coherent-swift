@@ -7,7 +7,7 @@
 import Foundation
 
 public struct CSReport: Codable {
-    var source: String = ""
+    var sources: [String] = []
     var minimum_threshold: String = ""
     var meets_threshold: Bool = false
     var report_date: String = ""

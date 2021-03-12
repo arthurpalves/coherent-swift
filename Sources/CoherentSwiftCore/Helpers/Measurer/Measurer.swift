@@ -90,7 +90,7 @@ public class Measurer {
         let cohesionString = overallCohesion.formattedCohesion()
 
         finalReport.minimum_threshold = configuration.minimum_threshold+"%"
-        finalReport.source = configuration.source
+        finalReport.sources = configuration.sources
         finalReport.cohesion = cohesionString+"%"
         finalReport.meets_threshold = overallCohesion >= threshold
         
