@@ -1,8 +1,8 @@
 {
-  "cohesion" : "95.21%",
+  "cohesion" : "95.27%",
   "meets_threshold" : true,
   "minimum_threshold" : "80%",
-  "report_date" : "2020-11-18 13:49:24",
+  "report_date" : "2021-03-12 14:56:14",
   "result" : [
     {
       "cohesion" : "100.00%",
@@ -388,7 +388,7 @@
           "properties" : [
             {
               "keyword" : "var",
-              "name" : "source",
+              "name" : "sources",
               "propertyType" : "instance"
             },
             {
@@ -494,7 +494,7 @@
           "properties" : [
             {
               "keyword" : "let",
-              "name" : "source",
+              "name" : "sources",
               "propertyType" : "instance"
             },
             {
@@ -771,22 +771,82 @@
         {
           "cohesion" : "100.00",
           "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "pipe(_ bashCommands: Bash.Command...) throws -> Pipe ",
+              "properties" : [
+                {
+                  "keyword" : "var",
+                  "name" : "stdOut",
+                  "propertyType" : "instance"
+                }
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "run() throws -> String? ",
+              "properties" : [
 
+              ]
+            }
           ],
           "name" : "Bash",
           "properties" : [
+
+          ],
+          "type" : "Struct"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "Command",
+          "properties" : [
             {
-              "keyword" : "var",
+              "keyword" : "let",
               "name" : "command",
               "propertyType" : "instance"
             },
             {
-              "keyword" : "var",
+              "keyword" : "let",
               "name" : "arguments",
               "propertyType" : "instance"
             }
           ],
           "type" : "Struct"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "pipe(_ bashCommand: Bash.Command) throws -> Pipe ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "run() throws -> String? ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "data",
+                  "propertyType" : "instance"
+                }
+              ]
+            }
+          ],
+          "name" : "Pipe ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
         }
       ],
       "filename" : "Sources/CoherentSwiftCore/Helpers/Bash.swift",
@@ -1121,21 +1181,6 @@
         {
           "cohesion" : "100.00",
           "methods" : [
-
-          ],
-          "name" : "StandardErrorOutputStream",
-          "properties" : [
-            {
-              "keyword" : "let",
-              "name" : "stderr",
-              "propertyType" : "instance"
-            }
-          ],
-          "type" : "Struct"
-        },
-        {
-          "cohesion" : "100.00",
-          "methods" : [
             {
               "cohesion" : "100.00",
               "methodType" : "Public",
@@ -1199,6 +1244,21 @@
 
           ],
           "type" : "Extension"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+
+          ],
+          "name" : "StandardErrorOutputStream",
+          "properties" : [
+            {
+              "keyword" : "let",
+              "name" : "stderr",
+              "propertyType" : "instance"
+            }
+          ],
+          "type" : "Struct"
         }
       ],
       "filename" : "Sources/CoherentSwiftCore/Helpers/Loggers/VerboseLogger.swift",
@@ -1514,46 +1574,31 @@
       "meets_threshold" : true
     },
     {
-      "cohesion" : "78.39%",
+      "cohesion" : "80.38%",
       "definitions" : [
         {
-          "cohesion" : "78.39",
+          "cohesion" : "80.38",
           "methods" : [
             {
-              "cohesion" : "50.00",
+              "cohesion" : "40.00",
               "methodType" : "Public",
               "name" : "parse(with configuration: Configuration, parentPath: Path) throws ",
               "properties" : [
                 {
                   "keyword" : "let",
-                  "name" : "absoluteSourcePath",
-                  "propertyType" : "instance"
-                },
-                {
-                  "keyword" : "let",
-                  "name" : "fileInputData",
+                  "name" : "absoluteSourcePaths",
                   "propertyType" : "instance"
                 }
               ]
             },
             {
-              "cohesion" : "71.43",
+              "cohesion" : "60.00",
               "methodType" : "Public",
-              "name" : "readInputFiles(with configuration: Configuration, sourcePath: Path) throws -> FileInputData ",
+              "name" : "readInputFiles(sourcePath: Path) throws -> FileInputData ",
               "properties" : [
                 {
-                  "keyword" : "var",
+                  "keyword" : "let",
                   "name" : "enumaratedString",
-                  "propertyType" : "instance"
-                },
-                {
-                  "keyword" : "let",
-                  "name" : "fileManager",
-                  "propertyType" : "instance"
-                },
-                {
-                  "keyword" : "let",
-                  "name" : "enumerator",
                   "propertyType" : "instance"
                 }
               ]
@@ -1591,6 +1636,14 @@
                   "propertyType" : "instance"
                 }
               ]
+            },
+            {
+              "cohesion" : "0.00",
+              "methodType" : "Private",
+              "name" : "processFilePath(filePath: Path, sourcePath: Path) -> Path ",
+              "properties" : [
+
+              ]
             }
           ],
           "name" : "FileScanner",
@@ -1620,7 +1673,7 @@
         }
       ],
       "filename" : "Sources/CoherentSwiftCore/Helpers/FileScanner.swift",
-      "meets_threshold" : false
+      "meets_threshold" : true
     },
     {
       "cohesion" : "100.00%",
@@ -1724,5 +1777,7 @@
       "meets_threshold" : true
     }
   ],
-  "source" : "./Sources/"
+  "sources" : [
+    "./Sources/"
+  ]
 }
