@@ -4,7 +4,7 @@ on:
   push:
     branches: [ action ]
 env:
-  DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
   GITHUB_TOKEN: ${{ secrets.PAT }}
 
 jobs:
@@ -14,11 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: arthurpalves/coherent-swift@0.5.5
+    - uses: arthurpalves/coherent-swift@0.5.10
       with:
         source: Sources/
         minimum_threshold: 60
         ignore_output_result: true
-        only_changes: true
+        only_changes: false
         report_format: plain
 
