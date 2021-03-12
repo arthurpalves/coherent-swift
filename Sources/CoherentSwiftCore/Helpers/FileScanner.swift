@@ -34,8 +34,7 @@ public class FileScanner {
         }
 
         for absoluteSourcePath in absoluteSourcePaths {
-            let fileInputData = try readInputFiles(with: configuration,
-                                                   sourcePath: absoluteSourcePath)
+            let fileInputData = try readInputFiles(sourcePath: absoluteSourcePath)
             parse(with: fileInputData,
                   configuration: configuration,
                   sourcePath: absoluteSourcePath,
@@ -43,7 +42,7 @@ public class FileScanner {
         }
     }
     
-    func readInputFiles(with configuration: Configuration, sourcePath: Path) throws -> FileInputData {
+    func readInputFiles(sourcePath: Path) throws -> FileInputData {
         if shouldOnlyScanChanges {
             /*
              * Scan only files whose contents have been modified

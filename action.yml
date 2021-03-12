@@ -6,8 +6,8 @@ branding:
   color: "green"
 
 inputs:
-  source:
-    description: 'Source folder to scan.'
+  sources:
+    description: 'Source folders to scan.'
     required: true
   minimum_threshold:
     description: 'Overall cohesion will be validated against this minimum threshold.'
@@ -29,19 +29,19 @@ inputs:
     description: 'If "true", only measure cohesion on changed files.'
     required: true
     default: 'false'
-    
+
 runs:
   using: "composite"
   steps:
     - name: Prepare spec
       shell: bash
       run: |
-        echo -e "source: ${{ inputs.source }}\n" > ${{ github.action_path }}/_coherent-swift.yml
+        echo -e "sources: ${{ inputs.sources }}\n" > ${{ github.action_path }}/_coherent-swift.yml
         echo -e "minimum_threshold: ${{ inputs.minimum_threshold }}\n" >> ${{ github.action_path }}/_coherent-swift.yml
         echo -e "reports_folder: ${{ inputs.reports_folder }}\n" >> ${{ github.action_path }}/_coherent-swift.yml
         echo -e "ignore_output_result: ${{ inputs.ignore_output_result }}\n" >> ${{ github.action_path }}/_coherent-swift.yml
         echo -e "report_format: ${{ inputs.report_format }}\n" >> ${{ github.action_path }}/_coherent-swift.yml
-  
+
     - name: Measure cohesion
       shell: bash
       run: |
