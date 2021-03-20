@@ -25,7 +25,7 @@ public class UserInputHelper {
     public func configurationFromUserInput() -> Configuration {
         let sourceFolder = userInput(
             with: "Provide the relative path of the source folder to be scanned during the report. Ensure this folder exists.",
-            suggestion: "i.e.: ./MyApp/Sources/") { input -> Bool in
+            suggestion: "i.e.: ./MyApp/*/Sources/") { input -> Bool in
             return !Path.glob(input).isEmpty
         }
         

@@ -27,13 +27,20 @@ public class FileScanner {
         let absoluteSourcePaths = configuration.sourcePaths()
             .flatMap { $0.glob("") }
             .compactMap { try? parentPath.safeJoin(path: $0) }
+        let validAbsoluteSourcePaths = absoluteSourcePaths
             .filter { $0.exists }
 
-        guard !absoluteSourcePaths.isEmpty else {
-            throw RuntimeError("Source folders '\(absoluteSourcePaths)' doesn't exist")
+        if validAbsoluteSourcePaths.count < absoluteSourcePaths.count {
+            let excludedAbsoluteSourcePaths = absoluteSourcePaths
+                .filter { !$0.exists }
+            logger.logWarning("⚠️  Ignoring", item: "\(excludedAbsoluteSourcePaths)")
         }
 
-        for absoluteSourcePath in absoluteSourcePaths {
+        guard !validAbsoluteSourcePaths.isEmpty else {
+            throw RuntimeError("None of the sources is valid: '\(absoluteSourcePaths)'")
+        }
+
+        for absoluteSourcePath in validAbsoluteSourcePaths {
             let fileInputData = try readInputFiles(sourcePath: absoluteSourcePath)
             parse(with: fileInputData,
                   configuration: configuration,
