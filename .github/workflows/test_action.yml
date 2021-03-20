@@ -16,10 +16,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: arthurpalves/coherent-swift@main
+    - uses: arthurpalves/coherent-swift@0.5.5
       with:
         sources: Sources/
         minimum_threshold: 60
         ignore_output_result: true
         only_changes: false
         report_format: plain
+

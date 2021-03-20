@@ -36,7 +36,7 @@ runs:
     - name: Prepare spec
       shell: bash
       run: |
-        echo -e "sources: ${{ inputs.sources }}\n" > ${{ github.action_path }}/_coherent-swift.yml
+        echo -e "sources:\n  - ${{ inputs.sources }}\n" > ${{ github.action_path }}/_coherent-swift.yml
         echo -e "minimum_threshold: ${{ inputs.minimum_threshold }}\n" >> ${{ github.action_path }}/_coherent-swift.yml
         echo -e "reports_folder: ${{ inputs.reports_folder }}\n" >> ${{ github.action_path }}/_coherent-swift.yml
         echo -e "ignore_output_result: ${{ inputs.ignore_output_result }}\n" >> ${{ github.action_path }}/_coherent-swift.yml
