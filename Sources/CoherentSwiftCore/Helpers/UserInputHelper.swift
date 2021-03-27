@@ -26,7 +26,7 @@ public class UserInputHelper {
         let sourceFolder = userInput(
             with: "Provide the relative path of the source folder to be scanned during the report. Ensure this folder exists.",
             suggestion: "i.e.: ./MyApp/*/Sources/") { input -> Bool in
-            return !Path.glob(input).isEmpty
+            return !Path.glob(input).filter { $0.exists }.isEmpty
         }
         
         let minimumThreshold = userInput(
