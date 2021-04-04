@@ -25,8 +25,8 @@ public class UserInputHelper {
     public func configurationFromUserInput() -> Configuration {
         let sourceFolder = userInput(
             with: "Provide the relative path of the source folder to be scanned during the report. Ensure this folder exists.",
-            suggestion: "i.e.: ./MyApp/Sources/") { input -> Bool in
-            return Path(input).exists
+            suggestion: "i.e.: ./MyApp/*/Sources/") { input -> Bool in
+            return !Path.glob(input).filter { $0.exists }.isEmpty
         }
         
         let minimumThreshold = userInput(
@@ -68,7 +68,7 @@ public class UserInputHelper {
         default: break
         }
         
-        let configuration = Configuration(source: sourceFolder,
+        let configuration = Configuration(sources: [sourceFolder],
                                       minimum_threshold: minimumThreshold,
                                       reports_folder: reportsFolder,
                                       ignore_output_result: Bool(ignoreOutputResults) ?? false,

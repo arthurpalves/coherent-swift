@@ -6,7 +6,7 @@ import Foundation
 import PathKit
 
 public struct Configuration: Codable {
-    let source: String
+    let sources: [String]
     let minimum_threshold: String
     let reports_folder: String
     let ignore_output_result: Bool
@@ -16,8 +16,8 @@ public struct Configuration: Codable {
         return Double(minimum_threshold)
     }
     
-    func sourcePath() -> Path {
-        return Path(source)
+    func sourcePaths() -> [Path] {
+        return sources.map { Path($0) }
     }
     
     func reportsPath() -> Path {

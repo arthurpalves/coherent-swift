@@ -24,21 +24,32 @@ public class FileScanner {
     }
 
     public func parse(with configuration: Configuration, parentPath: Path) throws {
-        let absoluteSourcePath = try parentPath.safeJoin(path: configuration.sourcePath())
-        guard absoluteSourcePath.exists else {
-            throw RuntimeError("Source folder '\(absoluteSourcePath.string)' doesn't exist")
+        let absoluteSourcePaths = configuration.sourcePaths()
+            .flatMap { $0.glob("") }
+            .compactMap { try? parentPath.safeJoin(path: $0) }
+        let validAbsoluteSourcePaths = absoluteSourcePaths
+            .filter { $0.exists }
+
+        if validAbsoluteSourcePaths.count < absoluteSourcePaths.count {
+            let excludedAbsoluteSourcePaths = absoluteSourcePaths
+                .filter { !$0.exists }
+            logger.logWarning("⚠️  Ignoring", item: "\(excludedAbsoluteSourcePaths)")
         }
-        
-        let fileInputData = try readInputFiles(with: configuration,
-                                               sourcePath: absoluteSourcePath)
-        parse(with: fileInputData,
-              configuration: configuration,
-              sourcePath: absoluteSourcePath,
-              threshold: defaultThreshold)
+
+        guard !validAbsoluteSourcePaths.isEmpty else {
+            throw RuntimeError("None of the sources is valid: '\(absoluteSourcePaths)'")
+        }
+
+        for absoluteSourcePath in validAbsoluteSourcePaths {
+            let fileInputData = try readInputFiles(sourcePath: absoluteSourcePath)
+            parse(with: fileInputData,
+                  configuration: configuration,
+                  sourcePath: absoluteSourcePath,
+                  threshold: defaultThreshold)
+        }
     }
     
-    func readInputFiles(with configuration: Configuration, sourcePath: Path) throws -> FileInputData {
-        var enumaratedString = ""
+    func readInputFiles(sourcePath: Path) throws -> FileInputData {
         if shouldOnlyScanChanges {
             /*
              * Scan only files whose contents have been modified
@@ -71,12 +82,11 @@ public class FileScanner {
         /*
          * Scan all files within the specified source folder
          */
-        let fileManager = FileManager.default
-        let enumerator = fileManager.enumerator(atPath: sourcePath.absolute().string)
-        enumerator?.allObjects.compactMap { $0 as? String }.forEach({ (item) in
-            enumaratedString.append(item)
-            enumaratedString.append("\n")
-        })
+        let enumaratedString = FileManager.default
+            .enumerator(atPath: sourcePath.absolute().string)?
+            .allObjects
+            .compactMap { $0 as? String }
+            .joined(separator: "\n") ?? ""
         return (enumaratedString: enumaratedString, folderPath: sourcePath)
     }
     
@@ -96,7 +106,7 @@ public class FileScanner {
         
         fileInputData.enumaratedString.enumerateLines { [weak self] (fileName, _) in
             guard let self = self else { return }
-            let filePath = self.processFilePath(filename: fileName, sourcePath: configuration.sourcePath())
+            let filePath = self.processFilePath(filename: fileName, sourcePath: sourcePath)
             
             if filePath.exists, filePath.isFile,
                filePath.extension == "swift" {
@@ -154,15 +164,19 @@ public class FileScanner {
     }
     
     // MARK: - Private
-    
+
     private func processFilePath(filename: String, sourcePath: Path) -> Path {
         let filePath = Path(filename)
+        return processFilePath(filePath: filePath, sourcePath: sourcePath)
+    }
+
+    private func processFilePath(filePath: Path, sourcePath: Path) -> Path {
         guard let processedFilePath = try? sourcePath.safeJoin(path: filePath) else {
             return filePath
         }
         return processedFilePath
     }
-    
+
     private let factory: CSFactory
     private let logger: Logger
     private let shouldOnlyScanChanges: Bool
