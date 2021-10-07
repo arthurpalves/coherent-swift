@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
 env:
-  DEVELOPER_DIR: /Applications/Xcode_13.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_12.4.app/Contents/Developer
   GITHUB_TOKEN: ${{ secrets.PAT }}
 
 jobs:
@@ -13,6 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: Test
+      run: |
+        xcrun --show-sdk-path
 
     - name: Swift Package Resolve
       run: swift package resolve
