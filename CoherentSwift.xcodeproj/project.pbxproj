@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6748F49A270EF572002E5178 /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 6748F499270EF572002E5178 /* SwiftSyntax */; };
 		8EE2408B2563C4BA00F66F61 /* CoherentSwiftCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE240822563C4BA00F66F61 /* CoherentSwiftCore.framework */; };
 		8EE240902563C4BB00F66F61 /* CoherentSwiftCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2408F2563C4BB00F66F61 /* CoherentSwiftCoreTests.swift */; };
 		8EE240922563C4BB00F66F61 /* CoherentSwiftCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EE240842563C4BA00F66F61 /* CoherentSwiftCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,7 +40,6 @@
 		8EE241562563C8E000F66F61 /* CSPropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* CSPropertyType.swift */; };
 		8EE2419E2563D38000F66F61 /* PathKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE2419D2563D38000F66F61 /* PathKit */; };
 		8EE241A02563D38000F66F61 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE2419F2563D38000F66F61 /* Yams */; };
-		8EE241A22563D38000F66F61 /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE241A12563D38000F66F61 /* SwiftSyntax */; };
 		8EE241A42563D38000F66F61 /* SwiftSyntaxBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE241A32563D38000F66F61 /* SwiftSyntaxBuilder */; };
 		8EE241C5256411D500F66F61 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE241C4256411D500F66F61 /* ArgumentParser */; };
 		8EE241CA2564120400F66F61 /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE241C92564120400F66F61 /* Initializer.swift */; };
@@ -97,7 +97,6 @@
 /* Begin PBXFileReference section */
 		8EE240822563C4BA00F66F61 /* CoherentSwiftCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoherentSwiftCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE240842563C4BA00F66F61 /* CoherentSwiftCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoherentSwiftCore.h; sourceTree = "<group>"; };
-		8EE240852563C4BA00F66F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EE2408A2563C4BA00F66F61 /* CoherentSwiftCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoherentSwiftCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE2408F2563C4BB00F66F61 /* CoherentSwiftCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoherentSwiftCoreTests.swift; sourceTree = "<group>"; };
 		8EE240912563C4BB00F66F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -163,7 +162,7 @@
 				8EE2419E2563D38000F66F61 /* PathKit in Frameworks */,
 				8EE241A42563D38000F66F61 /* SwiftSyntaxBuilder in Frameworks */,
 				8EE241A02563D38000F66F61 /* Yams in Frameworks */,
-				8EE241A22563D38000F66F61 /* SwiftSyntax in Frameworks */,
+				6748F49A270EF572002E5178 /* SwiftSyntax in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +201,6 @@
 				OBJ_18 /* Helpers */,
 				OBJ_35 /* Schema */,
 				8EE240842563C4BA00F66F61 /* CoherentSwiftCore.h */,
-				8EE240852563C4BA00F66F61 /* Info.plist */,
 			);
 			name = CoherentSwiftCore;
 			path = Sources/CoherentSwiftCore;
@@ -453,8 +451,8 @@
 			packageProductDependencies = (
 				8EE2419D2563D38000F66F61 /* PathKit */,
 				8EE2419F2563D38000F66F61 /* Yams */,
-				8EE241A12563D38000F66F61 /* SwiftSyntax */,
 				8EE241A32563D38000F66F61 /* SwiftSyntaxBuilder */,
+				6748F499270EF572002E5178 /* SwiftSyntax */,
 			);
 			productName = CoherentSwiftCore;
 			productReference = 8EE240822563C4BA00F66F61 /* CoherentSwiftCore.framework */;
@@ -1201,6 +1199,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6748F499270EF572002E5178 /* SwiftSyntax */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EE240EA2563C56300F66F61 /* XCRemoteSwiftPackageReference "swift-syntax" */;
+			productName = SwiftSyntax;
+		};
 		8EE2419D2563D38000F66F61 /* PathKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8EE240C82563C51700F66F61 /* XCRemoteSwiftPackageReference "PathKit" */;
@@ -1210,11 +1213,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8EE240D92563C53500F66F61 /* XCRemoteSwiftPackageReference "Yams" */;
 			productName = Yams;
-		};
-		8EE241A12563D38000F66F61 /* SwiftSyntax */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8EE240EA2563C56300F66F61 /* XCRemoteSwiftPackageReference "swift-syntax" */;
-			productName = SwiftSyntax;
 		};
 		8EE241A32563D38000F66F61 /* SwiftSyntaxBuilder */ = {
 			isa = XCSwiftPackageProductDependency;

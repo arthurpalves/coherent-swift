@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.4
 
 import PackageDescription
 
@@ -13,20 +13,20 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/apple/swift-argument-parser.git",
-            from: "0.3.0"
+            from: "1.0.1"
         ),
         .package(
             url: "https://github.com/kylef/PathKit",
-            from: "1.0.0"
+            from: "1.0.1"
         ),
         .package(
             url: "https://github.com/jpsim/Yams.git",
-            from: "4.0.1"
+            from: "4.0.6"
         ),
         .package(
 			name: "SwiftSyntax",
             url: "https://github.com/apple/swift-syntax.git",
-            .exact("0.50300.0")
+            .exact("0.50400.0")
         )
     ],
     targets: [
@@ -38,7 +38,7 @@ let package = Package(
                 "SwiftSyntax"
             ]
         ),
-        .target(
+        .executableTarget(
             name: "CoherentSwift",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
