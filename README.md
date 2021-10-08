@@ -48,8 +48,7 @@ Some of the advantages of high cohesion, also by Wikipedia:
 ### Homebrew (recommended)
 
 ```sh
-brew tap arthurpalves/formulae
-brew install coherent-swift
+brew install arthurpalves/m/coherent-swift
 ```
 
 ### [Mint](https://github.com/yonaskolb/Mint)
