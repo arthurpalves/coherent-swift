@@ -2,6 +2,14 @@
 
 import PackageDescription
 
+#if swift(>=5.5)
+let branch = "release/5.5"
+#elseif swift(>=5.4)
+let branch = "release/5.4"
+#else
+let branch = "release/5.3"
+#endif
+
 let package = Package(
     name: "CoherentSwift",
 	platforms: [
@@ -23,11 +31,7 @@ let package = Package(
             url: "https://github.com/jpsim/Yams.git",
             from: "4.0.6"
         ),
-        .package(
-			name: "SwiftSyntax",
-            url: "https://github.com/apple/swift-syntax.git",
-            .exact("0.50400.0")
-        )
+	.package(name: "SwiftSyntax", url: "https://github.com/apple/swift-syntax.git", .branch(branch)),
     ],
     targets: [
         .target(
