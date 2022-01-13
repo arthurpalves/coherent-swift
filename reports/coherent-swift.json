@@ -1,8 +1,8 @@
 {
-  "cohesion" : "95.27%",
+  "cohesion" : "95.33%",
   "meets_threshold" : true,
   "minimum_threshold" : "80%",
-  "report_date" : "2021-03-12 14:56:14",
+  "report_date" : "2022-01-13 15:33:20",
   "result" : [
     {
       "cohesion" : "100.00%",
@@ -152,28 +152,6 @@
         {
           "cohesion" : "100.00",
           "methods" : [
-            {
-              "cohesion" : "100.00",
-              "methodType" : "Public",
-              "name" : "safeJoin(path: Path) throws -> Path ",
-              "properties" : [
-                {
-                  "keyword" : "let",
-                  "name" : "newPath",
-                  "propertyType" : "instance"
-                }
-              ]
-            }
-          ],
-          "name" : "Path ",
-          "properties" : [
-
-          ],
-          "type" : "Extension"
-        },
-        {
-          "cohesion" : "100.00",
-          "methods" : [
 
           ],
           "name" : "SuspiciousFileOperation",
@@ -195,6 +173,28 @@
             }
           ],
           "type" : "Class"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "safeJoin(path: Path) throws -> Path ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "newPath",
+                  "propertyType" : "instance"
+                }
+              ]
+            }
+          ],
+          "name" : "Path ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
         }
       ],
       "filename" : "Sources/CoherentSwiftCore/Extensions/PathKit+SafeJoin.swift",
@@ -774,6 +774,36 @@
             {
               "cohesion" : "100.00",
               "methodType" : "Public",
+              "name" : "pipe(_ bashCommand: Bash.Command) throws -> Pipe ",
+              "properties" : [
+
+              ]
+            },
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "run() throws -> String? ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "data",
+                  "propertyType" : "instance"
+                }
+              ]
+            }
+          ],
+          "name" : "Pipe ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
+        },
+        {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
               "name" : "pipe(_ bashCommands: Bash.Command...) throws -> Pipe ",
               "properties" : [
                 {
@@ -817,36 +847,6 @@
             }
           ],
           "type" : "Struct"
-        },
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-            {
-              "cohesion" : "100.00",
-              "methodType" : "Public",
-              "name" : "pipe(_ bashCommand: Bash.Command) throws -> Pipe ",
-              "properties" : [
-
-              ]
-            },
-            {
-              "cohesion" : "100.00",
-              "methodType" : "Public",
-              "name" : "run() throws -> String? ",
-              "properties" : [
-                {
-                  "keyword" : "let",
-                  "name" : "data",
-                  "propertyType" : "instance"
-                }
-              ]
-            }
-          ],
-          "name" : "Pipe ",
-          "properties" : [
-
-          ],
-          "type" : "Extension"
         }
       ],
       "filename" : "Sources/CoherentSwiftCore/Helpers/Bash.swift",
@@ -939,6 +939,33 @@
       "cohesion" : "82.92%",
       "definitions" : [
         {
+          "cohesion" : "100.00",
+          "methods" : [
+            {
+              "cohesion" : "100.00",
+              "methodType" : "Public",
+              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool ",
+              "properties" : [
+                {
+                  "keyword" : "let",
+                  "name" : "range",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "matches",
+                  "propertyType" : "instance"
+                }
+              ]
+            }
+          ],
+          "name" : "SwiftParser ",
+          "properties" : [
+
+          ],
+          "type" : "Extension"
+        },
+        {
           "cohesion" : "65.84",
           "methods" : [
             {
@@ -1015,33 +1042,6 @@
             }
           ],
           "type" : "Class"
-        },
-        {
-          "cohesion" : "100.00",
-          "methods" : [
-            {
-              "cohesion" : "100.00",
-              "methodType" : "Public",
-              "name" : "content(_ contentString: String, hasOccuranceOf name: String, numberOfOccasions: Int = 1) -> Bool ",
-              "properties" : [
-                {
-                  "keyword" : "let",
-                  "name" : "range",
-                  "propertyType" : "instance"
-                },
-                {
-                  "keyword" : "let",
-                  "name" : "matches",
-                  "propertyType" : "instance"
-                }
-              ]
-            }
-          ],
-          "name" : "SwiftParser ",
-          "properties" : [
-
-          ],
-          "type" : "Extension"
         }
       ],
       "filename" : "Sources/CoherentSwiftCore/Helpers/Parsers/SwiftParser.swift",
@@ -1574,19 +1574,24 @@
       "meets_threshold" : true
     },
     {
-      "cohesion" : "80.38%",
+      "cohesion" : "82.16%",
       "definitions" : [
         {
-          "cohesion" : "80.38",
+          "cohesion" : "82.16",
           "methods" : [
             {
-              "cohesion" : "40.00",
+              "cohesion" : "66.67",
               "methodType" : "Public",
               "name" : "parse(with configuration: Configuration, parentPath: Path) throws ",
               "properties" : [
                 {
                   "keyword" : "let",
                   "name" : "absoluteSourcePaths",
+                  "propertyType" : "instance"
+                },
+                {
+                  "keyword" : "let",
+                  "name" : "validAbsoluteSourcePaths",
                   "propertyType" : "instance"
                 }
               ]
