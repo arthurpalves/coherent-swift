@@ -4,6 +4,7 @@
 
 import Foundation
 import SwiftSyntax
+import SwiftSyntaxParser
 import PathKit
 
 typealias ParsingDefition = [String: CSDefinition]
