@@ -2,6 +2,7 @@
 
 import PackageDescription
 
+
 let package = Package(
     name: "CoherentSwift",
 	platforms: [
@@ -24,10 +25,10 @@ let package = Package(
             from: "4.0.6"
         ),
         .package(
-			name: "SwiftSyntax",
+            name: "SwiftSyntax",
             url: "https://github.com/apple/swift-syntax.git",
-            .exact("0.50500.0")
-        )
+            .revision("093e5ee151d206454e2c1950d81333c4d4a4472e")
+        ),
     ],
     targets: [
         .target(
@@ -35,7 +36,8 @@ let package = Package(
             dependencies: [
                 "PathKit",
                 "Yams",
-                "SwiftSyntax"
+                .product(name: "SwiftSyntax", package: "SwiftSyntax"),
+                .product(name: "SwiftParser", package: "SwiftSyntax")
             ]
         ),
         .executableTarget(
