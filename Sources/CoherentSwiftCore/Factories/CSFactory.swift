@@ -21,7 +21,7 @@ public class CSFactory {
         
         let properties = members.filter { $0.decl.is(VariableDeclSyntax.self) }
         properties.forEach { (property) in
-            let props = processProperties(property.tokens)
+            let props = processProperties(property.tokens(viewMode: .sourceAccurate))
             reportProperties.append(contentsOf: props)
         }
         localDefinition.properties = reportProperties
@@ -33,7 +33,7 @@ public class CSFactory {
         name = Cleaner.shared.methodName(name)
         var method = CSMethod(name: name)
         
-        node.modifiers?.tokens.forEach { (item) in
+        node.modifiers?.tokens(viewMode: .sourceAccurate).forEach { (item) in
             switch item.tokenKind {
             case .privateKeyword, .fileprivateKeyword:
                 method.methodType = .Private
@@ -53,7 +53,7 @@ public class CSFactory {
         
         let properties = body.statements.filter { $0.item.is(VariableDeclSyntax.self) }
         properties.forEach { (property) in
-            let props = processProperties(property.tokens)
+            let props = processProperties(property.tokens(viewMode: .sourceAccurate))
             method.properties.append(contentsOf: props)
         }
         method.contentString = body.description
