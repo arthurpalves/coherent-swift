@@ -4,7 +4,7 @@
 
 import Foundation
 import SwiftSyntax
-import SwiftSyntaxParser
+import SwiftParser
 import PathKit
 
 typealias ParsingDefition = [String: CSDefinition]
@@ -20,6 +20,7 @@ class SwiftParser: SyntaxVisitor {
     ) {
         self.logger = logger
         self.factory = factory
+        super.init(viewMode: .sourceAccurate)
     }
     
     override func visit(_ node: ClassDeclSyntax) -> SyntaxVisitorContinueKind {
@@ -85,10 +86,10 @@ extension SwiftParser {
         logger.logInfo("File: ", item: path.description)
         var finalDefinitions: [CSDefinition] = []
         var cohesion: Double = 0
-        
-        let url = path.absolute().url
+                
         do {
-            let sourceFile = try SyntaxParser.parse(url)
+            let code = try path.read(.utf8)
+            let sourceFile = try Parser.parse(source: code)
             walk(sourceFile)
             
             let definitions = self.factory.mapExtensions(self.extensions, to: self.mainDefinitions)
